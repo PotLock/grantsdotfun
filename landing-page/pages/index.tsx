@@ -67,11 +67,9 @@ export default function Home() {
         <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* <h1 className="text-4xl md:text-6xl font-bold mb-8">GRANTS.FUN</h1> */}
-          
-          <div id="emojis" className="text-6xl md:text-8xl mb-8 space-x-4 md:space-x-8">
+      <main className="flex flex-col items-center justify-center min-h-screen p-4 px-2 sm:px-4">
+        <div className="text-center w-full max-w-4xl mx-auto">
+          <div id="emojis" className="text-4xl sm:text-6xl md:text-8xl mb-4 sm:mb-8 space-x-2 sm:space-x-4 md:space-x-8">
             <SlotEmoji 
               finalEmoji="💸" 
               duration={2000} 
@@ -92,7 +90,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-16 mb-8">
+          <div className="h-12 sm:h-16 mb-4 sm:mb-8">
             <TypeAnimation
               sequence={[
                 '[jan.exe]',
@@ -107,14 +105,14 @@ export default function Home() {
               wrapper="div"
               cursor={true}
               repeat={Infinity}
-              className="text-xl md:text-2xl font-mono"
+              className="text-lg sm:text-xl md:text-2xl font-mono px-2"
             />
           </div>
 
-          <div className="flex flex-row justify-center gap-4 mb-12 whitespace-nowrap">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
             <Link 
               href="https://twitter.com/potlock_" 
-              className="btn"
+              className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -122,7 +120,7 @@ export default function Home() {
             </Link>
             <Link 
               href="https://docs.grants.fun" 
-              className="btn"
+              className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -130,7 +128,7 @@ export default function Home() {
             </Link>
             <Link 
               href="https://github.com/potlock/grantsdotfun" 
-              className="btn"
+              className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -138,7 +136,7 @@ export default function Home() {
             </Link>
             <Link 
               href="https://t.me/grantsdotfun" 
-              className="btn"
+              className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -148,7 +146,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 w-full py-4 text-center bg-white/80 backdrop-blur">
+      <footer className="fixed bottom-0 w-full py-2 sm:py-4 text-center bg-white/80 backdrop-blur text-sm sm:text-base">
         <Link 
           href="https://potlock.org" 
           className="hover:text-gray-800"
