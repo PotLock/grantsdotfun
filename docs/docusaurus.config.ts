@@ -112,7 +112,7 @@ const config: Config = {
           items: [
             {
               label: 'Telegram',
-              href: 'https://t.me/+s6SngjDt_fIwZDMx',
+              href: 'https://t.me/+grantsdotfun',
             },
             {
               label: 'Twitter',

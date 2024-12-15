@@ -136,6 +136,14 @@ export default function Home() {
             >
               GitHub
             </Link>
+            <Link 
+              href="https://t.me/grantsdotfun" 
+              className="btn"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Telegram
+            </Link>
           </div>
         </div>
       </main>

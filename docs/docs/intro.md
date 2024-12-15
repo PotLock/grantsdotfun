@@ -53,3 +53,9 @@ Built with ❤️ by Potlock Labs
 - Integrated with meme.cooking
 - Powered by the Eliza Framework
 - Multi-chain payment support
+
+## Community Channels
+
+- [Telegram](https://t.me/grantsdotfun)
+- [Twitter/X](https://twitter.com/grantsdotfun)
+- [GitHub](https://github.com/potlock/grantsdotfun)
