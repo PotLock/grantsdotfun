@@ -143,11 +143,11 @@ export default function Home() {
       <footer className="fixed bottom-0 w-full py-4 text-center bg-white/80 backdrop-blur">
         <Link 
           href="https://potlock.org" 
-          className="text-blue-600 hover:text-blue-800"
+          className="hover:text-gray-800"
           target="_blank"
           rel="noopener noreferrer"
         >
-          w/ ❤️ by  🫕 Potlock
+          w/ ❤️ by  🫕 POTLOCK
         </Link>
       </footer>
     </div>
