@@ -69,7 +69,7 @@ const config: Config = {
       title: 'GRANTS.FUN',
       logo: {
         alt: 'GRANTS.FUN Docs Logo',
-        src: 'img/refer-logo.png',
+        src: 'img/grantsdotfun_icon.png',
       },
       items: [
         {
@@ -81,6 +81,11 @@ const config: Config = {
         {
           href: 'https://grants.fun',
           label: 'Website',
+          position: 'right',
+        },
+        {
+          href: 'https://x.com/grantsdotfun',
+          label: 'X',
           position: 'right',
         },
         {
@@ -111,7 +116,7 @@ const config: Config = {
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/potlock_',
+              href: 'https://twitter.com/grantsdotfun',
             },
           ],
         },
@@ -126,10 +131,10 @@ const config: Config = {
               label: 'AI-PGF',
               href: 'https://aipgf.com',
             },
-            {
-              label: 'TOKEN',
-              href: 'https://grantstoken.com',
-            },
+            // {
+            //   label: 'TOKEN',
+            //   href: 'https://grantstoken.com',
+            // },
           ],
         },
       ],

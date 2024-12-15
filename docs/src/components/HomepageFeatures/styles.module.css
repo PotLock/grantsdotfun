@@ -9,3 +9,9 @@
   height: 200px;
   width: 200px;
 }
+
+.featureEmoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}

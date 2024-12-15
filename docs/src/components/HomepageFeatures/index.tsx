@@ -4,14 +4,14 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  image: string;
+  emoji: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Deploy Agents',
-    image: require('@site/static/img/docs-tracking.png').default,
+    emoji: '🤖',
     description: (
       <>
         Create a grant operator agent with a single click with type of projects and approriate filter for program.
@@ -20,7 +20,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Set Reviewers',
-    image: require('@site/static/img/docs-puzzle.png').default,
+    emoji: '👥',
     description: (
       <>
         Set reviewers that can evaluate a projects effectiveness via comments on twitter. 
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Easy Onboarding From Twitter',
-    image: require('@site/static/img/docs-mlm.png').default,
+    emoji: '🐦',
     description: (
       <>
         Use twitter social graph and other socials to accept grantees and then onboard them to claim payouts via Twitter-Auth claim links.
@@ -38,7 +38,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'On-Chain Payouts',
-    image: require('@site/static/img/docs-stakeslash.png').default,
+    emoji: '💸',
     description: (
       <>
         Integrated into on-chain actions for payouts and multichain token support.
@@ -47,7 +47,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Replenish Agent Wallet',
-    image: require('@site/static/img/docs-security.png').default,
+    emoji: '🏦',
     description: (
       <>
         Top up payouts from treasury for weekly payouts automation
@@ -56,7 +56,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Token Integration',
-    image: require('@site/static/img/docs-toolbox.png').default,
+    emoji: '🪙',
     description: (
       <>
        Directly buy grant operator agent tokens. 
@@ -65,7 +65,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'See How Much Capital is Deployed',
-    image: require('@site/static/img/docs-api.png').default,
+    emoji: '📊',
     description: (
       <>
         Easily see how much capital has been deployed trhough grant operators
@@ -74,7 +74,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Open Source MIT License',
-    image: require('@site/static/img/docs-boilerplate.png').default,
+    emoji: '📖',
     description: (
       <>
         Built on the Eliza framework, we believe in open source and have completely open soruced our front ends.
@@ -83,11 +83,13 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, image, description}: FeatureItem) {
+function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <img className={styles.featureSvg} role="img" src={image} alt={title} />
+        <span className={styles.featureEmoji} role="img" aria-label={title}>
+          {emoji}
+        </span>
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>

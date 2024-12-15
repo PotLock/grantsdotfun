@@ -21,17 +21,12 @@ function HomepageHeader() {
           <Link
             className="button button--primary button--lg"
             to="/docs/intro">
-            Deploy AI Grant Operator
+            Deploy Grant Agent
           </Link>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Buy Token
-          </Link>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            How to Contribute
+            Learn More
           </Link>
         </div>
       </div>
@@ -53,7 +48,7 @@ export default function Home(): JSX.Element {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="GRANTS.FUN - AI Grant Operators" />
         <meta name="twitter:description" content="GRANTS.FUN lets you deploy AI grant operators agents with tokens directly integrated into socials with on-chain payments." />
-        <meta name="keywords" content="grants, fun, ai, grant operators, autonomous, agents, tokens, socials, on-chain payments, pump.fun, near protocol, vvaifu.fun, daos.fun, AI grants, AI-PGF, retropgf, potlock" />
+        <meta name="keywords" content="grants, fun, ai, grant operators, autonomous, agents, tokens, socials, on-chain payments, pump.fun, near protocol, vvaifu.fun, daos.fun, AI grants, AI-PGF, retropgf, potlock, virtuals, vaderai, pumpdotfun, daosdotfun" />
       </Head>
       <HomepageHeader />
       <main>
