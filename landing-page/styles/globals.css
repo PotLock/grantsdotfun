@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-8 py-3 text-base font-mono text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors tracking-wide;
+  }
+} 
+
+@layer utilities {
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+} 
+
+@keyframes spin {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  #emojis span {
+    display: inline-block;
+    animation: spin 0.1s ease-out;
+  }
