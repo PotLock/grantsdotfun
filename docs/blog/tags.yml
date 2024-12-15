@@ -1,0 +1,34 @@
+facebook:
+  label: Facebook
+  permalink: /facebook
+  description: Facebook tag description
+
+hello:
+  label: Hello
+  permalink: /hello
+  description: Hello tag description
+
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Posts related to Docusaurus features and functionality
+
+hola:
+  label: Hola
+  permalink: /hola
+  description: Hola tag description
+
+referral-system:
+  label: Referral System
+  permalink: /referral-system
+  description: Documentation and information about the Referral System API
+
+smart-contracts:
+  label: Smart Contracts
+  permalink: /smart-contracts
+  description: Topics related to blockchain smart contracts
+
+api-documentation:
+  label: API Documentation
+  permalink: /api-documentation
+  description: Detailed explanations of API endpoints and structures
