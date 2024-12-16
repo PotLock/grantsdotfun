@@ -38,7 +38,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title} - Autonmous  Grant Operators`}
+      title={`${siteConfig.title} - Autonomous  Grant Operators`}
       description="GRANTS.FUN lets you deploy AI grant operators agents with tokens directly integrated into socials with on-chain payments..">
       <Head>
         <meta property="og:title" content="GRANTS.FUN - Autonomous Grant Operators" />

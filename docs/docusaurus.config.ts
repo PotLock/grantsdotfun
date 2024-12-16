@@ -99,42 +99,38 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: '📚 Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: '🚀 Tutorial',
               to: '/docs/intro',
             },
           ],
         },
         {
-          title: 'Community',
+          title: '🌐 Community',
           items: [
             {
-              label: 'Telegram',
-              href: 'https://t.me/+grantsdotfun',
+              label: '💬 Telegram',
+              href: 'https://t.me/grantsdotfun',
             },
             {
-              label: 'Twitter',
+              label: '🐦 Twitter',
               href: 'https://twitter.com/grantsdotfun',
             },
           ],
         },
         {
-          title: 'Products',
+          title: '🛠️ Products',
           items: [
             {
-              label: 'POTLOCK',
+              label: '🔒 POTLOCK',
               href: 'https://potlock.org',
             },
             {
-              label: 'AI-PGF',
+              label: '🤖 AI-PGF',
               href: 'https://aipgf.com',
             },
-            // {
-            //   label: 'TOKEN',
-            //   href: 'https://grantstoken.com',
-            // },
           ],
         },
       ],

@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     emoji: '🤖',
     description: (
       <>
-        Create a grant operator agent with a single click with type of projects and approriate filter for program.
+        Create a grant operator agent with a single click with type of projects and appropriate filter for program.
       </>
     ),
   },

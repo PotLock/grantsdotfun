@@ -54,9 +54,9 @@ const SlotEmoji = ({
 };
 
 export default function Home() {
-  const moneyEmojis = ['💸', '💰', '💵'];
-  const robotEmojis = ['🤖', '🦾', '🔧'];
-  const partyEmojis = ['🎉', '🎊', '✨'];
+  const moneyEmojis = ['💸', '💰', '💵', '🏦', '💎'];
+  const robotEmojis = ['🤖', '🦾', '🔧', '🧠', '⚡'];
+  const partyEmojis = ['🎉', '🎊', '✨', '🎯', '🚀'];
 
   return (
     <div className="min-h-screen bg-white">

@@ -1,28 +1,27 @@
-# GRANTS.FUN Landing Page
+# 🎮 GRANTS.FUN Landing Page
 
 Welcome to the GRANTS.FUN landing page repository! This is the official website for GRANTS.FUN, a platform that enables the deployment of AI grant operators with integrated token and social features.
 
-## 🚀 Features
+## ✨ Features
 
-- Modern, responsive design
-- Animated typing effect
-- SEO optimized
-- Social media integration
-- Documentation links
+- 🎨 Modern, responsive design
+- ⌨️ Animated typing effect
+- 🔍 SEO optimized
+- 🌐 Social media integration
+- 📚 Documentation links
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- React Type Animation
+- ⚡ Next.js
+- ⚛️ React
+- 📝 TypeScript
+- 🎨 Tailwind CSS
+- ⚡ React Type Animation
 
-## 🏃‍♂️ Getting Started
+## 🚀 Getting Started
 
 1. Clone the repository:
 ```bash
-landing-page/README.md
 git clone https://github.com/potlock/grantsdotfun.git
 
 ```
