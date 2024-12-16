@@ -57,7 +57,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Website](https://grants.fun)
 - [Documentation](https://docs.grants.fun)
-- [Twitter](https://twitter.com/potlock_)
+- [Twitter](https://twitter.com/grantsdotfun)
 - [GitHub](https://github.com/potlock/grantsdotfun)
 
 ## 🏗 Built by Potlock Protocol

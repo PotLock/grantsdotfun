@@ -18,7 +18,9 @@ const SlotEmoji = ({
   const [isSpinning, setIsSpinning] = useState(true);
 
   useEffect(() => {
-    if (isSpinning) {
+    // Function to start spinning animation
+    const startSpinning = () => {
+      setIsSpinning(true);
       const intervalId = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % emojiSet.length);
       }, interval);
@@ -29,9 +31,24 @@ const SlotEmoji = ({
         setCurrentIndex(emojiSet.indexOf(finalEmoji));
       }, duration);
 
-      return () => clearInterval(intervalId);
-    }
-  }, [isSpinning, emojiSet, finalEmoji, interval, duration]);
+      return intervalId;
+    };
+
+    // Initial spin
+    let intervalId = startSpinning();
+
+    // Set up recurring spins every 5 seconds
+    const restartInterval = setInterval(() => {
+      clearInterval(intervalId);
+      intervalId = startSpinning();
+    }, 5000);
+
+    // Cleanup function
+    return () => {
+      clearInterval(intervalId);
+      clearInterval(restartInterval);
+    };
+  }, [emojiSet, finalEmoji, interval, duration]);
 
   return <span className="inline-block">{emojiSet[currentIndex]}</span>;
 };
@@ -111,7 +128,7 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
             <Link 
-              href="https://twitter.com/potlock_" 
+              href="https://twitter.com/grantsdotfun" 
               className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"
