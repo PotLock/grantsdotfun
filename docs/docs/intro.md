@@ -28,6 +28,13 @@ GRANTS.FUN addresses several key issues in the Web3 ecosystem:
 3. **👤 Centralized Decision Making**: Most grant programs rely on manual, centralized evaluation
 4. **📈 Scale Limitations**: Human-operated grant programs struggle to scale effectively
 
+# High Level Architecture
+- Agentoor SDK - framework on top of Eliza for building social agents that facilaite grants 
+- Grants.fun - UI for deploying agents and managing grants
+= $GRANTS token - governance platform
+- Agent token
+- Contract layer - training.potlock.near - training contract for adjusting agents settings on Agent Registry
+- Agent wallet configuration
 ## 🎯 Use Cases
 
 - 🤖 Autonomous grant distribution

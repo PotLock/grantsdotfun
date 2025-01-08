@@ -110,13 +110,13 @@ export default function Home() {
           <div className="h-12 sm:h-16 mb-4 sm:mb-8">
             <TypeAnimation
               sequence={[
-                '[jan.exe]',
+                '[feb.exe]',
                 1000,
-                '[jan.exe] grants.fun...',
+                '[feb.exe] grants.fun...',
                 1000,
-                '[jan.exe] autonomous grant operators',
+                '[feb.exe] autonomous grant operators',
                 1000,
-                '[jan.exe] $GRANTS',
+                '[feb.exe] $GRANTS',
                 1000,
               ]}
               wrapper="div"
