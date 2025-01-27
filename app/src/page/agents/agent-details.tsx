@@ -10,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import Image from "next/image"
 import { Copy, Search, BarChart2, Vote, Users, MessageSquare, FileText } from "lucide-react"
 import AboutGovernance from "@/components/custom/AboutGovernance"
 import ProposalGovernance from "@/components/custom/ProposalGovernance"
@@ -43,7 +42,7 @@ const AgentDetails = () => {
             <div className="space-y-6">
                 <div className="flex items-center gap-4 border border-gray-200 rounded-xl p-4 shadow-sm">
                     <div className="flex items-center justify-center h-[95px] w-[150px] p-2 bg-gray-100 rounded-lg">
-                        <Image
+                        <img
                             src="/assets/tokens/dragon.png"
                             alt="Black Dragon Logo"
                             width={70}

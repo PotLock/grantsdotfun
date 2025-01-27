@@ -12,7 +12,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { TwitterIcon } from "@/components/icons/TwitterIcon"
 import { TelegramIcon } from "@/components/icons/TelegramIcon"
 import { DiscordIcon } from "@/components/icons/DiscordIcon"
-import Image from "next/image"
 
 interface LogEntry {
     id: string
@@ -48,7 +47,7 @@ const LogInteraction = ({ log }: { log: LogEntry }) => {
                 <div className="flex-1">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
-                            <Image src={log.user?.avatar || ''} alt={log.user?.name || ''} className="w-5 h-5 rounded-full" width={16} height={16} />
+                            <img src={log.user?.avatar || ''} alt={log.user?.name || ''} className="w-5 h-5 rounded-full" width={16} height={16} />
                             <span className="text-sm">{log.user?.name}</span>
                         </div>
                     </div>
@@ -84,7 +83,7 @@ const LogDeveloper = ({ log }: { log: LogEntry }) => {
                     <div className="flex items-center gap-2">
                         <span className="text-sm text-muted-foreground">Contributed by</span>
                         <div className="flex items-center gap-1">
-                            <Image 
+                            <img 
                                 src={log.contributor?.avatar || ''} 
                                 alt={log.contributor?.name || ''} 
                                 width={20} 

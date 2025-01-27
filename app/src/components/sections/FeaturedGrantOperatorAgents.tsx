@@ -4,10 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { useState, useCallback } from "react"
 import { Settings2, Twitter, MessageCircle } from "lucide-react"
-import Link from "next/link"
 
 // Mock data array
 const mockData = Array(100).fill(0).map((_, index) => ({
@@ -183,7 +181,7 @@ const FeaturedGrantOperatorAgents = () => {
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full overflow-hidden">
-                      <Image src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={32} height={32} className="object-cover" />
+                      <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={32} height={32} className="object-cover" />
                     </div>
                     <span className="font-semibold">{item.name}</span>
                   </div>
@@ -206,14 +204,14 @@ const FeaturedGrantOperatorAgents = () => {
                 <TableCell className="text-center">
                   <div className="flex justify-center gap-2">
                     {item.hasTwitter && (
-                      <Link href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                      <a href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                         <Twitter className="h-4 w-4 text-gray-600" />
-                      </Link>
+                      </a>
                     )}
                     {item.hasTelegram && (
-                      <Link href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                      <a href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                         <MessageCircle className="h-4 w-4 text-gray-600" />
-                      </Link>
+                      </a>
                     )}
                   </div>
                 </TableCell>
@@ -229,7 +227,7 @@ const FeaturedGrantOperatorAgents = () => {
           <Card key={item.id} className="p-4">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-10 w-10 rounded-full overflow-hidden">
-                <Image src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={40} height={40} className="object-cover" />
+                <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={40} height={40} className="object-cover" />
               </div>
               <div>
                 <div className="font-medium">{item.name}</div>
@@ -266,14 +264,14 @@ const FeaturedGrantOperatorAgents = () => {
                 <span className="text-muted-foreground">Integrations:</span>
                 <div className="flex gap-2">
                   {item.hasTwitter && (
-                    <Link href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                    <a href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                       <Twitter className="h-4 w-4 text-gray-600" />
-                    </Link>
+                    </a>
                   )}
                   {item.hasTelegram && (
-                    <Link href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                    <a href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                       <MessageCircle className="h-4 w-4 text-gray-600" />
-                    </Link>
+                    </a>
                   )}
                 </div>
               </div>

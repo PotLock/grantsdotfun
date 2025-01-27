@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header"
 import Hero from "@/components/sections/Hero"
 import FeaturedGrantAgents from "@/components/sections/FeaturedGrantAgents"
 import FeaturedGrantOperatorAgents from "@/components/sections/FeaturedGrantOperatorAgents"

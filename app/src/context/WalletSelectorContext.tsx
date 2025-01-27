@@ -1,5 +1,3 @@
-"use client"
-
 import type { AccountState, NetworkId, WalletSelector } from "@near-wallet-selector/core";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import type { WalletSelectorModal } from "@near-wallet-selector/modal-ui";
@@ -19,7 +17,6 @@ import React, {
   useMemo,
 } from "react";
 import { distinctUntilChanged, map } from "rxjs";
-import { NextPage } from "next";
 
 
 declare global {
@@ -39,7 +36,7 @@ interface WalletSelectorContextValue {
 const WalletSelectorContext = React.createContext<WalletSelectorContextValue | null>(null);
 
 
-export const WalletSelectorContextProvider: NextPage<{
+export const WalletSelectorContextProvider:React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
   const [selector, setSelector] = useState<WalletSelector | null>(null);
@@ -49,7 +46,7 @@ export const WalletSelectorContextProvider: NextPage<{
 
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
-      network: process.env.NEXT_PUBLIC_NETWORK as NetworkId,
+      network: import.meta.env.VITE_NETWORK as NetworkId,
       debug: true,
       modules: [
         setupNightly() as any,
@@ -57,14 +54,14 @@ export const WalletSelectorContextProvider: NextPage<{
         setupHereWallet(),
         setupMeteorWallet(),
         setupBitteWallet({
-          walletUrl: process.env.NEXT_PUBLIC_NETWORK as NetworkId == "mainnet" ? process.env.NEXT_PUBLIC_WALLET_URL as string : process.env.NEXT_PUBLIC_WALLET_URL_TESTNET as string,
-          callbackUrl: process.env.NEXT_PUBLIC_CALLBACK_URL,
+          walletUrl: import.meta.env.VITE_NETWORK as NetworkId == "mainnet" ? import.meta.env.VITE_WALLET_URL as string : import.meta.env.VITE_WALLET_URL_TESTNET as string,
+          callbackUrl: import.meta.env.VITE_CALLBACK_URL,
           deprecated: false,
       }),
       ],
     });
     const _modal = setupModal(_selector, {
-      contractId: process.env.NEXT_PUBLIC_NETWORK as NetworkId == "mainnet" ? process.env.NEXT_PUBLIC_AI_PGF_FORUM_CONTRACT as string : process.env.NEXT_PUBLIC_AI_PGF_FORUM_CONTRACT_TESTNET as string,
+      contractId: import.meta.env.VITE_NETWORK as NetworkId == "mainnet" ? import.meta.env.VITE_SMART_CONTRACT as string : import.meta.env.VITE_SMART_CONTRACT_TESTNET as string,
     });
     const state = _selector.store.getState();
     setAccounts(state.accounts);

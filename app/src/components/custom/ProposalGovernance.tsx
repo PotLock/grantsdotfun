@@ -14,7 +14,6 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { Calendar, Plus, User } from "lucide-react"
-import Image from "next/image"
 import ProposalDetail from "./ProposalDetail"
 import { Button } from "../ui/button"
 import CreateProposalModal from "./CreateProposalModal"
@@ -181,7 +180,7 @@ const ProposalGovernance = () => {
                                         <div className="flex items-center gap-1">
                                             <User className="h-3.5 w-3.5 text-blue-500" />
                                             <span>Published by</span>
-                                            <Image src="/assets/images/avatar/avatar.png" alt="avatar" width={16} height={16} className="rounded-full" />
+                                            <img src="/assets/images/avatar/avatar.png" alt="avatar" width={16} height={16} className="rounded-full" />
                                             <span className="text-blue-500">0x7df...8yhd9</span>
                                         </div>
                                     </div>

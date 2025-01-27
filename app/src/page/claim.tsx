@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Filter, Search, ShieldCheck } from 'lucide-react';
 import { Card, CardContent, CardTitle, CardHeader } from '@/components/ui/card';
-import { NextPage } from 'next';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-const ClaimPage:NextPage = () => {
+const ClaimPage = () => {
 
   const recentClaims = [
     {

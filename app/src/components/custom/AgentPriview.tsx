@@ -1,7 +1,6 @@
 import { Button } from "../ui/button"
 import { Card } from "../ui/card"
 import { AgentPreviewTypes } from "@/types/agent"
-import Image from "next/image"
 
 const AgentPreview: React.FC<AgentPreviewTypes> = 
     ({ name, image, description, governanceType, fundingFrequency, evaluationType }) => {
@@ -11,7 +10,7 @@ const AgentPreview: React.FC<AgentPreviewTypes> =
             <Card className="rounded-xl border p-6">
             <div className="flex justify-between items-start mb-6">
                 <div className="flex flex-col items-start gap-5 w-full">
-                    <Image src={image} alt="Agent Preview" width={100} height={100} />
+                    <img src={image} alt="Agent Preview" width={100} height={100} />
                     <div className="flex flex-row justify-between items-center w-full">
                         <div className="flex flex-col items-start gap-1">
                             <h3 className="font-semibold text-2xl">{name || 'AI Research DAO'}</h3>

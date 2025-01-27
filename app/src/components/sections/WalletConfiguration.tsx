@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Info } from 'lucide-react'
-import Image from 'next/image'
 
 interface WalletConfigurationProps {
     onBack: () => void;
@@ -105,7 +104,7 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
               </div>
               <div className="mt-1 text-sm text-gray-600 flex items-center gap-1">
                 <span>This covers infrastructure and initial setup costs 100</span> 
-                <Image src="/assets/icons/money.svg" alt="GRANTS" width={16} height={16} />
+                <img src="/assets/icons/money.svg" alt="GRANTS" width={16} height={16} />
                 <span>$GRANTS</span>
               </div>
             </div>

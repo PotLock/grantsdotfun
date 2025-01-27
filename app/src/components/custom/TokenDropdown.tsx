@@ -5,7 +5,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
 export interface Token {
@@ -44,7 +43,7 @@ export const TokenDropdown = ({ selectedToken, onSelect }: TokenDropdownProps) =
         <Button variant="secondary" className="shrink-0 rounded-full bg-stone-200 hover:bg-stone-300">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 relative flex items-center justify-center rounded-full bg-white/10">
-                <Image
+                <img
                 src={selectedToken.image}
                 alt={selectedToken.name}
                 width={16}
@@ -65,7 +64,7 @@ export const TokenDropdown = ({ selectedToken, onSelect }: TokenDropdownProps) =
             className="flex items-center gap-2"
           >
             <div className="w-5 h-5 relative flex items-center justify-center rounded-full bg-white/10">
-                <Image
+                <img
                 src={token.image}
                 alt={token.name}
                 width={16}

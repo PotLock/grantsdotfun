@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -80,7 +79,7 @@ const ProposalDetail: React.FC<ProposalDetailProps> = ({ proposal, onBack }) => 
                 <span>Published by</span>
               </div>
               <div className="flex items-center gap-1">
-                <Image src="/assets/images/avatar/avatar.png" alt="avatar" width={20} height={20} className="rounded-full" />
+                <img src="/assets/images/avatar/avatar.png" alt="avatar" width={20} height={20} className="rounded-full" />
                 <span className="text-blue-500">{proposal.publisher.address}</span>
               </div>
             </div>

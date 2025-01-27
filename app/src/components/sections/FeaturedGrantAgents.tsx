@@ -1,11 +1,8 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 // Mock data
 const mockGrantAgents = [
@@ -48,10 +45,10 @@ const mockGrantAgents = [
 ];
 
 const FeaturedGrantAgents = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const totalPages = Math.ceil(mockGrantAgents.length / itemsPerPage);
-  const router = useRouter();
 
   const handleNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -96,10 +93,10 @@ const FeaturedGrantAgents = () => {
 
       <div className="grid sm:grid-cols-2 gap-4">
         {getCurrentPageItems().map((agent) => (
-          <Card key={agent.id} className="p-4 sm:p-6 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => router.push(`/agents/${agent.id}`)}>
+          <Card key={agent.id} className="p-4 sm:p-6 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => navigate(`/agents/${agent.id}`)}>
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="h-20 w-20 sm:h-24 sm:w-24 bg-muted rounded-lg shrink-0 mx-auto sm:mx-0 flex items-center justify-center">
-                <Image src={agent.image} alt={agent.name} width={80} height={80} className="object-contain" />
+                <img src={agent.image} alt={agent.name} width={80} height={80} className="object-contain" />
               </div>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 justify-center sm:justify-start">

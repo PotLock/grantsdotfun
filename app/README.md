@@ -12,13 +12,13 @@ GRANTS.FUN is an autonomous grant operator platform built on NEAR Protocol, desi
 
 ## Tech Stack
 
-- **Framework**: Next.js 15.1.5
+- **Framework**: Vite v5.1.3, React v19.0.0
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
 - **Icons**: Lucide Icons
-- **Fonts**: Geist Sans & Geist Mono
-- **Development Tools**: ESLint, Turbopack
+- **Fonts**: Geist Sans
+- **Development Tools**: ESLint
 
 ## Getting Started
 

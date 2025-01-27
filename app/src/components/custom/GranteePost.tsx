@@ -1,5 +1,4 @@
 import { Avatar } from "@/components/ui/avatar"
-import Link from "next/link"
 import { Card, CardContent } from "../ui/card"
 import { MessageCircle } from "lucide-react"
 
@@ -37,10 +36,10 @@ const GranteePost = ({
                     </div>
                     <p className="mt-2">{content}</p>
                     {hasThread && (
-                        <Link href="#" className="mt-2 max-w-[150px] items-center text-sm text-muted-foreground border border-gray-200 rounded-md px-2 py-1 flex flex-row gap-1">
+                        <a href="#" className="mt-2 max-w-[150px] items-center text-sm text-muted-foreground border border-gray-200 rounded-md px-2 py-1 flex flex-row gap-1">
                             <MessageCircle className="w-3 h-3" />
                             <span>Thread (3 tweets)</span>
-                        </Link>
+                        </a>
                     )}
                 </div>
             </CardContent>

@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@builddao/near-social-js": "^1.1.0",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@fontsource/geist-sans": "^5.1.0",
     "@near-wallet-selector/bitte-wallet": "^8.9.15",
     "@near-wallet-selector/core": "^8.9.15",
     "@near-wallet-selector/here-wallet": "^8.9.15",
@@ -32,31 +34,34 @@
     "@radix-ui/react-switch": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.2",
     "@vercel/analytics": "^1.4.1",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "highcharts": "^12.1.2",
     "highcharts-react-official": "^3.2.1",
     "lucide-react": "^0.472.0",
     "near-rpc-providers": "^0.1.0",
-    "next": "15.1.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.1",
+    "react-router-dom": "^6.22.1",
     "recharts": "^2.15.0",
     "rxjs": "^7.8.1",
+    "stream-browserify": "^3.0.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.49.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
     "eslint": "^9",
-    "eslint-config-next": "15.1.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^5.1.3"
   }
 }

@@ -2,17 +2,15 @@
 
 import { Button } from "@/components/ui/button"
 import { Menu, Users } from 'lucide-react'
-import Image from "next/image"
 import LoginButton from "@/components/custom/LoginButton"
-import Link from "next/link"
 
 const Header = () => {
   return (
     <header className="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
       <div className="container flex h-16 items-center justify-between mx-auto">
         <div className="flex items-center gap-20">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
+          <a href="/" className="flex items-center gap-2">
+            <img
               src="/assets/logos/money.svg"
               alt="Grants.fun Logo"
               width={24}
@@ -20,17 +18,17 @@ const Header = () => {
               className="h-6 w-6" 
             />
             <span className="font-semibold">grants.fun</span>
-          </Link>
+          </a>
           <div className="flex items-center gap-10">
-            <Link href="/explore">
+            <a href="/">
               <span className="text-sm">Explore</span>
-            </Link>
-            <Link href="/governance">
-              <span className="text-sm">Governance</span>
-            </Link>
-            <Link href="/claim">
+            </a>
+            <a href="/agents/create">
+              <span className="text-sm">Create Agent</span>
+            </a>
+            <a href="/claim">
               <span className="text-sm">Claim Funds</span>
-            </Link>
+            </a>
           </div>
         </div>
         <LoginButton />

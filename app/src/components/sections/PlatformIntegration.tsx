@@ -8,7 +8,6 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Switch } from "../ui/switch"
 import { useState } from "react"
-import Image from "next/image"
 
 
 interface PlatformIntegrationProps {
@@ -65,7 +64,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                   <div className="flex items-center justify-between rounded-lg border p-4">
                     <div className="flex items-center gap-5">
                       <div className="flex h-7 w-7 items-center justify-center bg-gray-800 rounded-full">
-                        <Image src="/assets/icons/telegram.svg" alt="Telegram"  width={16} height={16} />
+                        <img src="/assets/icons/telegram.svg" alt="Telegram"  width={16} height={16} />
                       </div>
                       <div>
                         <div className="font-medium">Telegram Integration</div>
@@ -141,7 +140,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                                 {reviewers.map((reviewer, index) => (
                                     <div key={index} className="flex items-center gap-2 w-full justify-between">
                                         <div className="flex flex-row gap-2">
-                                            <Image src={`https://unavatar.io/${reviewer}`} alt={reviewer} className="rounded-lg h-7 w-7" width={20} height={20} />
+                                            <img src={`https://unavatar.io/${reviewer}`} alt={reviewer} className="rounded-lg h-7 w-7" width={20} height={20} />
                                             <div className="flex items-center gap-2 text-sm font-semibold">@{reviewer}</div>
                                         </div>
                                         <Button className="border border-red-500 hover:bg-red-50" variant="outline" size="sm" onClick={() => handleRemoveReviewer(reviewer)}>

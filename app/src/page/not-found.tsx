@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
@@ -13,12 +12,12 @@ export default function NotFound() {
         <p className="text-muted-foreground max-w-md">
           Sorry, we couldn't find the page you're looking for. Please check the URL or return to the homepage.
         </p>
-        <Link href="/">
+        <a href="/">
           <Button variant="default" className="mt-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Button>
-        </Link>
+        </a>
       </div>
     </div>
   );
