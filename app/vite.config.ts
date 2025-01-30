@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'buffer': 'buffer/',
+      'buffer': 'buffer',
       'stream': 'stream-browserify',
     },
   },
@@ -37,11 +37,14 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
       plugins: [
         NodeGlobalsPolyfillPlugin({
           buffer: true
         })
       ]
-    }
+    },
   },
 }) 
