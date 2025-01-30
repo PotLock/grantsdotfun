@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { NetworkIDEnum, Social } from '@builddao/near-social-js';
 import { ViewMethod } from '@/hooks/near-method';
 import { AvatarProfileProps } from '@/types/types';
-import { NextPage } from 'next';
 
-const AvatarProfile: NextPage<AvatarProfileProps> = ({ accountId, size = 40,style, image }) => {
+
+const AvatarProfile: React.FC<AvatarProfileProps> = ({ accountId, size = 40,style, image }) => {
     const [avatar, setAvatar] = useState<string | null>(null);
     const [oldUrl, setOldUrl] = useState<string | null>(null);
     const [imageUrls, setImageUrl] = useState<string | null>(null);
