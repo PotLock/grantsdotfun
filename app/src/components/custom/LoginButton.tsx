@@ -32,7 +32,7 @@ const ButtonLogin = () => {
         try {
             setIsLoading(true);
             if (!modal) {
-                toast.error("Wallet selector initialization is still in progress. Please try again in a moment.");
+                toast.loading("Please wait...", { duration: 3000 });
                 throw new Error("Wallet selector initialization is still in progress. Please try again in a moment.");
             }
             modal.show();
