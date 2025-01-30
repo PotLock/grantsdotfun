@@ -4,6 +4,7 @@ import path from 'path'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 
 export default defineConfig({
+  base: '/app/',
   plugins: [react()],
   resolve: {
     alias: {
