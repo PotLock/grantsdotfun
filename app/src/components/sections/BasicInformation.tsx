@@ -43,6 +43,16 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ preview, setPreview
               </div>
 
               <div className="space-y-1.5">
+                <Label htmlFor="ticker">Ticker Name</Label>
+                <Input 
+                  id="ticker" 
+                  placeholder="$ Token"
+                  value={preview.ticker}
+                  onChange={(e) => setPreview((p: AgentPreviewTypes) => ({...p, ticker: e.target.value}))}
+                />
+              </div>
+
+              <div className="space-y-1.5">
                 <Label htmlFor="description">AI Agent Description</Label>
                 <Textarea 
                   id="description" 

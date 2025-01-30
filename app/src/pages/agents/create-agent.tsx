@@ -15,6 +15,7 @@ const CreateAgent = () => {
     const [step, setStep] = useState<number>(1)
     const [preview, setPreview] = useState<AgentPreviewTypes>({
         name: '',
+        ticker: '',
         description: '',
         image: '/assets/images/agent-example.svg',
         governanceType: '',
