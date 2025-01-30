@@ -43,13 +43,13 @@ const AvatarProfile: React.FC<AvatarProfileProps> = ({ accountId, size = 40,styl
         const getAvatarBySocial = async () => {
             if (accountId) {
                 const social = new Social({
-                    contractId: process.env.NEXT_PUBLIC_NETWORK=="mainnet"?"social.near":"v1.social08.testnet",
-                    network: process.env.NEXT_PUBLIC_NETWORK=="mainnet"?NetworkIDEnum.Mainnet:NetworkIDEnum.Testnet,
+                    contractId: import.meta.env.VITE_NETWORK=="mainnet"?"social.near":"v1.social08.testnet",
+                    network: import.meta.env.VITE_NETWORK=="mainnet"?NetworkIDEnum.Mainnet:NetworkIDEnum.Testnet,
                 });
                 try {
                 const result: any = await social.get({
                     keys: [`${accountId}/profile/**`],
-                    useApiServer:process.env.NEXT_PUBLIC_NETWORK=="mainnet"?true:false
+                    useApiServer:import.meta.env.VITE_NETWORK=="mainnet"?true:false
                 });
                 const avatarUrl = result?.[accountId]?.profile?.image?.ipfs_cid;
                 // Check for NFT avatar

@@ -58,8 +58,8 @@ const ButtonLogin = () => {
     const formatAccountId = (accountId: string) => {
         if (accountId.length === 64) {
             return `${accountId.slice(0, 6)}...${accountId.slice(-4)}`;
-        } else if (accountId.endsWith(process.env.NEXT_PUBLIC_NETWORK == "testnet" ? ".testnet" : ".near")) {
-            return accountId.replace(process.env.NEXT_PUBLIC_NETWORK == "testnet" ? ".testnet" : ".near", '');
+        } else if (accountId.endsWith(import.meta.env.VITE_NETWORK == "testnet" ? ".testnet" : ".near")) {
+            return accountId.replace(import.meta.env.VITE_NETWORK == "testnet" ? ".testnet" : ".near", '');
         }
         return accountId;
     };

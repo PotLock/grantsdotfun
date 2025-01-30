@@ -1,31 +1,30 @@
-import { NearRpcProvider } from 'near-rpc-providers';
+import { JsonRpcProvider } from 'near-api-js/lib/providers';
 
 const getRpcProvider = () => {
-  const networkId = process.env.NEXT_PUBLIC_NETWORK || "";
-  const provider = new NearRpcProvider(networkId === "mainnet" ? "near" : "neartestnet");
-  return provider;
+  const networkId = import.meta.env.VITE_NETWORK || "";
+  const rpcUrl = networkId === "mainnet" 
+    ? "https://rpc.mainnet.near.org"
+    : "https://rpc.testnet.near.org";
+  return new JsonRpcProvider({ url: rpcUrl });
 };
 
 export const ViewMethod = async (contractId: string, method: string, args: any) => {
   try {
     const provider = getRpcProvider();
     
-    const argsString = args ? JSON.stringify(args) : '{}';
-    const argsBase64 = Buffer.from(argsString).toString('base64');
-    
-    const response = await provider.contractCall(
-      contractId,
-      'latest',
-      method,
-      argsBase64
-    );
+    const response = await provider.query({
+      request_type: "call_function",
+      account_id: contractId,
+      method_name: method,
+      args_base64: Buffer.from(JSON.stringify(args)).toString('base64'),
+      finality: "final"
+    });
 
-    if (!response || !response.result) {
+    if (!response || !('result' in response)) {
       return null;
     }
 
     try {
-
       if (response.result instanceof Array && response.result.length > 0 || response.result instanceof Uint8Array) {
         return JSON.parse(Buffer.from(response.result).toString());
       }

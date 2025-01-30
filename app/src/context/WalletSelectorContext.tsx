@@ -43,7 +43,6 @@ export const WalletSelectorContextProvider:React.FC<{
   const [modal, setModal] = useState<WalletSelectorModal | null>(null);
   const [accounts, setAccounts] = useState<Array<AccountState>>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
       network: import.meta.env.VITE_NETWORK as NetworkId,
