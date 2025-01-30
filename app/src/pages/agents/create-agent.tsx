@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import BasicInformation from '@/components/sections/BasicInformation'
 import AgentPreview from '@/components/custom/AgentPriview'
