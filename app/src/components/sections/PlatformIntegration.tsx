@@ -188,21 +188,38 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-500">Require Admin Approval</span>
-                        <Info className="h-4 w-4 text-gray-400" />
-                      </div>
+                        <div className="flex items-center gap-2">
+                            <Label className="text-sm text-gray-500">Require Admin Approval</Label>
+                            <div className="cursor-help group relative">
+                                <Info className="h-3 w-3 text-gray-500" />
+                                <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[350px] h-[60px]">
+                                    <span className="text-xs">
+                                      If enabled, even projects below the auto-approve threshold will require admin approval.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                       <Switch />
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* Submission Requirements */}
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <h3 className="font-medium">Submission Requirements</h3>
 
                   <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
-                    <Label className="text-sm text-gray-500">Minimum Followings</Label>
+                    <div className="flex items-center gap-2">
+                        <Label className="text-sm text-gray-500">Minimum Followings</Label>
+                        <div className="cursor-help group relative">
+                            <Info className="h-3 w-3 text-gray-500" />
+                            <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[340px] h-[35px]">
+                                <span className="text-xs">
+                                  Minimum age of the Twitter account in days to be eligible.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <Input 
                       type="number"
                       className="max-w-[100px]"
@@ -212,7 +229,17 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                   </div>
 
                   <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
-                    <Label className="text-sm text-gray-500">Minimum Account Age</Label>
+                    <div className="flex items-center gap-2">
+                        <Label className="text-sm text-gray-500">Minimum Account Age</Label>
+                        <div className="cursor-help group relative">
+                            <Info className="h-3 w-3 text-gray-500" />
+                            <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[360px] h-[35px]">
+                                <span className="text-xs">
+                                  Require the Twitter account to have a blue verification badge.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <Input 
                       type="number"
                       className="max-w-[100px]"
@@ -221,20 +248,29 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                     />
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-500">Blue Tick (Verified Account)</span>
-                      <Info className="h-4 w-4 text-gray-400" />
+                  <div className="space-y-6 pt-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                          <Label className="text-sm text-gray-500">Blue Tick (Verified Account)</Label>
+                          <div className="cursor-help group relative">
+                              <Info className="h-3 w-3 text-gray-500" />
+                              <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[460px] h-[35px]">
+                                  <span className="text-xs">
+                                    Require the Twitter account to be set up to receive crypto tips  or display NFTs.
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <Switch />
                     </div>
-                    <Switch />
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-500">Crypto Settings Enabled</span>
-                      <Info className="h-4 w-4 text-gray-400" />
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-500">Crypto Settings Enabled</span>
+                        <Info className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <Switch />
                     </div>
-                    <Switch />
                   </div>
                 </div>
               </div>

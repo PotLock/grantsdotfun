@@ -28,7 +28,6 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
             <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                     <h2 className="text-xl font-semibold">Token Configuration</h2>
-                    <Info className="h-4 w-4 text-gray-400" />
                 </div>
             </div>
             
@@ -110,7 +109,17 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
             <Button className="text-blue-600 font-semibold bg-transparent hover:bg-transparent shadow-none">+ Add New</Button>
 
             <div className="space-y-1.5">
-                <Label>Governance Type</Label>
+                <div className="flex items-center gap-2">
+                    <Label htmlFor="min-grant">Governance Type</Label>
+                    <div className="cursor-help group relative">
+                        <Info className="h-3 w-3" />
+                        <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[230px] h-[35px]">
+                            <span className="text-xs">
+                                You can vote to change this anytime.
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <Select defaultValue="admin">
                 <SelectTrigger>
                     <SelectValue placeholder="Select governance type" />
@@ -125,7 +134,17 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
 
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <Label>Max Deploy Percentage</Label>
+                    <div className="flex items-center gap-2">
+                        <Label htmlFor="min-grant">Max Deploy Percentage</Label>
+                        <div className="cursor-help group relative">
+                            <Info className="h-3 w-3" />
+                            <div className="hidden group-hover:block absolute top-4 z-10 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[65px]">
+                                <span className="text-xs">
+                                This is how much of the total pot is allowed to be transferred to the spending balance.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <span className="text-sm font-medium">{maxDeploy}%</span>
                 </div>
                 <Slider
@@ -159,24 +178,44 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
 
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                <Label htmlFor="min-grant">Minimum Grant Size</Label>
-                <Input 
-                    id="min-grant" 
-                    type="number"
-                    placeholder="10,000"
-                    value={minGrant || ''}
-                    onChange={(e) => setMinGrant(e.target.value)}
-                />
+                    <div className="flex items-center gap-2">
+                        <Label htmlFor="min-grant">Minimum Grant Size</Label>
+                        <div className="cursor-help group relative">
+                            <Info className="h-3 w-3" />
+                            <div className="hidden group-hover:block absolute top-4 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[90px]">
+                                <span className="text-xs">
+                                    The minimum amount that can be granted to a single project. This helps ensure a fair distribution of funds.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <Input 
+                        id="min-grant" 
+                        type="number"
+                        placeholder="10,000"
+                        value={minGrant || ''}
+                        onChange={(e) => setMinGrant(e.target.value)}
+                    />
                 </div>
                 <div className="space-y-1.5">
-                <Label htmlFor="max-grant">Maximum Grant Size</Label>
-                <Input 
-                    id="max-grant" 
-                    type="number"
-                    placeholder="30,000"
-                    value={maxGrant || ''}
-                    onChange={(e) => setMaxGrant(e.target.value)}
-                />
+                    <div className="flex items-center gap-2">
+                        <Label htmlFor="max-grant">Maximum Grant Size</Label>
+                        <div className="cursor-help group relative">
+                            <Info className="h-3 w-3" />
+                            <div className="hidden group-hover:block absolute top-4 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[90px]">
+                                <span className="text-xs">
+                                    The maximum amount that can be granted to a single project. This helps ensure a fair distribution of funds.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <Input 
+                        id="max-grant" 
+                        type="number"
+                        placeholder="30,000"
+                        value={maxGrant || ''}
+                        onChange={(e) => setMaxGrant(e.target.value)}
+                    />
                 </div>
             </div>
             </div>

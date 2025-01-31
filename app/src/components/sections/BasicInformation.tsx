@@ -26,7 +26,6 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ preview, setPreview
             
             <div className="mt-4">
               <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Info className="h-4 w-4" />
                 <p>Need help developing your own agent? See the <code className="rounded bg-gray-100 px-1.5 py-0.5 text-xs">agent_config</code> file for another Grant Agent Token (GAT)</p>
               </div>
             </div>
