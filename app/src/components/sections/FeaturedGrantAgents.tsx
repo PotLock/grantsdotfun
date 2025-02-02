@@ -51,12 +51,14 @@ const mockGrantAgents = [
 const FeaturedGrantAgents = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(window.innerWidth < 640 ? 1 : 2);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(
+    window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3
+  );
   const totalPages = Math.ceil(mockGrantAgents.length / itemsPerPage);
 
   useEffect(() => {
     const handleResize = () => {
-      setItemsPerPage(window.innerWidth < 640 ? 1 : 2);
+      setItemsPerPage(window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3);
     };
 
     window.addEventListener('resize', handleResize);
@@ -104,7 +106,7 @@ const FeaturedGrantAgents = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
         {getCurrentPageItems().map((agent) => (
           <Card key={agent.id} className="p-4 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => navigate(`/agents/${agent.id}`)}>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
