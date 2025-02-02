@@ -1,16 +1,14 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Settings2, Twitter, MessageCircle } from "lucide-react"
 
 // Mock data array
 const mockData = Array(100).fill(0).map((_, index) => ({
     id: index + 1,
     name: index === 0 ? "AI Research DAO" : index === 1 ? "Black Dragon" : `AI Research DAO ${index + 1}`,
+    ticker: index === 0 ? "AI" : index === 1 ? "BD" : `AI${index + 1}`,
     creator: index === 0 ? "Amichael_design" : index === 1 ? "BAjwaze" : `Creator${index + 1}`,
     marketcap: "$2,567,001.00",
     price: "$12.45",
@@ -23,8 +21,6 @@ const mockData = Array(100).fill(0).map((_, index) => ({
     telegramLink: "https://t.me/ai_research_dao",
 }))
 
-const ITEMS_PER_PAGE = 8
-
 interface SearchFilters {
   searchTerm: string;
   sortBy?: 'marketcap' | 'price' | 'change24h' | 'capitalDeployed' | 'weeklyPool';
@@ -34,7 +30,6 @@ interface SearchFilters {
 const searchData = (data: typeof mockData, filters: SearchFilters) => {
   let filteredData = [...data]
 
-  // Apply text search
   if (filters.searchTerm) {
     const searchLower = filters.searchTerm.toLowerCase()
     filteredData = filteredData.filter(item => 
@@ -43,7 +38,6 @@ const searchData = (data: typeof mockData, filters: SearchFilters) => {
     )
   }
 
-  // Apply sorting if specified
   if (filters.sortBy) {
     filteredData.sort((a, b) => {
       const aValue = parseFloat(a[filters.sortBy!].replace(/[^0-9.-]+/g, ''))
@@ -59,20 +53,19 @@ const searchData = (data: typeof mockData, filters: SearchFilters) => {
 }
 
 const FeaturedGrantOperatorAgents = () => {
+  const [itemsPerPage, setItemsPerPage] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState<string|null>(null)
   const [sortConfig, setSortConfig] = useState<{
     sortBy?: SearchFilters['sortBy'];
     sortDirection?: SearchFilters['sortDirection'];
   }>({})
 
-  // Memoize search function to prevent unnecessary re-renders
   const handleSearch = useCallback((term: string) => {
     setSearchTerm(term)
-    setCurrentPage(1) // Reset to first page when searching
+    setCurrentPage(1)
   }, [])
 
-  // Handle sorting
   const handleSort = useCallback((column: SearchFilters['sortBy']) => {
     setSortConfig(prev => ({
       sortBy: column,
@@ -83,14 +76,29 @@ const FeaturedGrantOperatorAgents = () => {
     }))
   }, [])
 
-  // Get filtered and sorted data
   const filteredData = searchData(mockData, {
-    searchTerm,
+    searchTerm: searchTerm || "",
     ...sortConfig
   })
 
-  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE)
-  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(4)
+      } else {
+        setItemsPerPage(8)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const currentData = filteredData.slice(startIndex, startIndex + itemsPerPage)
+
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(prev => prev - 1)
@@ -102,10 +110,6 @@ const FeaturedGrantOperatorAgents = () => {
       setCurrentPage(prev => prev + 1)
     }
   }
-
-  // Calculate current page data
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const currentData = filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
   return (
     <section className="space-y-4">
@@ -120,7 +124,7 @@ const FeaturedGrantOperatorAgents = () => {
                     type="search" 
                     placeholder="Search Agents" 
                     className="w-full sm:max-w-xs"
-                    value={searchTerm}
+                    value={searchTerm || ""}
                     onChange={(e) => handleSearch(e.target.value)}
                 />
                 <Button 
@@ -135,15 +139,14 @@ const FeaturedGrantOperatorAgents = () => {
         </div>
       </div>
 
-      {/* Desktop Table View */}
-      <div className="hidden sm:block border rounded-lg">
+      <div className="block border rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="text-left">Agent</TableHead>
-              <TableHead className="text-left">Creator</TableHead>
+              <TableHead className="text-left hidden sm:table-cell">Creator</TableHead>
               <TableHead 
-                className="text-center cursor-pointer hover:bg-gray-50"
+                className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('marketcap')}
               >
                 Marketcap {sortConfig.sortBy === 'marketcap' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
@@ -155,19 +158,19 @@ const FeaturedGrantOperatorAgents = () => {
                 Price {sortConfig.sortBy === 'price' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
               </TableHead>
               <TableHead 
-                className="text-center cursor-pointer hover:bg-gray-50"
+                className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('change24h')}
               >
                 24h (%) {sortConfig.sortBy === 'change24h' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
               </TableHead>
               <TableHead 
-                className="text-center cursor-pointer hover:bg-gray-50"
+                className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('capitalDeployed')}
               >
                 Capital Deployed {sortConfig.sortBy === 'capitalDeployed' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
               </TableHead>
               <TableHead 
-                className="text-center cursor-pointer hover:bg-gray-50"
+                className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('weeklyPool')}
               >
                 Weekly Pool {sortConfig.sortBy === 'weeklyPool' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
@@ -180,27 +183,30 @@ const FeaturedGrantOperatorAgents = () => {
               <TableRow key={item.id}>
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full overflow-hidden">
+                    <div className="h-8 w-8 rounded-lg overflow-hidden">
                       <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={32} height={32} className="object-cover" />
                     </div>
-                    <span className="font-semibold">{item.name}</span>
+                    <div className="flex flex-col items-start justify-start">
+                      <span className="font-semibold text-sidebar-foreground">{item.name}</span>
+                      <span className="text-sidebar-foreground text-sm">${item.ticker}</span>
+                    </div>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell">
                   <div className="flex items-center gap-2">
-                    <div className="h-6 w-6 rounded-full bg-purple-600 flex items-center justify-center text-white text-sm">
+                    <div className="h-8 w-8 rounded-lg bg-blue-500 text-sm flex items-center justify-center text-white">
                       {item.creator[0]}
                     </div>
-                    <span>{item.creator}</span>
+                    <span className="text-sidebar-foreground">{item.creator}</span>
                   </div>
                 </TableCell>
-                <TableCell className="text-center">{item.marketcap}</TableCell>
-                <TableCell className="text-center">{item.price}</TableCell>
-                <TableCell className="text-center text-green-500">
+                <TableCell className="text-center text-muted-foreground hidden sm:table-cell">{item.marketcap}</TableCell>
+                <TableCell className="text-center text-muted-foreground">{item.price}</TableCell>
+                <TableCell className="text-center text-green-500 hidden sm:table-cell">
                   {item.change24h}%
                 </TableCell>
-                <TableCell className="text-center">{item.capitalDeployed}</TableCell>
-                <TableCell className="text-center">{item.weeklyPool}</TableCell>
+                <TableCell className="text-center text-muted-foreground hidden sm:table-cell">{item.capitalDeployed}</TableCell>
+                <TableCell className="text-center text-muted-foreground hidden sm:table-cell">{item.weeklyPool}</TableCell>
                 <TableCell className="text-center">
                   <div className="flex justify-center gap-2">
                     {item.hasTwitter && (
@@ -219,65 +225,6 @@ const FeaturedGrantOperatorAgents = () => {
             ))}
           </TableBody>
         </Table>
-      </div>
-
-      {/* Mobile Card View */}
-      <div className="grid gap-4 sm:hidden">
-        {currentData.map((item) => (
-          <Card key={item.id} className="p-4">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-full overflow-hidden">
-                <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={40} height={40} className="object-cover" />
-              </div>
-              <div>
-                <div className="font-medium">{item.name}</div>
-                <div className="text-sm text-muted-foreground flex items-center gap-2">
-                  <div className="h-5 w-5 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs">
-                    {item.creator[0]}
-                  </div>
-                  {item.creator}
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Marketcap:</span>
-                <span className="font-medium">{item.marketcap}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Price:</span>
-                <span className="font-medium">{item.price}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">24h:</span>
-                <span className="text-green-500">{item.change24h}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Capital:</span>
-                <span className="font-medium">{item.capitalDeployed}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Weekly Pool:</span>
-                <span className="font-medium">{item.weeklyPool}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Integrations:</span>
-                <div className="flex gap-2">
-                  {item.hasTwitter && (
-                    <a href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
-                      <Twitter className="h-4 w-4 text-gray-600" />
-                    </a>
-                  )}
-                  {item.hasTelegram && (
-                    <a href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
-                      <MessageCircle className="h-4 w-4 text-gray-600" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </Card>
-        ))}
       </div>
 
       <div className="flex justify-between items-center py-2">

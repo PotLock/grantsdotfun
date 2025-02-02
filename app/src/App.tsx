@@ -7,6 +7,7 @@ import NotFound from './pages/not-found'
 import AgentDetails from './pages/agents/agent-details';
 import CreateAgent from './pages/agents/create-agent';
 import ClaimPage from './pages/claim';
+import NavBar from './components/layout/NavBar';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
                     <Route path="/claim" element={<ClaimPage />} />
                 </Routes>
             </main>
+            <NavBar/>
         </div>
     </WalletSelectorContextProvider>
   )

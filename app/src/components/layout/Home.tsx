@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero"
 import FeaturedGrantAgents from "@/components/sections/FeaturedGrantAgents"
 import FeaturedGrantOperatorAgents from "@/components/sections/FeaturedGrantOperatorAgents"
+import NavBar from "./NavBar"
 
 const Home: React.FC = () => {
   return (
