@@ -31,9 +31,9 @@ const CreateAgent = () => {
   return (
     <div className="min-h-screen bg-white">
       <main>
-        <div className="mb-12 text-center bg-blue-50 py-16 px-32">
-          <h1 className="text-4xl font-bold tracking-tight">Create AI Agent</h1>
-          <p className="mt-2 text-xl text-gray-600">
+        <div className="mb-12 text-center bg-blue-50 py-8 md:py-16 px-4 md:px-32">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Create AI Agent</h1>
+          <p className="mt-2 text-lg md:text-xl text-gray-600">
             Launch your own grant program on social with an agent governed by token holders
           </p>
         </div>
@@ -41,17 +41,19 @@ const CreateAgent = () => {
         <ProgressSteps currentStep={step} />
 
         {/* <BasicInformation preview={preview} setPreview={setPreview} emojis={emojis} /> */}
-        <div className='container mx-auto grid gap-8 lg:grid-cols-[1fr,400px] pb-10'>
+        <div className='container mx-auto grid gap-8 px-4 md:px-6 lg:grid-cols-[1fr,400px] pb-10'>
             {step === 1 && <BasicInformation preview={preview} setPreview={setPreview} emojis={emojis} onNext={() => setStep(2)} />}
             {step === 2 && <TokenConfiguration onBack={() => setStep(1)} onNext={() => setStep(3)} />}
             {step === 3 && <PlatformIntegration onBack={() => setStep(2)} onNext={() => setStep(4)} />}
             {step === 4 && <GrantCanvas onBack={() => setStep(3)} onNext={() => setStep(5)} />}
             {step === 5 && <WalletConfiguration onBack={() => setStep(4)} onDeploy={handleDeploy} payoutBuffer={payoutBuffer} setPayoutBuffer={setPayoutBuffer} />}
 
-            {/* Preview */}
-            <AgentPreview 
-              {...preview}
-            />  
+            {/* Preview - Hide on mobile, show on larger screens */}
+            <div className="hidden lg:block">
+              <AgentPreview 
+                {...preview}
+              />
+            </div>
         </div>
       </main>
     </div>

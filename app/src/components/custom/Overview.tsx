@@ -1,7 +1,7 @@
 import Reviewers from "./Reviewers";
 import SocialIntegrations from "./SocialIntegrations";
 
-const Overview = () => {
+const Overview: React.FC = () => {
     return (
         <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-5">

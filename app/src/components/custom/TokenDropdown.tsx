@@ -36,7 +36,7 @@ interface TokenDropdownProps {
   onSelect: (token: Token) => void
 }
 
-export const TokenDropdown = ({ selectedToken, onSelect }: TokenDropdownProps) => {
+export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onSelect }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

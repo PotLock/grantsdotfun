@@ -1,13 +1,14 @@
-"use client"
-
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, ChevronRight } from "lucide-react"
 import { TokenDropdown, Token } from "./TokenDropdown"
 
-const SwapInterface = () => {
+const SwapInterface: React.FC = () => {
+
+  const [fromAmount, setFromAmount] = useState<string|null>(null)
+  const [toAmount, setToAmount] = useState<string|null>(null)
+
   const [fromToken, setFromToken] = useState<Token>({
     symbol: "$BLACKDRAGON",
     name: "Black Dragon",
@@ -35,12 +36,12 @@ const SwapInterface = () => {
         <div className="relative space-y-2">
           <div className="rounded-lg bg-stone-50 p-4 space-y-2">
             <label className="text-sm text-muted-foreground">From</label>
-            <div className="flex items-center gap-2">
-              <input value="432.23474782" className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl" />
+            <div className="flex items-center gap-2 justify-between">
+              <input value={fromAmount || ""} placeholder="0" onChange={(e) => setFromAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl w-[200px]" />
               <TokenDropdown selectedToken={fromToken} onSelect={setFromToken} />
             </div>
             <div className="flex items-center justify-between">
-              <div className="mt-1 text-sm text-muted-foreground">$12,095</div>
+              <div className="mt-1 text-sm text-muted-foreground">$0.00</div>
               <span className="text-sm text-muted-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
             </div>
           </div>
@@ -52,11 +53,11 @@ const SwapInterface = () => {
           <div className="rounded-lg bg-stone-50 p-4 space-y-2">
             <label className="text-sm text-muted-foreground">To</label>
             <div className="flex items-center justify-between gap-2">
-              <input value="20.2" className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl" />
+              <input value={toAmount || ""} placeholder="0" onChange={(e) => setToAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl w-[200px]" />
               <TokenDropdown selectedToken={toToken} onSelect={setToToken} />
             </div>
             <div className="flex items-center justify-between">
-              <div className="mt-1 text-sm text-muted-foreground">$12,095</div>
+              <div className="mt-1 text-sm text-muted-foreground">$0.00</div>
               <span className="text-sm text-muted-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
             </div>
           </div>
