@@ -8,7 +8,9 @@ declare global {
   }
 }
 
-const TradingViewChart = () => {
+const TradingViewChart: React.FC<{
+  symbol?: string
+}> = ({ symbol }) => {
   const container = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -37,7 +39,6 @@ const TradingViewChart = () => {
           show_popup_button: true,
           popup_width: "1000",
           popup_height: "650",
-          height: 400,
           hide_volume: false,
           withdateranges: true,
           range: "12M",
@@ -56,7 +57,13 @@ const TradingViewChart = () => {
     }
   }, [])
 
-  return <div id="tradingview_chart" ref={container} className="h-[400px] w-full" />
+  return (
+    <div 
+      id="tradingview_chart" 
+      ref={container} 
+      className="w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[450px] xl:h-[600px]" 
+    />
+  )
 }
 
 export default TradingViewChart;

@@ -99,27 +99,27 @@ const AgentDetails: React.FC = () => {
                   <TabsList className="bg-transparent p-1">
                     <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <Search className="w-4 h-4" />
-                      Overview
+                      <span className="hidden md:inline">Overview</span>
                     </TabsTrigger>
                     <TabsTrigger value="analytics" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <BarChart2 className="w-4 h-4" />
-                      Analytics
+                      <span className="hidden md:inline">Analytics</span>
                     </TabsTrigger>
                     <TabsTrigger value="governance" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <Vote className="w-4 h-4" />
-                      Governance
+                      <span className="hidden md:inline">Governance</span>
                     </TabsTrigger>
                     <TabsTrigger value="grantees" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <Users className="w-4 h-4" />
-                      Grantees
+                      <span className="hidden md:inline">Grantees</span>
                     </TabsTrigger>
                     <TabsTrigger value="forum" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <MessageSquare className="w-4 h-4" />
-                      Forum
+                      <span className="hidden md:inline">Forum</span>
                     </TabsTrigger>
                     <TabsTrigger value="agent-logs" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                       <FileText className="w-4 h-4" />
-                      Agent Logs
+                      <span className="hidden md:inline">Agent Logs</span>
                     </TabsTrigger>
                   </TabsList>
                   <div className="bg-gray-100 w-full h-[2px]"/>

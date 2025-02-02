@@ -15,6 +15,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       'buffer': 'buffer/',
       'stream': 'stream-browserify',
+      'process': 'process/browser',
+      'util': 'util',
+      'https': 'agent-base',
+      'zlib': 'browserify-zlib',
     },
   },
   define: {

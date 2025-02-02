@@ -1,4 +1,4 @@
-import type { AccountState, NetworkId, WalletSelector } from "@near-wallet-selector/core";
+import type { AccountState, NetworkId, WalletSelector, WalletModuleFactory } from "@near-wallet-selector/core";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import type { WalletSelectorModal } from "@near-wallet-selector/modal-ui";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -43,20 +43,24 @@ export const WalletSelectorContextProvider:React.FC<{
   const [modal, setModal] = useState<WalletSelectorModal | null>(null);
   const [accounts, setAccounts] = useState<Array<AccountState>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const network = import.meta.env.VITE_NETWORK as NetworkId;
+  console.log(network)
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
-      network: import.meta.env.VITE_NETWORK as NetworkId,
+      network: network,
       debug: true,
       modules: [
-        setupNightly() as any,
-        setupMyNearWallet(),
+        setupMyNearWallet() as any,
+        setupNightly(),
         setupHereWallet(),
         setupMeteorWallet(),
         setupBitteWallet({
-          walletUrl: import.meta.env.VITE_NETWORK as NetworkId == "mainnet" ? import.meta.env.VITE_WALLET_URL as string : import.meta.env.VITE_WALLET_URL_TESTNET as string,
+          walletUrl: network === "mainnet" 
+            ? import.meta.env.VITE_WALLET_URL as string 
+            : import.meta.env.VITE_WALLET_URL_TESTNET as string,
           callbackUrl: import.meta.env.VITE_CALLBACK_URL,
           deprecated: false,
-      }),
+        }),
       ],
     });
     const _modal = setupModal(_selector, {
