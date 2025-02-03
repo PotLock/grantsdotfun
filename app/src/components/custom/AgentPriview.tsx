@@ -1,8 +1,8 @@
 import { Button } from "../ui/button"
 import { Card } from "../ui/card"
-import { AgentPreviewTypes } from "@/types/agent"
+import { AgentTypes } from "@/types/agent"
 
-const AgentPreview: React.FC<AgentPreviewTypes> = ({ name, image, description, governanceType, fundingFrequency, evaluationType, ticker, isUseImageGenerated, isUseEmoji }) => {
+const AgentPreview: React.FC<AgentTypes> = ({ name, image, description, governanceType, fundingFrequency, evaluationType, ticker, isUseImageGenerated, isUseEmoji }) => {
 
     return(
         <div className="lg:sticky lg:top-8 space-y-4">
