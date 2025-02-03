@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [react(),vercel()],
   resolve: {
     alias: {
@@ -51,5 +51,6 @@ export default defineConfig({
         })
       ]
     },
+    assetsDir: 'assets',
   },
 }) 
