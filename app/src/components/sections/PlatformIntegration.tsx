@@ -1,5 +1,3 @@
-'use client'
-
 import { Info, Trash, Plus } from "lucide-react"
 import { Button } from "../ui/button"
 import { Card, CardContent } from "../ui/card"
@@ -51,7 +49,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                 </div>
               </div>
               
-              <div className="mt-4 text-sm text-gray-600">
+              <div className="mt-4 text-sm text-sidebar-foreground">
                 Connect your agent to external services and configure integration settings
               </div>
 
@@ -59,7 +57,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                 {/* Telegram Section */}
                 <div className="space-y-4">
                   <h3 className="text-sm font-medium text-gray-700 uppercase">Telegram Interactions</h3>
-                  <p className="text-sm text-gray-600">Configure how your agent interacts on Telegram</p>
+                  <p className="text-sm text-sidebar-foreground">Configure how your agent interacts on Telegram</p>
                   
                   <div className="flex items-center justify-between rounded-lg border p-4">
                     <div className="flex items-center gap-5">
@@ -68,7 +66,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                       </div>
                       <div>
                         <div className="font-medium">Telegram Integration</div>
-                        <div className="text-sm text-gray-500">Interact on Telegram</div>
+                        <div className="text-sm text-sidebar-foreground">Interact on Telegram</div>
                       </div>
                     </div>
                     <div className="rounded-md border bg-amber-50 border-amber-500 px-3 py-1 text-xs text-amber-600">
@@ -80,7 +78,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                 {/* Twitter Section */}
                 <div className="space-y-4">
                   <h3 className="text-sm font-medium text-gray-700 uppercase">Twitter Interactions</h3>
-                  <p className="text-sm text-gray-600">Configure how your agent interacts on Twitter</p>
+                  <p className="text-sm text-sidebar-foreground">Configure how your agent interacts on Twitter</p>
                   
                   <Card className="shadow-none">
                     <CardContent className="p-3">
@@ -93,7 +91,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                           </div>
                           <div>
                             <div className="font-medium">X(Twitter) Integration</div>
-                            <div className="text-sm text-gray-500">Post, reply, and interact</div>
+                            <div className="text-sm text-sidebar-foreground">Post, reply, and interact</div>
                           </div>
                         </div>
                         <Button variant="outline" size="sm">Configure</Button>
@@ -107,6 +105,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                             placeholder="XXXX-XXXX-XXXX-XXXX"
                             value={apiKey || ''}
                             onChange={(e) => setApiKey(e.target.value)}
+                            className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                           />
                           <p className="text-sm text-red-500">Warning: You will not be able to view this API key again after saving.</p>
                         </div>
@@ -116,7 +115,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                           <Textarea 
                             id="example-tweets"
                             placeholder="Add example tweets to guide your AI's posting style..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] placeholder:text-sidebar-foreground text-sidebar-foreground"
                           />
                         </div>
                         {apiKey && (
@@ -124,10 +123,11 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ onBack, onNex
                             <span>Add Reviewer</span>
                             <div className="flex items-center gap-2">
                                 <Input 
-                                    placeholder="@username" 
-                                    value={reviewer} 
-                                    onChange={(e) => setReviewer(e.target.value)}
-                                    onKeyDown={handleKeyPress}
+                                  placeholder="@username" 
+                                  value={reviewer} 
+                                  onChange={(e) => setReviewer(e.target.value)}
+                                  onKeyDown={handleKeyPress}
+                                  className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                                 />
                                 <Button onClick={handleAddReviewer}><Plus className="h-4 w-4" /></Button>
                             </div>

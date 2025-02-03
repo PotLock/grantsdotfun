@@ -3,23 +3,9 @@ import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState, useCallback, useEffect } from "react"
 import { Settings2, Twitter, MessageCircle } from "lucide-react"
-
-// Mock data array
-const mockData = Array(100).fill(0).map((_, index) => ({
-    id: index + 1,
-    name: index === 0 ? "AI Research DAO" : index === 1 ? "Black Dragon" : `AI Research DAO ${index + 1}`,
-    ticker: index === 0 ? "AI" : index === 1 ? "BD" : `AI${index + 1}`,
-    creator: index === 0 ? "Amichael_design" : index === 1 ? "BAjwaze" : `Creator${index + 1}`,
-    marketcap: "$2,567,001.00",
-    price: "$12.45",
-    change24h: "+0.91",
-    capitalDeployed: "$250,000.00",
-    weeklyPool: "$250.00",
-    hasTwitter: index % 2 === 0,
-    hasTelegram: index % 2 === 1,
-    twitterLink: "https://twitter.com/ai_research_dao",
-    telegramLink: "https://t.me/ai_research_dao",
-}))
+import { useNavigate } from "react-router-dom"
+import { grantOperatorAgents } from "@/data/agents"
+import { GrantOperatorAgent } from "@/types/agent"
 
 interface SearchFilters {
   searchTerm: string;
@@ -27,7 +13,7 @@ interface SearchFilters {
   sortDirection?: 'asc' | 'desc';
 }
 
-const searchData = (data: typeof mockData, filters: SearchFilters) => {
+const searchData = (data: GrantOperatorAgent[], filters: SearchFilters) => {
   let filteredData = [...data]
 
   if (filters.searchTerm) {
@@ -52,7 +38,8 @@ const searchData = (data: typeof mockData, filters: SearchFilters) => {
   return filteredData
 }
 
-const FeaturedGrantOperatorAgents = () => {
+const FeaturedGrantOperatorAgents: React.FC = () => {
+  const navigate = useNavigate();
   const [itemsPerPage, setItemsPerPage] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState<string|null>(null)
@@ -76,7 +63,7 @@ const FeaturedGrantOperatorAgents = () => {
     }))
   }, [])
 
-  const filteredData = searchData(mockData, {
+  const filteredData = searchData(grantOperatorAgents, {
     searchTerm: searchTerm || "",
     ...sortConfig
   })
@@ -116,8 +103,8 @@ const FeaturedGrantOperatorAgents = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-col gap-4 w-full">
             <div>
-                <h2 className="text-xl font-bold">Featured Grant Operator Agents</h2>
-                <p className="text-muted-foreground text-sm">Top ai agent token with AI grant operator agents.</p>
+                <h2 className="text-lg md:text-xl font-bold text-sidebar-foreground">Featured Grant Operator Agents</h2>
+                <p className="text-sm text-sidebar-foreground">Top ai agent token with AI grant operator agents.</p>
             </div>
             <div className="flex justify-between flex-row w-full items-center gap-4">
                 <Input 
@@ -181,7 +168,7 @@ const FeaturedGrantOperatorAgents = () => {
           <TableBody>
             {currentData.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">
+                <TableCell className="font-medium cursor-pointer" onClick={() => navigate(`/agents/${item.id}`)}>
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-lg overflow-hidden">
                       <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={32} height={32} className="object-cover" />

@@ -3,58 +3,19 @@ import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { Agent } from "@/types/agent"
 
-// Mock data
-const mockGrantAgents = [
-  {
-    id: 1,
-    name: "AI Research DAO",
-    price: "$100",
-    growth: "+28.91%",
-    description: "Lorem ipsum dolor sit amet consectetur. Magnis tincidunt platea adipiscing diam in. Ut urna sed quis et eu nibh sapien neque quis.",
-    currentTreasury: "$8,600,213.00",
-    weeklyGrantPool: "$8,600,213.00",
-    image: "/assets/images/image-example.png"
-  },
-  {
-    id: 2,
-    name: "Web3 Innovation Fund",
-    price: "$100",
-    growth: "+15.45%",
-    description: "Focused on advancing decentralized technologies and supporting innovative blockchain projects across various sectors.",
-    currentTreasury: "$5,200,000.00",
-    weeklyGrantPool: "$450,000.00",
-    image: "/assets/images/image-example.png"
-  },
-  {
-    id: 3,
-    name: "Climate Tech DAO",
-    price: "$100",
-    growth: "+22.31%",
-    description: "Supporting projects that leverage technology to address climate change and environmental sustainability.",
-    currentTreasury: "$12,300,000.00",
-    weeklyGrantPool: "$900,000.00",
-    image: "/assets/images/image-example.png"
-  },
-  {
-    id: 4,
-    name: "DeFi Grants Initiative",
-    price: "$100",
-    growth: "+19.75%",
-    description: "Accelerating the development of decentralized finance protocols and infrastructure.",
-    currentTreasury: "$7,800,000.00",
-    weeklyGrantPool: "$600,000.00",
-    image: "/assets/images/image-example.png"
-  }
-];
+interface FeaturedGrantAgentsProps {
+  agents: Agent[]
+}
 
-const FeaturedGrantAgents = () => {
+const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(
     window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3
   );
-  const totalPages = Math.ceil(mockGrantAgents.length / itemsPerPage);
+  const totalPages = Math.ceil(agents.length / itemsPerPage);
 
   useEffect(() => {
     const handleResize = () => {
@@ -76,15 +37,15 @@ const FeaturedGrantAgents = () => {
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return mockGrantAgents.slice(startIndex, endIndex);
+    return agents.slice(startIndex, endIndex);
   };
 
   return (
     <section className="space-y-4">
       <div className="flex flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg sm:text-2xl font-bold">Featured Grant Agents</h2>
-          <p className="text-muted-foreground text-sm">Top ai agent token with AI grant operator agents.</p>
+          <h2 className="text-lg sm:text-2xl font-bold text-sidebar-foreground">Featured Grant Agents</h2>
+          <p className="text-muted-foreground text-sm text-sidebar-foreground">Top ai agent token with AI grant operator agents.</p>
         </div>
         <div className="flex gap-2 self-auto">
           <Button 
