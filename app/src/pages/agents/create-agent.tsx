@@ -12,23 +12,50 @@ import { AgentTypes } from '@/types/agent'
 const emojis = ["😀", "😄", "🤪", "❤️", "🐻", "🐉", "🐶", "😋", "🐺", "🏃", "🍷"]
 
 const CreateAgent: React.FC = () => {
-    const [step, setStep] = useState<number>(1)
-    const [agent, setAgent] = useState<AgentTypes>({
-        name: '',
-        ticker: '',
-        description: '',
-        image: '/assets/images/image-example.png',
-        governanceType: '',
-        fundingFrequency: '',
-        evaluationType: '',
-        isUseImageGenerated: false,
-        isUseEmoji: false
-    })
-    const [payoutBuffer, setPayoutBuffer] = useState<string|null>(null)
+  const [step, setStep] = useState<number>(1)
+  const [agent, setAgent] = useState<AgentTypes>({
+    name: '',
+    ticker: '',
+    description: '',
+    image: '/assets/images/image-example.png',
+    governanceType: '',
+    fundingFrequency: '',
+    evaluationType: '',
+    isUseImageGenerated: false,
+    isUseEmoji: false,
+    agentPrompt: '',
+    personality: '',
+    style: '',
+    knowledge: '',
+    tokenAddress: '',
+    maxDeployPercentage: 50,
+    minGrant: '',
+    maxGrant: '',
+    exampleTwitter: '',
+    isGrantWhitelisted: false,
+    autoApproveThreshold: 0,
+    requireAdminApproval: false,
+    minimumFollowing: 0,
+    miniumAccountAge: 0,
+    verifiedAccount: false,
+    cryptoSettingEnabled: false,
+    reviewers: [],
+    ecosystemGoals: '',
+    evaluationCriteria: '',
+    rewardCriteria: '',
+    projectType: '',
+    metricsOptimizingFor: [],
+    disqualificationCriteria: [],
+    treasuryAddress: '',
+    payoutFrequency: '',
+    maximumPayoutFrequency: 0,
+    maximumPayoutDay: 0,
+    payoutBuffer: 0,
+  })
 
-    const handleDeploy = () => {
-        toast.success('Agent deployed successfully!')
-    }
+  const handleDeploy = () => {
+    toast.success('Agent deployed successfully!')
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,9 +72,9 @@ const CreateAgent: React.FC = () => {
         <div className='container mx-auto grid gap-8 lg:grid-cols-[1fr,400px] pb-10'>
             {step === 1 && <BasicInformation agent={agent} setAgent={setAgent} emojis={emojis} onNext={() => setStep(2)} />}
             {step === 2 && <TokenConfiguration agent={agent} setAgent={setAgent} onBack={() => setStep(1)} onNext={() => setStep(3)} />}
-            {step === 3 && <PlatformIntegration onBack={() => setStep(2)} onNext={() => setStep(4)} />}
-            {step === 4 && <GrantCanvas onBack={() => setStep(3)} onNext={() => setStep(5)} />}
-            {step === 5 && <WalletConfiguration onBack={() => setStep(4)} onDeploy={handleDeploy} payoutBuffer={payoutBuffer} setPayoutBuffer={setPayoutBuffer} />}
+            {step === 3 && <PlatformIntegration agent={agent} setAgent={setAgent} onBack={() => setStep(2)} onNext={() => setStep(4)} />}
+            {step === 4 && <GrantCanvas agent={agent} setAgent={setAgent} onBack={() => setStep(3)} onNext={() => setStep(5)} />}
+            {step === 5 && <WalletConfiguration agent={agent} setAgent={setAgent} onBack={() => setStep(4)} onDeploy={handleDeploy} />}
 
             <div className="hidden lg:block">
               <AgentPreview 

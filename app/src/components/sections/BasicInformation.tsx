@@ -21,7 +21,7 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
   const [generatedImage, setGeneratedImage] = useState<string | null>(null)
 
   const handleGenerateImage = () => {
-    setAgent((p: AgentTypes) => ({...p, isUseImageGenerated: true}))
+    setAgent((p: AgentTypes) => ({...p, image: generatedImage || '', isUseImageGenerated: true}))
     console.log('generate image')
   }
 
@@ -130,6 +130,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                   placeholder="Example: As the EcoTech Grant AI, you are passionate about funding innovative green technologies. Your tone is enthusiastic yet professional, always encouraging applicants to think big about environmental solutions. You have a deep understanding of climate science and are excited y projects that combine technology with sustainability"
                   className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
                   rows={4}
+                  value={agent.agentPrompt}
+                  onChange={(e) => setAgent((p: AgentTypes) => ({...p, agentPrompt: e.target.value}))}
                 />
                 <div className="text-sm text-sidebar-foreground">
                   Enter background story and lore details...
@@ -144,6 +146,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                   placeholder="Example: Friendly, approachable, and knowledgeable. You're enthusiastic about innovative ideas but also analytical and detail-oriented when evaluating proposals. You're patient with applicants and always willing to provide constructive feedback"
                   className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
                   rows={4}
+                  value={agent.personality}
+                  onChange={(e) => setAgent((p: AgentTypes) => ({...p, personality: e.target.value}))}
                 />
                 <div className="text-sm text-sidebar-foreground">
                   Describe your AI Agent traits, behavior and demeanor.
@@ -157,6 +161,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                   placeholder="Example: Professional yet approachable, uses technical terms but explain them clearly"
                   className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
                   rows={4}
+                  value={agent.style}
+                  onChange={(e) => setAgent((p: AgentTypes) => ({...p, style: e.target.value}))}
                 />
                 <div className="text-sm text-sidebar-foreground">
                   Describe your AI Agent response style.
@@ -170,6 +176,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                   placeholder="Example: Blockchain Technology, DeFi Protocols, Smart Contract development, Tokenomics, Web3 Infrastructure, Cryptography, Sustainable Technology, Renewable Energy"
                   className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
                   rows={4}
+                  value={agent.knowledge}
+                  onChange={(e) => setAgent((p: AgentTypes) => ({...p, knowledge: e.target.value}))}
                 />
                 <div className="text-sm text-sidebar-foreground">
                   Give your agent some knowledge, separate by /'s

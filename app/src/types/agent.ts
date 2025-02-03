@@ -8,6 +8,34 @@ export interface AgentTypes {
   evaluationType: string
   isUseImageGenerated: boolean
   isUseEmoji: boolean
+  agentPrompt: string
+  personality: string
+  style: string
+  knowledge: string
+  tokenAddress: string
+  maxDeployPercentage: number
+  minGrant: string
+  maxGrant: string
+  exampleTwitter: string
+  isGrantWhitelisted: boolean
+  autoApproveThreshold: number
+  requireAdminApproval: boolean
+  minimumFollowing: number
+  miniumAccountAge: number
+  verifiedAccount: boolean
+  cryptoSettingEnabled: boolean
+  reviewers: string[]
+  ecosystemGoals: string
+  evaluationCriteria: string
+  rewardCriteria: string
+  projectType: string
+  metricsOptimizingFor: string[]
+  disqualificationCriteria: string[]
+  treasuryAddress: string
+  payoutFrequency: string
+  maximumPayoutFrequency: number
+  maximumPayoutDay: number
+  payoutBuffer: number
 } 
 
 export interface Reviewer {
@@ -99,6 +127,25 @@ export interface GranteesType {
   grantees_posts: GranteePostType[]
 }
 
+export interface AgentLog {
+  id: string
+  type: string
+  platform?: string
+  user?: {
+      name: string
+      avatar: string
+  }
+  message?: string
+  timestamp: string
+  actionLink?: string
+  commit?: string
+  contributor?: {
+      name: string
+      avatar: string
+  }
+}
+
+
 export interface Agent {
   id: number
   name: string
@@ -123,6 +170,7 @@ export interface Agent {
   totalGrants: string
   governance: Governance
   grantees: GranteesType
+  logs?: AgentLog[]
 }
 
 export interface GrantOperatorAgent {

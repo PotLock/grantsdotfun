@@ -241,7 +241,53 @@ const agents: Agent[] = [
                 hasThread: true
             }
         ]
-      }
+      },
+      logs: [
+        {
+            id: "1",
+            type: "interaction",
+            platform: "twitter",
+            user: {
+                name: "Web3plug",
+                avatar: "/assets/images/avatar/avatar.png"
+            },
+            message: "Mentioned you in their #GRANT REVIEW post",
+            timestamp: "2024-01-10T12:00:00Z",
+            actionLink: "View on Twitter"
+        },
+        {
+            id: "2",
+            type: "interaction",
+            platform: "telegram",
+            user: {
+                name: "Web3plug",
+                avatar: "/assets/images/avatar/avatar.png"
+            },
+            message: "Mentioned you in their #GRANT REVIEW post",
+            timestamp: "2024-01-10T12:00:00Z",
+            actionLink: "View on Telegram"
+        },
+        {
+            id: "3",
+            type: "developer",
+            timestamp: "2024-01-10T12:05:00Z",
+            commit: "bf580e76c9e23593b30ecadbefb29c3892a135ec",
+            contributor: {
+                name: "PlugnLinear",
+                avatar: "/assets/images/avatar/avatar-1.png"
+            }
+        },
+        {
+            id: "4",
+            type: "developer",
+            timestamp: "2024-01-10T12:00:00Z",
+            commit: "bf580e76c9e23593b30ecadbefb29c3892a135ec",
+            contributor: {
+                name: "PlugnLinear",
+                avatar: "/assets/images/avatar/avatar-1.png"
+            }
+        },
+    ]
     },
     {
       id: 2,

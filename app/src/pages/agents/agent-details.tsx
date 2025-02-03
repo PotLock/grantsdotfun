@@ -99,9 +99,9 @@ const AgentDetails: React.FC = () => {
                       </div>
                   </div>
               </div>
-              {/* <div className="rounded-lg border">
+              <div className="rounded-lg border">
                 <TradingViewChart />
-              </div> */}
+              </div>
 
               <Tabs defaultValue="overview" className="space-y-4">
                   <TabsList className="bg-transparent p-1">
@@ -152,7 +152,7 @@ const AgentDetails: React.FC = () => {
 
                   </TabsContent>
                   <TabsContent value="agent-logs" className="space-y-6">
-                    <AgentLogs />
+                    <AgentLogs logs={agent.logs || []} />
                   </TabsContent>
               </Tabs>
           </div>

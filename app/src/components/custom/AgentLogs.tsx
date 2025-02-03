@@ -12,24 +12,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { TwitterIcon } from "@/components/icons/TwitterIcon"
 import { TelegramIcon } from "@/components/icons/TelegramIcon"
 import { DiscordIcon } from "@/components/icons/DiscordIcon"
+import { AgentLog } from "@/types/agent"
 
-interface LogEntry {
-    id: string
-    type: string
-    platform?: string
-    user?: {
-        name: string
-        avatar: string
-    }
-    message?: string
-    timestamp: string
-    actionLink?: string
-    commit?: string
-    contributor?: {
-        name: string
-        avatar: string
-    }
-}
 
 const IconSocial = {
     twitter: <TwitterIcon />,
@@ -37,7 +21,7 @@ const IconSocial = {
     discord: <DiscordIcon />
 }
 
-const LogInteraction = ({ log }: { log: LogEntry }) => {
+const LogInteraction = ({ log }: { log: AgentLog }) => {
     return (
         <Card key={log.id} className="shadow-none">
             <CardContent className="flex items-start gap-4 p-6 border-b last:border-b-0">
@@ -71,7 +55,7 @@ const LogInteraction = ({ log }: { log: LogEntry }) => {
     )
 }
 
-const LogDeveloper = ({ log }: { log: LogEntry }) => {
+const LogDeveloper = ({ log }: { log: AgentLog }) => {
     return (
         <Card key={log.id} className="shadow-none">
             <CardContent className="flex items-center justify-between p-4">
@@ -102,53 +86,7 @@ const LogDeveloper = ({ log }: { log: LogEntry }) => {
     )
 }
 
-const AgentLogs = () => {
-    const logs: LogEntry[] = [
-        {
-            id: "1",
-            type: "interaction",
-            platform: "twitter",
-            user: {
-                name: "Web3plug",
-                avatar: "/assets/images/avatar/avatar.png"
-            },
-            message: "Mentioned you in their #GRANT REVIEW post",
-            timestamp: "2024-01-10T12:00:00Z",
-            actionLink: "View on Twitter"
-        },
-        {
-            id: "2",
-            type: "interaction",
-            platform: "telegram",
-            user: {
-                name: "Web3plug",
-                avatar: "/assets/images/avatar/avatar.png"
-            },
-            message: "Mentioned you in their #GRANT REVIEW post",
-            timestamp: "2024-01-10T12:00:00Z",
-            actionLink: "View on Telegram"
-        },
-        {
-            id: "3",
-            type: "developer",
-            timestamp: "2024-01-10T12:05:00Z",
-            commit: "bf580e76c9e23593b30ecadbefb29c3892a135ec",
-            contributor: {
-                name: "PlugnLinear",
-                avatar: "/assets/images/avatar/avatar-1.png"
-            }
-        },
-        {
-            id: "4",
-            type: "developer",
-            timestamp: "2024-01-10T12:00:00Z",
-            commit: "bf580e76c9e23593b30ecadbefb29c3892a135ec",
-            contributor: {
-                name: "PlugnLinear",
-                avatar: "/assets/images/avatar/avatar-1.png"
-            }
-        },
-    ]
+const AgentLogs = ({ logs }: { logs: AgentLog[] }) => {
 
     const platforms = ["All Platforms", "Twitter", "Telegram", "Discord"]
 

@@ -18,11 +18,6 @@ interface TokenConfigurationProps {
 
 export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: TokenConfigurationProps) {
   const [launchOption, setLaunchOption] = useState<string>('existing')
-  const [maxDeploy, setMaxDeploy] = useState<number>(50)
-  const [tokenAddress, setTokenAddress] = useState<string|null>(null)
-  const [minGrant, setMinGrant] = useState<string|null>(null)
-  const [maxGrant, setMaxGrant] = useState<string|null>(null)
-  
   return (
     <div className="space-y-8">
         <Card className="rounded-xl border p-6">
@@ -81,8 +76,8 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 <Input 
                     id="token-address" 
                     placeholder="Enter token address"
-                    value={tokenAddress || ''}
-                    onChange={(e) => setTokenAddress(e.target.value)}
+                    value={agent.tokenAddress || ''}
+                    onChange={(e) => setAgent((p: AgentTypes) => ({...p, tokenAddress: e.target.value}))}
                     className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                 />
                 <div className="text-sm text-sidebar-foreground">
@@ -147,11 +142,11 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                             </div>
                         </div>
                     </div>
-                    <span className="text-sm font-medium text-sidebar-foreground">{maxDeploy}%</span>
+                    <span className="text-sm font-medium text-sidebar-foreground">{agent.maxDeployPercentage}%</span>
                 </div>
                 <Slider
-                    value={[maxDeploy]}
-                    onValueChange={([value]) => setMaxDeploy(value)}
+                    value={[agent.maxDeployPercentage]}
+                    onValueChange={([value]) => setAgent((p: AgentTypes) => ({...p, maxDeployPercentage: value}))}
                     min={10}
                     max={100}
                     step={1}
@@ -166,15 +161,19 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
 
             <div className="space-y-1.5">
                 <Label>Funding Frequency</Label>
-                <Select defaultValue="weekly">
-                <SelectTrigger>
-                    <SelectValue placeholder="Select funding frequency" />
+                <Select 
+                    defaultValue="weekly"
+                    onValueChange={(value) => setAgent((prev: AgentTypes) => ({...prev, fundingFrequency: value}))}
+                    value={agent.fundingFrequency || 'weekly'}
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select funding frequency" />
                     </SelectTrigger>
                     <SelectContent className='text-sidebar-foreground'>
                         <SelectItem value="weekly">Weekly</SelectItem>
                         <SelectItem value="monthly">Monthly</SelectItem>
                         <SelectItem value="quarterly">Quarterly</SelectItem>
-                </SelectContent>
+                    </SelectContent>
                 </Select>
             </div>
 
@@ -195,8 +194,8 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         id="min-grant" 
                         type="number"
                         placeholder="10,000"
-                        value={minGrant || ''}
-                        onChange={(e) => setMinGrant(e.target.value)}
+                        value={agent.minGrant || ''}
+                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, minGrant: e.target.value}))}
                         className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                     />
                 </div>
@@ -216,8 +215,8 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         id="max-grant" 
                         type="number"
                         placeholder="30,000"
-                        value={maxGrant || ''}
-                        onChange={(e) => setMaxGrant(e.target.value)}
+                        value={agent.maxGrant || ''}
+                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, maxGrant: e.target.value}))}
                         className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                     />
                 </div>
