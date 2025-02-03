@@ -84,9 +84,9 @@ const MarketCapChart: React.FC<MarketCapChartProps> = ({
             <CardContent className="p-4">
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col">
-                        <span className="text-sm text-gray-500">Market cap</span>
+                        <span className="text-sm text-sidebar-foreground">Market cap</span>
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl font-semibold">{`${marketCap}M`}</span>
+                            <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">{`${marketCap}M`}</span>
                             <span 
                                 className="text-sm font-medium"
                                 style={{ color: percentageChange >= 0 ? '#34A853' : '#EA4335' }}
@@ -98,8 +98,8 @@ const MarketCapChart: React.FC<MarketCapChartProps> = ({
                 </div>
                 <HighchartsReact highcharts={Highcharts} options={options} />
                 <div className="mt-2">
-                    <span className="text-sm text-[#5F6368]">
-                        {`+${comparisonPercentage}% market cap vs agents with a similar mindshare`}
+                    <span className="text-sm text-sidebar-foreground">
+                        <span className="text-green-500">+${comparisonPercentage}%</span> market cap vs agents with a similar mindshare
                     </span>
                 </div>
             </CardContent>

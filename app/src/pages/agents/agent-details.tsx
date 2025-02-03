@@ -39,9 +39,9 @@ const AgentDetails: React.FC = () => {
   const shortDescription = fullDescription.slice(0, 150) + "..."
 
   return(
-      <main className="flex-1">
+      <main className="px-5">
       <div className="container py-6 mx-auto">
-        <Breadcrumb className="mb-6">
+        <Breadcrumb className="mb-4 sm:mb-6">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -56,9 +56,9 @@ const AgentDetails: React.FC = () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="grid gap-6 md:grid-cols-[3fr_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[3fr_1fr]">
           <div className="space-y-6">
-              <div className="flex items-start gap-4 border border-gray-200 rounded-xl p-4 shadow-sm">
+              <div className="flex md:flex-row flex-col items-start gap-4 border border-gray-200 rounded-xl p-4 shadow-sm w-full">
                   <div className="flex-shrink-0 flex items-center justify-center h-[95px] w-[100px] p-2 bg-gray-100 rounded-lg">
                       <img
                           src="/assets/tokens/dragon.png"
@@ -68,21 +68,21 @@ const AgentDetails: React.FC = () => {
                           className="rounded-full object-contain"
                       />
                   </div>
-                  <div className="flex-1 min-w-0">
-                      <h1 className="text-2xl font-bold truncate">Black Dragon</h1>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span className="text-blue-500 font-semibold">$BLACKDRAGON</span>
+                  <div className="flex-1">
+                      <h1 className="text-lg xl:text-xl font-bold truncate text-sidebar-foreground">Black Dragon</h1>
+                      <div className="flex items-center gap-2 text-sm text-sidebar-foreground">
+                          <span className="text-blue-500 font-semibold text-xs md:text-sm">$BLACKDRAGON</span>
                           <span>|</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-muted-foreground font-medium bg-gray-100 p-1 px-2 rounded-md">Blackdragon.near</span>
+                            <span className="text-sidebar-foreground font-medium bg-gray-100 p-1 px-2 text-xs md:text-sm rounded-md">Blackdragon.near</span>
                             <Copy className="w-4 h-4 cursor-pointer flex-shrink-0" onClick={() => copyToClipboard("Blackdragon.near")} />
                           </div>
                       </div>
                       <div className="flex items-start gap-2">
-                        <p className="text-muted-foreground text-sm break-words">
+                        <p className="text-sidebar-foreground text-xs lg:text-sm break-words">
                           {isExpanded ? fullDescription : shortDescription}
                           <span 
-                            className="text-black font-semibold cursor-pointer ml-1 inline-block"
+                            className="text-sidebar-foreground font-semibold cursor-pointer ml-1 inline-block text-xs md:text-sm"
                             onClick={handleDescriptionToggle}
                           >
                             {isExpanded ? "Show Less" : "Read More"}
@@ -149,9 +149,9 @@ const AgentDetails: React.FC = () => {
               </Tabs>
           </div>
 
-          <div className="space-y-6 lg:max-w-md md:max-w-sm w-full">
-              <SwapInterface />
-              <TwitterActivity />
+          <div className="space-y-6 w-full pb-20 sm:pb-0">
+            <SwapInterface />
+            <TwitterActivity />
           </div>
         </div>
       </div>

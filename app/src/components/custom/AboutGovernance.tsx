@@ -7,52 +7,52 @@ import {
   HoverCardTrigger,
 } from "../ui/hover-card";
 
-const AboutGovernance = () => {
+const AboutGovernance: React.FC = () => {
     return (
         <Card className="shadow-none bg-[#F8FAFC]">
-            <CardContent className="space-y-4 p-6">
+            <CardContent className="space-y-2 md:space-y-4 p-3 md:p-6">
                 <div>
                     <CardHeader className="p-0">
-                        <CardTitle>About Governance</CardTitle>
+                        <CardTitle className="text-lg md:text-xl text-sidebar-foreground">About Governance</CardTitle>
                     </CardHeader>
-                    <p className="text-sm text-muted-foreground mt-2">
+                    <p className="text-sm text-sidebar-foreground mt-2">
                         This grant program is governed by $BLACKDRAGON token holders through a DAO structure. Token holders can vote on key parameters, reviewer appointments, and treasury allocations.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-8 py-6">
-                    <Card>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 py-2 md:py-6">
+                    <Card className="shadow-none">
                         <CardContent className="p-4">
-                            <div className="text-lg font-semibold">35</div>
-                            <div className="text-sm text-muted-foreground">Proposals</div>
+                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">35</div>
+                            <div className="text-xs md:text-sm text-sidebar-foreground">Proposals</div>
                         </CardContent>
                     </Card>
-                    <Card>
+                    <Card className="shadow-none">
                         <CardContent className="p-4">
-                            <div className="text-lg font-semibold">$2,876,000</div>
-                            <div className="text-sm text-muted-foreground">Capital Deployed</div>
+                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">$2,876,000</div>
+                            <div className="text-xs md:text-sm text-sidebar-foreground">Capital Deployed</div>
                         </CardContent>
                     </Card>
-                    <Card>
+                    <Card className="shadow-none">
                         <CardContent className="p-4">
-                            <div className="text-lg font-semibold flex items-center gap-1">
-                                1.2B $GRANTS
+                            <div className="text-sm md:text-lg text-sidebar-foreground flex items-center gap-1">
+                                <span className="font-semibold">1.2B $GRANTS</span>
                                 <HoverCard>
                                     <HoverCardTrigger>
                                         <InfoIcon className="w-4 h-4 text-muted-foreground cursor-help" />
                                     </HoverCardTrigger>
                                     <HoverCardContent className="w-80">
-                                        <p className="text-sm">Total voting power represents the sum of all $GRANTS tokens that can be used for governance decisions.</p>
+                                        <p className="text-sm font-sans text-sidebar-foreground">Total voting power represents the sum of all $GRANTS tokens that can be used for governance decisions.</p>
                                     </HoverCardContent>
                                 </HoverCard>
                             </div>
-                            <div className="text-sm text-muted-foreground">Total Voting Power</div>
+                            <div className="text-xs md:text-sm text-sidebar-foreground">Total Voting Power</div>
                         </CardContent>
                     </Card>
                 </div>
 
-                <div className="grid grid-cols-2 gap-8">
-                    <Card className="bg-[#EFF6FF] border-blue-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <Card className="bg-[#EFF6FF] border-blue-200 shadow-none">
                         <CardContent className="space-y-3 p-4">
                             <div className="flex items-center gap-2">
                                 <InfoIcon className="w-5 h-5 text-blue-500" />
@@ -69,11 +69,11 @@ const AboutGovernance = () => {
                         </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="shadow-none">
                         <CardContent className="space-y-3 p-4 flex flex-col justify-between h-full">
                             <div>
-                                <h3 className="text-lg font-semibold">Voting Preferences</h3>
-                                <p className="text-sm text-muted-foreground mt-2">
+                                <h3 className="text-sm md:text-lg font-semibold text-sidebar-foreground">Voting Preferences</h3>
+                                <p className="text-xs md:text-sm text-sidebar-foreground mt-2">
                                     Personal settings that determine how your votes are cast. Only visible to you as a token holder. Choose between manual voting, AI-powered voting rules, or delegating your voting power to a trusted community member.
                                 </p>
                             </div>

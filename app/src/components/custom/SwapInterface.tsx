@@ -23,7 +23,7 @@ const SwapInterface: React.FC = () => {
   return (
     <Card className="p-4 shadow-none">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-lg font-medium">Swap</h3>
+        <h3 className="text-lg font-medium text-sidebar-foreground">Swap</h3>
         <div className="flex items-center space-x-2">
           <Button size="icon" variant="ghost" className="h-8 w-8">
             <span className="sr-only">Settings</span>
@@ -35,14 +35,14 @@ const SwapInterface: React.FC = () => {
       <div className="space-y-4">
         <div className="relative space-y-2">
           <div className="rounded-lg bg-stone-50 p-4 space-y-2">
-            <label className="text-sm text-muted-foreground">From</label>
+            <label className="text-sm text-sidebar-foreground">From</label>
             <div className="flex items-center gap-2 justify-between">
-              <input value={fromAmount || ""} placeholder="0" onChange={(e) => setFromAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl w-[200px]" />
+              <input value={fromAmount || ""} placeholder="0" onChange={(e) => setFromAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full md:w-[120px] 2xl:w-[200px]" />
               <TokenDropdown selectedToken={fromToken} onSelect={setFromToken} />
             </div>
             <div className="flex items-center justify-between">
-              <div className="mt-1 text-sm text-muted-foreground">$0.00</div>
-              <span className="text-sm text-muted-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
+              <div className="mt-1 text-sm text-sidebar-foreground">$0.00</div>
+              <span className="text-sm text-sidebar-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
             </div>
           </div>
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center -translate-y-[3%] pointer-events-none">
@@ -51,31 +51,31 @@ const SwapInterface: React.FC = () => {
             </div>
           </div>
           <div className="rounded-lg bg-stone-50 p-4 space-y-2">
-            <label className="text-sm text-muted-foreground">To</label>
+            <label className="text-sm text-sidebar-foreground">To</label>
             <div className="flex items-center justify-between gap-2">
-              <input value={toAmount || ""} placeholder="0" onChange={(e) => setToAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-2xl w-[200px]" />
+              <input value={toAmount || ""} placeholder="0" onChange={(e) => setToAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full xl:w-[120px] 2xl:w-[200px]" />
               <TokenDropdown selectedToken={toToken} onSelect={setToToken} />
             </div>
             <div className="flex items-center justify-between">
-              <div className="mt-1 text-sm text-muted-foreground">$0.00</div>
-              <span className="text-sm text-muted-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
+              <div className="mt-1 text-sm text-sidebar-foreground">$0.00</div>
+              <span className="text-sm text-sidebar-foreground">Balance: <strong className="text-blue-500">0.00</strong></span>
             </div>
           </div>
         </div>
         <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">Swap</Button>
-        <div className="space-y-6 rounded-lg border border-stone-200 p-3 text-muted-foreground">
+        <div className="space-y-6 rounded-lg border border-stone-200 p-3 text-sidebar-foreground">
           <div className="flex justify-between text-sm">
-            <span>Rate</span>
-            <span>1 {toToken.symbol}=0.1001234 NEAR</span>
+            <span className="text-sidebar-foreground">Rate</span>
+            <span className="text-sidebar-foreground">1 {toToken.symbol}=0.1001234 NEAR</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span>Est network fee</span>
-            <span>$0.010</span>
+            <span className="text-sidebar-foreground">Est network fee</span>
+            <span className="text-sidebar-foreground">$0.010</span>
           </div>
           
           <div className="flex justify-between text-sm items-center">
             <div className="flex items-center gap-1">
-              Slippage
+              <span className="text-sidebar-foreground">Slippage</span>
               <div className="text-gray-400 cursor-help">ⓘ</div>
             </div>
             <div className="flex items-center text-orange-500">
@@ -91,7 +91,7 @@ const SwapInterface: React.FC = () => {
 
           <div className="flex justify-between text-sm items-center">
             <div className="flex items-center gap-1">
-              Quote route
+              <span className="text-sidebar-foreground">Quote route</span>
               <div className="text-gray-400 cursor-help">ⓘ</div>
             </div>
             <ChevronRight className="h-4 w-4" />
@@ -99,7 +99,7 @@ const SwapInterface: React.FC = () => {
 
           <div className="flex justify-between text-sm items-center">
             <div className="flex items-center gap-1">
-              Quote route
+              <span className="text-sidebar-foreground">Quote route</span>
               <div className="text-gray-400 cursor-help">ⓘ</div>
             </div>
             <ChevronRight className="h-4 w-4" />

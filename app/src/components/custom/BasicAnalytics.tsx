@@ -13,16 +13,16 @@ const AnalyticCard = ({ title, value, change, timeframe = "This Month" }: Analyt
   return (
     <Card className="bg-[#F8FAFC] shadow-none">
       <CardContent className="p-4">
-        <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">{title}</p>
-            <span className="text-lg font-bold">{value}</span>
+        <div className="space-y-3">
+            <p className="text-xs md:text-sm text-sidebar-foreground">{title}</p>
+            <span className="text-lg font-bold text-sidebar-foreground">{value}</span>
             <div className="h-[1px] w-full bg-gray-200"/>
-            <div className="flex items-center gap-5 flex-row ">
-                <div className={`flex items-center gap-1 text-sm text-white px-2 rounded-full ${isPositive ? 'bg-green-500' : 'bg-red-500'}`}>
+            <div className="flex items-center flex-row justify-between">
+                <div className={`flex items-center gap-1 text-xs md:text-sm text-white px-2 rounded-full ${isPositive ? 'bg-green-500' : 'bg-red-500'}`}>
                     {isPositive ? '+' : "-"}
                     <span>{Math.abs(change)}%</span>
                 </div>
-                <p className="text-xs">{timeframe}</p>
+                <p className="text-xs text-sidebar-foreground">{timeframe}</p>
             </div>
         </div>
       </CardContent>
@@ -46,7 +46,7 @@ const BasicAnalytics = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
         {analyticsData.map((item, index) => (
             <AnalyticCard
             key={index}
@@ -56,8 +56,8 @@ const BasicAnalytics = () => {
             />
         ))}
       </div>
-      <span className="text-lg font-bold">Twitter Analytics</span>
-      <div className="grid gap-4 md:grid-cols-3">
+      <span className="text-lg font-bold text-sidebar-foreground">Twitter Analytics</span>
+      <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
         {twitterAnalyticsData.map((item, index) => (
             <AnalyticCard
             key={index}

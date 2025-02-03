@@ -1,11 +1,9 @@
-"use client"
-
 import { Card, CardContent } from "../ui/card"
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { useEffect, useState } from "react"
 
-const UniqueHolderChart = () => {
+const UniqueHolderChart: React.FC = () => {
     const [chartOptions, setChartOptions] = useState<Highcharts.Options>({
         chart: {
             type: 'column',
@@ -50,9 +48,9 @@ const UniqueHolderChart = () => {
                 <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                         <div className="flex flex-col">
-                            <span className="text-sm text-gray-500">Unique Holder</span>
+                            <span className="text-sm text-sidebar-foreground">Unique Holder</span>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-2xl font-semibold">51.73K</span>
+                                <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">51.73K</span>
                                 <span className="text-sm text-green-500">+35% 7D</span>
                             </div>
                         </div>
@@ -63,7 +61,7 @@ const UniqueHolderChart = () => {
                         options={chartOptions}
                     />
                     
-                    <div className="text-sm">
+                    <div className="text-sm text-sidebar-foreground">
                         <span className="text-red-500">-22.87%</span> holders vs agents with a similar MC
                     </div>
                 </div>

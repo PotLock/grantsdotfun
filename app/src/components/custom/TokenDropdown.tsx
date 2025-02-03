@@ -51,7 +51,7 @@ export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onS
                 className="object-contain max-w-[16px] max-h-[16px]"
                 />
             </div>
-            {selectedToken.symbol} 
+            <span className="text-xs xl:text-base">{selectedToken.symbol}</span>
             <ChevronDown className="w-4 h-4" />
           </div>
         </Button>
@@ -72,7 +72,7 @@ export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onS
                 className="object-contain max-w-[16px] max-h-[16px]"
                 />
             </div>
-            <span>{token.symbol}</span>
+            <span className="text-xs xl:text-base">{token.symbol}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

@@ -5,20 +5,18 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { Card, CardContent, CardHeader } from '../ui/card';
 
-const MindShareChart = () => {
+const MindShareChart: React.FC = () => {
   const [chartOptions, setChartOptions] = useState<any>(null);
 
   useEffect(() => {
-    // Generate 100 data points
     const generateMockData = () => {
       const priceData = [];
       const mindshareData = [];
       const categories = [];
       
-      // Start date
+
       const startDate = new Date('2024-01-16');
       
-      // Generate smooth random data
       let price = 0.72;
       let mindshare = 8.0;
       
@@ -32,18 +30,15 @@ const MindShareChart = () => {
           hour: '2-digit'
         }));
 
-        // Generate price with smooth random walk
         const priceChange = (Math.random() - 0.5) * 0.02;
         price = Math.max(0.48, Math.min(0.96, price + priceChange));
         priceData.push(Number(price.toFixed(2)));
 
-        // Generate mindshare with smooth random walk
         const mindshareChange = (Math.random() - 0.48) * 0.15;
         mindshare = Math.max(7.5, Math.min(9.8, mindshare + mindshareChange));
         mindshareData.push(Number(mindshare.toFixed(2)));
       }
 
-      // Ensure last points match the target values
       priceData[priceData.length - 1] = 0.86;
       mindshareData[mindshareData.length - 1] = 9.57;
 
@@ -70,7 +65,7 @@ const MindShareChart = () => {
         categories: categories,
         gridLineWidth: 0,
         labels: {
-          step: 24, // Show roughly one label per day
+          step: 24,
           style: {
             color: '#666666',
             fontSize: '12px'
@@ -196,23 +191,23 @@ const MindShareChart = () => {
         <div className="space-y-2">
           <div className="flex items-center gap-10">
             <div>
-              <div className="text-sm text-gray-600">Mindshare</div>
+              <div className="text-sm text-sidebar-foreground">Mindshare</div>
               <div className="flex items-center gap-2">
-                <span className="text-xl font-semibold">9.57%</span>
-                <span className="text-sm text-red-500">-1.76 7D</span>
+                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground">9.57%</span>
+                <span className="text-xs md:text-sm text-red-500">-1.76 7D</span>
               </div>
             </div>
             <div>
-              <div className="text-sm text-gray-600">Price</div>
+              <div className="text-sm text-sidebar-foreground">Price</div>
               <div className="flex items-center gap-2">
-                <span className="text-xl font-semibold">$0.86</span>
-                <span className="text-sm text-green-500">+28.44% 7D</span>
+                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground">$0.86</span>
+                <span className="text-xs md:text-sm text-green-500">+28.44% 7D</span>
               </div>
             </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className='p-0 md:p-3'>
         <HighchartsReact
           highcharts={Highcharts}
           options={chartOptions}

@@ -45,10 +45,10 @@ interface Proposal {
     };
 }
 
-const ProposalGovernance = () => {
+const ProposalGovernance: React.FC = () => {
     const [sortByDate, setSortByDate] = useState<boolean>(false)
     const [selectedProposal, setSelectedProposal] = useState<Proposal | null>(null)
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false)
 
     // Mock data for demonstration
     const mockProposal: Proposal = {
@@ -58,9 +58,9 @@ const ProposalGovernance = () => {
         description: "Lorem ipsum dolor sit amet consectetur...",
         treasurySettings: [
             {
-              name: "Weekly Reward Balance",
-              currentValue: "10,000 $GRANT",
-              proposedValue: "15,000 $GRANT"
+                name: "Weekly Reward Balance",
+                currentValue: "10,000 $GRANT",
+                proposedValue: "15,000 $GRANT"
             }
         ],
         publisher: {
@@ -97,23 +97,23 @@ const ProposalGovernance = () => {
 
     return (
         <div className="space-y-6">
-            <Tabs defaultValue="all" className="py-4">
+            {/* <Tabs defaultValue="all" className="py-4">
                 <TabsList className="py-5 px-1">
                     <TabsTrigger value="all" className="p-2 px-4">All</TabsTrigger>
                     <TabsTrigger value="active" className="p-2 px-4">Active Proposals</TabsTrigger>
                     <TabsTrigger value="passed" className="p-2 px-4">Passed Proposals</TabsTrigger>
                     <TabsTrigger value="my" className="p-2 px-4">My Proposals</TabsTrigger>
                 </TabsList>
-            </Tabs>
-            <div className="flex items-center justify-between">
+            </Tabs> */}
+            <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                 <Input
                     type="text"
                     placeholder="Search Proposal"
-                    className="max-w-[300px]"
+                    className="w-full md:max-w-[300px]"
                 />
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap flex-row gap-2">
                     <Select>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-[150px]">
                         <SelectValue placeholder="Proposal Type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -124,7 +124,7 @@ const ProposalGovernance = () => {
                     </Select>
 
                     <Select>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-[150px]">
                             <SelectValue placeholder="State" />
                         </SelectTrigger>
                         <SelectContent>

@@ -130,21 +130,21 @@ const EngagementChart: React.FC<EngagementChartProps> = ({
   return (
     <Card className='bg-white rounded-lg shadow-none'>
       <CardHeader className='pb-2 p-3'>
-        <CardTitle>Engagement</CardTitle>
+        <CardTitle className='text-sidebar-foreground'>Engagement</CardTitle>
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <div className="text-sm text-muted-foreground">Post engagement (7-day)</div>
+            <div className="text-sm text-sidebar-foreground">Post engagement (7-day)</div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-semibold">{postEngagement}K</span>
+              <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">{postEngagement}K</span>
               <Badge variant="success" className="font-normal">
                 {postEngagementGrowth}%
               </Badge>
             </div>
           </div>
           <div>
-            <div className="text-sm text-muted-foreground">Smart engagement (7-day)</div>
+            <div className="text-sm text-sidebar-foreground">Smart engagement (7-day)</div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-semibold">{smartEngagement}</span>
+              <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">{smartEngagement}</span>
               <Badge variant="success" className="font-normal">
                 {smartEngagementGrowth}%
               </Badge>
@@ -157,7 +157,7 @@ const EngagementChart: React.FC<EngagementChartProps> = ({
         
         <div className="mt-2 text-sm flex flex-row gap-1 justify-end pt-3">
           <span className="text-red-500">{comparisonPercentage}% </span>
-          <span>smart engagements vs agents with similar market cap</span>
+          <span className='text-sidebar-foreground'>smart engagements vs agents with similar market cap</span>
         </div>
       </CardContent>
     </Card>
