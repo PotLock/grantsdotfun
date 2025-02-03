@@ -23,12 +23,12 @@ const tweets: Tweet[] = Array(12)
     id: index,
   }))
 
-const TwitterActivity = () => {
+const TwitterActivity: React.FC = () => {
   return (
     <div className="rounded-lg border">
       <div className="p-4 border-b">
-        <h3 className="font-medium">Recent Twitter Activity</h3>
-        <p className="text-sm text-muted-foreground">Latest Tweets and interactions for this agent</p>
+        <h3 className="font-medium text-sidebar-foreground">Recent Twitter Activity</h3>
+        <p className="text-sm text-sidebar-foreground">Latest Tweets and interactions for this agent</p>
       </div>
       <ScrollArea className="h-[400px]">
         <div className="p-4 space-y-4">
@@ -40,12 +40,12 @@ const TwitterActivity = () => {
               <div className="flex-1 space-y-1">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
-                    <span className="font-medium">{tweet.name}</span>
-                    <span className="text-sm text-muted-foreground">{tweet.handle}</span>
+                    <span className="font-medium text-sidebar-foreground">{tweet.name}</span>
+                    <span className="text-sm text-sidebar-foreground">{tweet.handle}</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">{tweet.date}</span>
+                  <span className="text-sm text-sidebar-foreground">{tweet.date}</span>
                 </div>
-                <p className="text-sm">{tweet.content}</p>
+                <p className="text-sm text-sidebar-foreground">{tweet.content}</p>
               </div>
             </div>
           ))}

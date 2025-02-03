@@ -29,7 +29,7 @@ const generateMockData = () => {
   return data;
 };
 
-const ReachChart = () => {
+const ReachChart: React.FC = () => {
   const options: Highcharts.Options = {
     chart: {
       type: 'area',
@@ -152,25 +152,25 @@ const ReachChart = () => {
   return (
     <Card className="bg-white rounded-lg shadow-none">
       <CardHeader className="pb-2 p-3">
-        <CardTitle>Reach</CardTitle>
+        <CardTitle className='text-sidebar-foreground'>Reach</CardTitle>
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-sidebar-foreground">
               Impressions (7-day)
             </p>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-semibold">214.68K</span>
+              <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">214.68K</span>
               <Badge variant="success" className="font-normal">
                 +81.72%
               </Badge>
             </div>
           </div>
           <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-sidebar-foreground">
               Smart reach (7-day)
             </p>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-semibold">34.24M</span>
+              <span className="text-lg md:text-2xl font-semibold text-sidebar-foreground">34.24M</span>
               <Badge variant="success" className="font-normal">
                 +156.91%
               </Badge>
@@ -187,7 +187,7 @@ const ReachChart = () => {
           
           <div className="text-sm justify-end flex flex-row gap-1">
             <span className="text-red-500">-89.07%</span> 
-            <span>total impressions vs agents with similar market cap</span>
+            <span className='text-sidebar-foreground'>total impressions vs agents with similar market cap</span>
           </div>
         </div>
       </CardContent>

@@ -1,24 +1,31 @@
 const Reviewers = () => {
     const reviewers = [
-      { name: "AMichael", handle: "@michael_design" },
-      { name: "AMichael", handle: "@michael_design" },
-      { name: "AMichael", handle: "@michael_design" },
-      { name: "AMichael", handle: "@michael_design" },
+      { name: "AMichael", handle: "@michael_design", image: "/assets/images/avatar/avatar-example.png" },
+      { name: "AMichael", handle: "@michael_design", image: "/assets/images/avatar/avatar-example.png" },
+      { name: "AMichael", handle: "@michael_design", image: "/assets/images/avatar/avatar-example.png" },
+      { name: "AMichael", handle: "@michael_design", image: "/assets/images/avatar/avatar-example.png" },
     ]
   
     return (
       <div className="space-y-4">
         <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-medium">Reviewers (4)</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-sidebar-foreground">Reviewers (4)</h3>
           <div className="w-full h-[1px] bg-gray-200"/>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {reviewers.map((reviewer, i) => (
             <div key={i} className="flex items-center gap-2 rounded-lg border p-2">
-              <div className="h-8 w-8 rounded-full bg-muted" />
+              <div className="h-10 w-10 rounded-full bg-muted relative">
+                <img src={reviewer.image} alt={reviewer.name} className="w-full h-full object-cover rounded-full" />
+                <div className="absolute -bottom-2 -right-1">
+                  <div className="w-5 h-5 rounded-full bg-white p-1 flex items-center justify-center border border-gray-200">
+                    <img src="/assets/icons/prime-twitter.svg" alt="Twitter" className="w-3 h-3" />
+                  </div>
+                </div>
+              </div>
               <div>
-                <div className="font-medium">{reviewer.name}</div>
-                <div className="text-sm text-muted-foreground">{reviewer.handle}</div>
+                <div className="font-medium text-sidebar-foreground">{reviewer.name}</div>
+                <div className="text-sm text-sidebar-foreground">{reviewer.handle}</div>
               </div>
             </div>
           ))}

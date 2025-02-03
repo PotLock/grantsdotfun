@@ -3,7 +3,7 @@ import LoginButton from "@/components/custom/LoginButton"
 const Header: React.FC = () => {
   return (
     <header className="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-      <div className="container flex h-16 items-center justify-between mx-auto px-5">
+      <div className="container flex h-16 items-center justify-between mx-auto px-5 2xl:px-0">
         <div className="flex items-center gap-6 md:gap-20">
           <a href="/" className="flex items-center gap-2">
             <img

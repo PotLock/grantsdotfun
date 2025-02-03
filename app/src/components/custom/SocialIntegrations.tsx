@@ -2,14 +2,14 @@ const SocialIntegrations: React.FC = () => {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-medium">Agent Integrations</h3>
-        <p className="text-sm text-muted-foreground">
+        <h3 className="text-lg font-medium text-sidebar-foreground">Agent Integrations</h3>
+        <p className="text-sm text-sidebar-foreground">
           This Agent can be accessed and interacted with through the following platforms:
         </p>
         <div className="w-full h-[1px] bg-gray-200"/>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <a href="#" target="_blank" className="flex items-center gap-2 rounded-lg border p-2 px-3 w-full hover:bg-muted">
           <div className="w-10 h-10 bg-black rounded-xl p-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -17,8 +17,8 @@ const SocialIntegrations: React.FC = () => {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold">Twitter</span>
-            <span className="text-sm">@grantsfun</span>
+            <span className="text-sm font-semibold text-sidebar-foreground">Twitter</span>
+            <span className="text-sm text-sidebar-foreground">@grantsfun</span>
           </div>
         </a>
         <a href="#" target="_blank" className="flex items-center gap-2 rounded-lg border p-2 px-3 w-full hover:bg-muted">
@@ -28,8 +28,8 @@ const SocialIntegrations: React.FC = () => {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold">Discord</span>
-            <span className="text-sm">@grantsfun</span>
+            <span className="text-sm font-semibold text-sidebar-foreground">Discord</span>
+            <span className="text-sm text-sidebar-foreground">@grantsfun</span>
           </div>
         </a>
         <a href="#" target="_blank" className="flex items-center gap-2 rounded-lg border p-2 px-3 w-full hover:bg-muted">
@@ -37,8 +37,8 @@ const SocialIntegrations: React.FC = () => {
             <img src="/assets/icons/telegram.svg" alt="Telegram" className="w-full h-full" width={20} height={20} />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold">Telegram</span>
-            <span className="text-sm">@grantsfun</span>
+            <span className="text-sm font-semibold text-sidebar-foreground">Telegram</span>
+            <span className="text-sm text-sidebar-foreground">@grantsfun</span>
           </div>
         </a>
       </div>

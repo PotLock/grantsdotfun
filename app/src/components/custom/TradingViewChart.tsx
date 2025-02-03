@@ -19,6 +19,8 @@ const TradingViewChart: React.FC<{
     script.async = true
     script.onload = () => {
       if (container.current) {
+        const isMobile = window.innerWidth < 768 // Define mobile breakpoint
+        
         new window.TradingView.widget({
           autosize: true,
           symbol: "NEARUSDT",
@@ -32,20 +34,26 @@ const TradingViewChart: React.FC<{
           allow_symbol_change: true,
           container_id: container.current.id,
           studies: [],
-          hide_side_toolbar: false,
-          details: true,
-          hotlist: true,
-          calendar: true,
-          show_popup_button: true,
+          hide_side_toolbar: isMobile,
+          details: !isMobile,
+          hotlist: !isMobile,
+          calendar: !isMobile,
+          show_popup_button: !isMobile,
           popup_width: "1000",
           popup_height: "650",
           hide_volume: false,
           withdateranges: true,
           range: "12M",
-          enabled_features: ["header_widget"],
+          enabled_features: isMobile ? [] : ["header_widget"],
           disabled_features: [
             "header_symbol_search",
             "use_localstorage_for_settings",
+            ...(isMobile ? [
+              "left_toolbar",
+              "header_widget",
+              "timeframes_toolbar",
+              "volume_force_overlay"
+            ] : [])
           ],
         })
       }
