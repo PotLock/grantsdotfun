@@ -24,12 +24,12 @@ const ProgressSteps: React.FC<ProgressStepsProps> = ({ currentStep }) => {
                 className={`flex h-6 w-6 items-center justify-center rounded-full text-sm
                   ${currentStep >= step.id 
                     ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-400 text-white'}`}
+                    : 'bg-[#334155bd] text-white'}`}
               >
                 {step.id}
               </div>
               <span className={`text-sm ${
-                currentStep >= step.id ? 'text-gray-900' : 'text-gray-400'
+                currentStep >= step.id ? 'text-gray-900' : 'text-sidebar-foreground'
               }`}>
                 {step.title}
               </span>

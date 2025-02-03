@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -9,19 +7,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider"
 import { Info, AlertTriangle } from 'lucide-react'
 import { Checkbox } from "@/components/ui/checkbox"
+import { AgentTypes } from '@/types/agent'
 
 interface TokenConfigurationProps {
+  agent: AgentTypes
+  setAgent: React.Dispatch<React.SetStateAction<AgentTypes>>
   onBack: () => void;
   onNext: () => void;
 }
 
-export default function TokenConfiguration({ onBack, onNext }: TokenConfigurationProps) {
+export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: TokenConfigurationProps) {
   const [launchOption, setLaunchOption] = useState<string>('existing')
-  const [maxDeploy, setMaxDeploy] = useState<number>(50)
-  const [tokenAddress, setTokenAddress] = useState<string|null>(null)
-  const [minGrant, setMinGrant] = useState<string|null>(null)
-  const [maxGrant, setMaxGrant] = useState<string|null>(null)
-  
   return (
     <div className="space-y-8">
         <Card className="rounded-xl border p-6">
@@ -31,7 +27,7 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                 </div>
             </div>
             
-            <div className="mt-4 text-sm text-gray-600">
+            <div className="mt-4 text-sm text-sidebar-foreground">
                 Configure the token settings for your grant agent
             </div>
 
@@ -47,7 +43,7 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                         />
                         <Label htmlFor="normal" className="font-normal">
                             <div>Normal Launch</div>
-                            <div className="text-sm text-gray-500">Launch a new token for your agent</div>
+                            <div className="text-sm text-sidebar-foreground">Launch a new token for your agent</div>
                         </Label>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -58,7 +54,7 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                         />
                         <Label htmlFor="existing" className="font-normal">
                             <div>Use Existing Token</div>
-                            <div className="text-sm text-gray-500">Must use deployed wallet. Try pasting contract several times if there's an error.</div>
+                            <div className="text-sm text-sidebar-foreground">Must use deployed wallet. Try pasting contract several times if there's an error.</div>
                         </Label>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -69,7 +65,7 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                         />
                         <Label htmlFor="none" className="font-normal">
                             <div>No Token</div>
-                            <div className="text-sm text-gray-500">Launch without token</div>
+                            <div className="text-sm text-sidebar-foreground">Launch without token</div>
                         </Label>
                     </div>
                 </div>
@@ -80,10 +76,11 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                 <Input 
                     id="token-address" 
                     placeholder="Enter token address"
-                    value={tokenAddress || ''}
-                    onChange={(e) => setTokenAddress(e.target.value)}
+                    value={agent.tokenAddress || ''}
+                    onChange={(e) => setAgent((p: AgentTypes) => ({...p, tokenAddress: e.target.value}))}
+                    className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                 />
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-sidebar-foreground">
                     E.g amichael.near
                 </div>
             </div>
@@ -91,10 +88,10 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
             <div className="rounded-lg bg-blue-50 p-4 space-y-3">
                 <div className="flex items-center gap-2 font-semibold">
                     <AlertTriangle className="h-5 w-5 text-black" />
-                    Token Whitelist Management
+                    <span>Token Whitelist Management</span>
                 </div>
                 <div className="text-sm text-black ml-10">
-                    To Get a token off the payment whitelist, projects can:
+                    <span>To Get a token off the payment whitelist, projects can:</span>
                     <ol className="list-decimal ml-5 mt-2 space-y-1">
                         <li>Submit a new proposal in the governance for token removal</li>
                         <li>Demonstrate consistent non compliance with grant terms</li>
@@ -121,14 +118,14 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                     </div>
                 </div>
                 <Select defaultValue="admin">
-                <SelectTrigger>
-                    <SelectValue placeholder="Select governance type" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="admin">Admin-based</SelectItem>
-                    <SelectItem value="dao">DAO</SelectItem>
-                    <SelectItem value="multisig">Multi-signature</SelectItem>
-                </SelectContent>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select governance type" />
+                    </SelectTrigger>
+                    <SelectContent className='text-sidebar-foreground'>
+                        <SelectItem value="admin">Admin-based</SelectItem>
+                        <SelectItem value="dao">DAO</SelectItem>
+                        <SelectItem value="multisig">Multi-signature</SelectItem>
+                    </SelectContent>
                 </Select>
             </div>
 
@@ -145,17 +142,17 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                             </div>
                         </div>
                     </div>
-                    <span className="text-sm font-medium">{maxDeploy}%</span>
+                    <span className="text-sm font-medium text-sidebar-foreground">{agent.maxDeployPercentage}%</span>
                 </div>
                 <Slider
-                    value={[maxDeploy]}
-                    onValueChange={([value]) => setMaxDeploy(value)}
+                    value={[agent.maxDeployPercentage]}
+                    onValueChange={([value]) => setAgent((p: AgentTypes) => ({...p, maxDeployPercentage: value}))}
                     min={10}
                     max={100}
                     step={1}
                     className="w-full"
                 />
-                <div className="flex justify-between text-sm text-gray-500">
+                <div className="flex justify-between text-sm text-sidebar-foreground">
                     <span>10%</span>
                     <span>50%</span>
                     <span>100%</span>
@@ -164,15 +161,19 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
 
             <div className="space-y-1.5">
                 <Label>Funding Frequency</Label>
-                <Select defaultValue="weekly">
-                <SelectTrigger>
-                    <SelectValue placeholder="Select funding frequency" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                    <SelectItem value="monthly">Monthly</SelectItem>
-                    <SelectItem value="quarterly">Quarterly</SelectItem>
-                </SelectContent>
+                <Select 
+                    defaultValue="weekly"
+                    onValueChange={(value) => setAgent((prev: AgentTypes) => ({...prev, fundingFrequency: value}))}
+                    value={agent.fundingFrequency || 'weekly'}
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select funding frequency" />
+                    </SelectTrigger>
+                    <SelectContent className='text-sidebar-foreground'>
+                        <SelectItem value="weekly">Weekly</SelectItem>
+                        <SelectItem value="monthly">Monthly</SelectItem>
+                        <SelectItem value="quarterly">Quarterly</SelectItem>
+                    </SelectContent>
                 </Select>
             </div>
 
@@ -193,8 +194,9 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                         id="min-grant" 
                         type="number"
                         placeholder="10,000"
-                        value={minGrant || ''}
-                        onChange={(e) => setMinGrant(e.target.value)}
+                        value={agent.minGrant || ''}
+                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, minGrant: e.target.value}))}
+                        className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                     />
                 </div>
                 <div className="space-y-1.5">
@@ -213,8 +215,9 @@ export default function TokenConfiguration({ onBack, onNext }: TokenConfiguratio
                         id="max-grant" 
                         type="number"
                         placeholder="30,000"
-                        value={maxGrant || ''}
-                        onChange={(e) => setMaxGrant(e.target.value)}
+                        value={agent.maxGrant || ''}
+                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, maxGrant: e.target.value}))}
+                        className="placeholder:text-sidebar-foreground text-sidebar-foreground"
                     />
                 </div>
             </div>

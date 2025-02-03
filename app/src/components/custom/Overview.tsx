@@ -1,3 +1,4 @@
+import { Agent } from "@/types/agent";
 import Reviewers from "./Reviewers";
 import SocialIntegrations from "./SocialIntegrations";
 
@@ -6,15 +7,20 @@ interface StatItem {
     value: string;
 }
 
-const stats: StatItem[] = [
-    { label: "Market Cap", value: "$75,000,000" },
-    { label: "24h Volume", value: "$75,000,000" },
-    { label: "Capital Deployed", value: "$75,000,000" },
-    { label: "Current Treasury", value: "$75,000,000" },
-    { label: "Total Grants", value: "$75,000,000" },
-];
+interface OverviewProps {
+    agent: Agent
+}
 
-const Overview: React.FC = () => {
+const Overview: React.FC<OverviewProps> = ({ agent }) => {
+    if (!agent) return null;
+
+    const stats: StatItem[] = [
+        { label: "Market Cap", value: agent.marketcap },
+        { label: "24h Volume", value: agent.weeklyGrantPool },
+        { label: "Capital Deployed", value: agent.capitalDeployed },
+        { label: "Current Treasury", value: agent.currentTreasury },
+        { label: "Total Grants", value: agent.totalGrants },
+    ];
     return (
         <div className="space-y-4 sm:space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">

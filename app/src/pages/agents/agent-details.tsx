@@ -19,23 +19,31 @@ import Overview from "@/components/custom/Overview"
 import Analytics from "@/components/custom/Analytics"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
+import { useParams } from "react-router-dom"
+import { useAgentDetails } from '@/hooks/useAgentDetails'
 
 const AgentDetails: React.FC = () => {
+  const params = useParams()
+  const agentId = params.agentId
+  const { agent } = useAgentDetails(agentId)
+  
+
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   
-  // Copy function
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
     toast.success('Copied to clipboard')
   }
 
-  // Handle description toggle
   const handleDescriptionToggle = () => {
     setIsExpanded(!isExpanded)
   }
 
-  const fullDescription = "The Ethereum Foundation, in collaboration with Aztec, Polygon, Scroll, Taiko and zkSync, is launching the grants initiative to encourage research and development for Zero-Knowledge proofs and standards for ZK L2s. This initiative aims to accelerate the development of ZK technology and promote interoperability across different L2 solutions."
-  
+  if (!agent) {
+    return <div className="container py-6 mx-auto">Agent not found</div>
+  }
+
+  const fullDescription = agent.description || "No description available"
   const shortDescription = fullDescription.slice(0, 150) + "..."
 
   return(
@@ -52,7 +60,7 @@ const AgentDetails: React.FC = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Black Dragon</BreadcrumbPage>
+              <BreadcrumbPage>{agent.name}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -61,21 +69,21 @@ const AgentDetails: React.FC = () => {
               <div className="flex md:flex-row flex-col items-start gap-4 border border-gray-200 rounded-xl p-4 shadow-sm w-full">
                   <div className="flex-shrink-0 flex items-center justify-center h-[95px] w-[100px] p-2 bg-gray-100 rounded-lg">
                       <img
-                          src="/assets/tokens/dragon.png"
-                          alt="Black Dragon Logo"
+                          src={agent.image||"/assets/images/image-example.png"}
+                          alt={agent.name}
                           width={70}
                           height={70}
                           className="rounded-full object-contain"
                       />
                   </div>
                   <div className="flex-1">
-                      <h1 className="text-lg xl:text-xl font-bold truncate text-sidebar-foreground">Black Dragon</h1>
+                      <h1 className="text-lg xl:text-xl font-bold truncate text-sidebar-foreground">{agent.name}</h1>
                       <div className="flex items-center gap-2 text-sm text-sidebar-foreground">
-                          <span className="text-blue-500 font-semibold text-xs md:text-sm">$BLACKDRAGON</span>
+                          <span className="text-blue-500 font-semibold text-xs md:text-sm">${agent.ticker}</span>
                           <span>|</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-sidebar-foreground font-medium bg-gray-100 p-1 px-2 text-xs md:text-sm rounded-md">Blackdragon.near</span>
-                            <Copy className="w-4 h-4 cursor-pointer flex-shrink-0" onClick={() => copyToClipboard("Blackdragon.near")} />
+                            <span className="text-sidebar-foreground font-medium bg-gray-100 p-1 px-2 text-xs md:text-sm rounded-md">{agent.address}</span>
+                            <Copy className="w-4 h-4 cursor-pointer flex-shrink-0" onClick={() => copyToClipboard(agent.address || "")} />
                           </div>
                       </div>
                       <div className="flex items-start gap-2">
@@ -125,7 +133,7 @@ const AgentDetails: React.FC = () => {
                   <div className="bg-gray-100 w-full h-[2px]"/>
 
                   <TabsContent value="overview" className="space-y-6">
-                    <Overview />
+                    <Overview agent={agent} />
                   </TabsContent>
 
                   <TabsContent value="analytics" className="space-y-6"> 
@@ -133,18 +141,18 @@ const AgentDetails: React.FC = () => {
                   </TabsContent>
 
                   <TabsContent value="governance" className="space-y-6">
-                    <AboutGovernance /> 
-                    <ProposalGovernance />  
+                    <AboutGovernance agent={agent} /> 
+                    <ProposalGovernance proposals={agent.governance.proposal} />  
                   </TabsContent>
                   
                   <TabsContent value="grantees" className="space-y-6"> 
-                    <Grantees />
+                    <Grantees grantees={agent.grantees} />
                   </TabsContent>
                   <TabsContent value="forum" className="space-y-6">
 
                   </TabsContent>
                   <TabsContent value="agent-logs" className="space-y-6">
-                    <AgentLogs />
+                    <AgentLogs logs={agent.logs || []} />
                   </TabsContent>
               </Tabs>
           </div>

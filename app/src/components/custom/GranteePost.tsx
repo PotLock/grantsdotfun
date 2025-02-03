@@ -1,15 +1,7 @@
 import { Avatar } from "@/components/ui/avatar"
 import { Card, CardContent } from "../ui/card"
 import { MessageCircle } from "lucide-react"
-
-interface GranteePostProps {
-    avatar: string
-    name: string
-    username: string
-    content: string
-    timeAgo: string
-    hasThread?: boolean
-}
+import { GranteePostType } from "@/types/agent"
 
 const GranteePost = ({ 
     avatar, 
@@ -17,11 +9,12 @@ const GranteePost = ({
     username, 
     content, 
     timeAgo, 
-    hasThread 
-}: GranteePostProps) => {
+    hasThread,
+    twitterProposal
+}: GranteePostType) => {
     
     return (
-        <Card className="border-b py-4">
+        <Card className="border-b py-4 shadow-none rounded-md">
             <CardContent className="flex gap-3">
                 <Avatar className="h-10 w-10 rounded-sm">
                     <img src={avatar} alt={name} />
@@ -38,7 +31,7 @@ const GranteePost = ({
                     {hasThread && (
                         <a href="#" className="mt-2 max-w-[150px] items-center text-sm text-muted-foreground border border-gray-200 rounded-md px-2 py-1 flex flex-row gap-1">
                             <MessageCircle className="w-3 h-3" />
-                            <span>Thread (3 tweets)</span>
+                            <span>Thread ({twitterProposal?.length || 0} tweets)</span>
                         </a>
                     )}
                 </div>

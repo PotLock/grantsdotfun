@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import { Calendar, ChevronLeft, User, ChevronDown, Check, Wallet, CircleCheck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Proposal } from '@/types/agent';
 
 interface Voter {
   id: string;
@@ -28,18 +27,7 @@ interface Voter {
 }
 
 interface ProposalDetailProps {
-  proposal: {
-    title: string;
-    status: string;
-    publisher: {
-      address: string;
-    };
-    voters: Voter[];
-    votingPower: {
-      amount: string;
-      percentage: string;
-    };
-  };
+  proposal: Proposal
   onBack?: () => void;
 }
 
@@ -80,7 +68,7 @@ const ProposalDetail: React.FC<ProposalDetailProps> = ({ proposal, onBack }) => 
               </div>
               <div className="flex items-center gap-1">
                 <img src="/assets/images/avatar/avatar.png" alt="avatar" width={20} height={20} className="rounded-full" />
-                <span className="text-blue-500">{proposal.publisher.address}</span>
+                <span className="text-blue-500">{proposal.publisher}</span>
               </div>
             </div>
             {/* Tabs */}

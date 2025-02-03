@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -7,15 +5,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Info } from 'lucide-react'
-
+import { AgentTypes } from '@/types/agent'
 interface WalletConfigurationProps {
-    onBack: () => void;
-    onDeploy: () => void;
-    payoutBuffer: string | null;
-    setPayoutBuffer: (value: string | null) => void;
+  onBack: () => void;
+  onDeploy: () => void;
+  agent: AgentTypes
+  setAgent: (value: AgentTypes) => void;
 }
 
-const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDeploy, payoutBuffer, setPayoutBuffer }) => {
+const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDeploy, agent, setAgent }) => {
     return (
         <div className="space-y-8">
         <Card className="rounded-xl border p-6">
@@ -26,7 +24,7 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
             </div>
           </div>
           
-          <div className="mt-4 text-sm text-gray-600">
+          <div className="mt-4 text-sm text-sidebar-foreground">
             Set up your agent's wallet and Payout rules
           </div>
 
@@ -36,12 +34,16 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
               <Input 
                 id="treasury-wallet" 
                 placeholder="Enter Your Treasury Wallet Address"
+                value={agent.treasuryAddress}
+                onChange={(e) => setAgent({...agent, treasuryAddress: e.target.value})}
               />
             </div>
 
             <div className="space-y-1.5">
               <Label>Payout Frequency</Label>
-              <Select defaultValue="weekly">
+              <Select defaultValue={agent.payoutFrequency}
+                onValueChange={(value) => setAgent({...agent, payoutFrequency: value})}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select payout frequency" />
                 </SelectTrigger>
@@ -55,7 +57,9 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
 
             <div className="space-y-1.5">
               <Label>Maximum Weekly Payout</Label>
-              <Select defaultValue="1000">
+              <Select defaultValue="1000"
+                onValueChange={(value) => setAgent({...agent, maximumPayoutFrequency: Number(value)})}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Enter Maximum Weekly Payout" />
                 </SelectTrigger>
@@ -69,7 +73,9 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
 
             <div className="space-y-1.5">
               <Label>Payout Day</Label>
-              <Select defaultValue="monday">
+              <Select defaultValue="monday"
+                onValueChange={(value) => setAgent({...agent, maximumPayoutDay: Number(value)})}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select payout day" />
                 </SelectTrigger>
@@ -89,8 +95,8 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
                 id="payout-buffer" 
                 type="number"
                 placeholder="Enter payout buffer in hours"
-                value={payoutBuffer || ''}
-                onChange={(e) => setPayoutBuffer(e.target.value)}
+                value={agent.payoutBuffer || ''}
+                onChange={(e) => setAgent({...agent, payoutBuffer: Number(e.target.value)})}
               />
               <p className="text-sm text-gray-500">
                 Time period during which decisions can be vetoed before the actual payout occurs.

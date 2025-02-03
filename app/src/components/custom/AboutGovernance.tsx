@@ -6,8 +6,13 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
+import { Agent } from "@/types/agent";
 
-const AboutGovernance: React.FC = () => {
+interface AboutGovernanceProps {
+    agent: Agent;
+}
+
+const AboutGovernance: React.FC<AboutGovernanceProps> = ({ agent }) => {
     return (
         <Card className="shadow-none bg-[#F8FAFC]">
             <CardContent className="space-y-2 md:space-y-4 p-3 md:p-6">
@@ -16,27 +21,27 @@ const AboutGovernance: React.FC = () => {
                         <CardTitle className="text-lg md:text-xl text-sidebar-foreground">About Governance</CardTitle>
                     </CardHeader>
                     <p className="text-sm text-sidebar-foreground mt-2">
-                        This grant program is governed by $BLACKDRAGON token holders through a DAO structure. Token holders can vote on key parameters, reviewer appointments, and treasury allocations.
+                        {agent.governance.description}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 py-2 md:py-6">
                     <Card className="shadow-none">
                         <CardContent className="p-4">
-                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">35</div>
+                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">{agent.governance.number_of_proposals}</div>
                             <div className="text-xs md:text-sm text-sidebar-foreground">Proposals</div>
                         </CardContent>
                     </Card>
                     <Card className="shadow-none">
                         <CardContent className="p-4">
-                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">$2,876,000</div>
+                            <div className="text-sm md:text-lg font-semibold text-sidebar-foreground">${agent.governance.number_of_capital_deployed}</div>
                             <div className="text-xs md:text-sm text-sidebar-foreground">Capital Deployed</div>
                         </CardContent>
                     </Card>
                     <Card className="shadow-none">
                         <CardContent className="p-4">
                             <div className="text-sm md:text-lg text-sidebar-foreground flex items-center gap-1">
-                                <span className="font-semibold">1.2B $GRANTS</span>
+                                <span className="font-semibold">{agent.governance.number_of_total_voting_power} $GRANTS</span>
                                 <HoverCard>
                                     <HoverCardTrigger>
                                         <InfoIcon className="w-4 h-4 text-muted-foreground cursor-help" />

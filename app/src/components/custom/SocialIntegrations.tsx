@@ -2,7 +2,7 @@ const SocialIntegrations: React.FC = () => {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-medium text-sidebar-foreground">Agent Integrations</h3>
+        <h3 className="text-lg font-semibold text-sidebar-foreground">Agent Integrations</h3>
         <p className="text-sm text-sidebar-foreground">
           This Agent can be accessed and interacted with through the following platforms:
         </p>

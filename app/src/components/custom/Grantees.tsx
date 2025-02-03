@@ -1,13 +1,10 @@
-'use client'
-
 import { Card } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import GranteePost from './GranteePost'
+import GranteePostComponent from './GranteePost'
 import { useState } from 'react'
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
     PaginationNext,
@@ -20,147 +17,36 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Twitter } from 'lucide-react'
-
+import { GranteesType, PaymentTranche, GranteePostType } from '@/types/agent'
 interface StatsCardProps {
     title: string
     value: string | number
 }
 
-interface GranteeData {
-    id: number
-    avatar: string
-    name: string
-    username: string
-    content: string
-    timeAgo: string
-    hasThread: boolean
-    proposal?: string
-    paymentTranches?: {
-        amount: string
-        date: string
-    }[]
-    twitterProposal?: {
-        text: string
-        date: string
-    }
-    info?: {
-        description: string
-        website?: string
-        github?: string
-        twitter?: string
-    }
+interface GranteesProps {
+    grantees: GranteesType
 }
-
-
-const MOCK_GRANTEES: GranteeData[] = [
-    {
-        id: 1,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Potlock",
-        username: "Potlock_",
-        content: "Building decentralized funding infrastructure for public goods on NEAR Protocol.",
-        timeAgo: "2 Mins Ago",
-        hasThread: true,
-        twitterProposal: {
-            text: "Lorem ipsum dolor sit amet consectetur. Eget tincidunt aliquam dictum sed. Turpis tristique mi sit tempor lorem. Diam commodo eu vitae urna turpis. Elit nunc molestie lectus molestie nec aliquus. Id turpis pellentesque sed sit vestibulum lacus varius. Nunc proin id sed mattis dolor. Risus placerat faucibus sit placerat id proin pellentesque purus ultricies. Vestibulum mauris a malesuada non risus et magna risus duis. Porta ut vitae neque elit hendrerit amet et mi. In curabitur magna amet vitae sit hendrerit.",
-            date: "2024-05-14"
-        },
-        paymentTranches: [
-            { amount: "$50,000", date: "2025-01-09" },
-            { amount: "$50,000", date: "2025-01-09" },
-            { amount: "$50,000", date: "2025-01-09" },
-        ],
-        info: {
-            description: "Potlock is building decentralized funding infrastructure for public goods on NEAR Protocol. Our mission is to make funding accessible and transparent for everyone.",
-            website: "https://potlock.org",
-            github: "https://github.com/potlock",
-            twitter: "https://twitter.com/Potlock_"
-        }
-    },
-    {
-        id: 2,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "NearWeek",
-        username: "NearWeek_",
-        content: "Your trusted source for NEAR Protocol ecosystem news and updates.",
-        timeAgo: "5 Mins Ago",
-        hasThread: true
-    },
-    {
-        id: 3,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Ref Finance",
-        username: "Ref_Finance",
-        content: "Leading AMM protocol on NEAR, providing seamless DeFi experiences.",
-        timeAgo: "10 Mins Ago",
-        hasThread: false
-    },
-    {
-        id: 4,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Paras",
-        username: "Paras_NFT",
-        content: "Digital art cards marketplace on NEAR Protocol.",
-        timeAgo: "15 Mins Ago",
-        hasThread: true
-    },
-    {
-        id: 5,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Aurora",
-        username: "AuroraNetwork",
-        content: "EVM compatibility layer built on NEAR Protocol.",
-        timeAgo: "20 Mins Ago",
-        hasThread: true
-    },
-    {
-        id: 6,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Octopus Network",
-        username: "Octopus_Network",
-        content: "Multichain interoperable crypto-network for launching Web3 appchains.",
-        timeAgo: "25 Mins Ago",
-        hasThread: false
-    },
-    {
-        id: 7,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Mintbase",
-        username: "Mintbase_",
-        content: "NFT infrastructure provider on NEAR Protocol.",
-        timeAgo: "30 Mins Ago",
-        hasThread: true
-    },
-    {
-        id: 8,
-        avatar: "/assets/images/avatar/avatar.png",
-        name: "Human Guild",
-        username: "HumanGuild_",
-        content: "Supporting game developers building on NEAR Protocol.",
-        timeAgo: "35 Mins Ago",
-        hasThread: true
-    }
-]
 
 const StatsCard = ({ title, value }: StatsCardProps) => {
     return (
-        <Card className="p-4">
-            <p className="text-sm text-muted-foreground">{title}</p>
-            <p className="text-2xl font-semibold">{value}</p>
+        <Card className="p-4 shadow-none bg-primary-foreground">
+            <p className="text-sm text-sidebar-foreground">{title}</p>
+            <p className="text-xl font-semibold text-sidebar-foreground">{value}</p>
         </Card>
     )
 }
 
-const ITEMS_PER_PAGE = 5
 
-const Grantees = () => {
+const ITEMS_PER_PAGE = 8
+
+const Grantees: React.FC<GranteesProps> = ({ grantees }) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const totalPages = Math.ceil(MOCK_GRANTEES.length / ITEMS_PER_PAGE)
-    const [selectedGrantee, setSelectedGrantee] = useState<GranteeData | null>(null)
+    const totalPages = Math.ceil(grantees.grantees_posts.length / ITEMS_PER_PAGE)
+    const [selectedGrantee, setSelectedGrantee] = useState<GranteePostType | null>(null)
 
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
     const endIndex = startIndex + ITEMS_PER_PAGE
-    const currentGrantees = MOCK_GRANTEES.slice(startIndex, endIndex)
+    const currentGrantees = grantees.grantees_posts.slice(startIndex, endIndex)
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page)
@@ -170,10 +56,10 @@ const Grantees = () => {
         <div className="space-y-6">
             {/* Stats Section */}
             <div className="grid grid-cols-4 gap-4">
-                <StatsCard title="Total Funded" value="$23,081,920" />
-                <StatsCard title="Total Grantees" value="200" />
-                <StatsCard title="Weekly Payouts" value="$200,000.00" />
-                <StatsCard title="Completed Grants" value="177" />
+                <StatsCard title="Total Funded" value={`$${grantees.total_funded}`} />
+                <StatsCard title="Total Grantees" value={grantees.total_grants} />
+                <StatsCard title="Weekly Payouts" value={`$${grantees.weekly_payouts}`} />
+                <StatsCard title="Completed Grants" value={grantees.completed_grants} />
             </div>
 
             <Tabs defaultValue="latest" className="w-full">
@@ -188,19 +74,20 @@ const Grantees = () => {
                 <div className="space-y-3">
                     {currentGrantees.map((grantee) => (
                         <div key={grantee.id} onClick={() => setSelectedGrantee(grantee)} className="cursor-pointer">
-                            <GranteePost
+                            <GranteePostComponent
+                                id={grantee.id}
                                 avatar={grantee.avatar}
                                 name={grantee.name}
                                 username={grantee.username}
                                 content={grantee.content}
                                 timeAgo={grantee.timeAgo}
                                 hasThread={grantee.hasThread}
+                                twitterProposal={grantee.twitterProposal}
                             />
                         </div>
                     ))}
                 </div>
 
-                {/* Modal */}
                 <Dialog open={!!selectedGrantee} onOpenChange={() => setSelectedGrantee(null)}>
                     <DialogContent className="max-w-4xl">
                         <DialogHeader>
@@ -213,10 +100,10 @@ const Grantees = () => {
                                             className="w-10 h-10 rounded-lg"
                                         />
                                         <div className='flex flex-col gap-2'>
-                                            <span className="font-semibold">{selectedGrantee.name}</span>
+                                            <span className="font-semibold text-sidebar-foreground">{selectedGrantee.name}</span>
                                             <div className="space-y-2">
-                                                <p className="text-sm text-gray-600">{selectedGrantee.content}</p>
-                                                <p className="text-sm text-muted-foreground">Where anyone can put funding on the table.</p>
+                                                <p className="text-sm text-sidebar-foreground font-normal">{selectedGrantee.content}</p>
+                                                <p className="text-sm text-sidebar-foreground font-normal">Where anyone can put funding on the table.</p>
                                             </div>
                                         </div>
                                     </>
@@ -234,15 +121,16 @@ const Grantees = () => {
                                         </div>
                                         
                                         <p className="text-sm text-gray-600 leading-relaxed">
-                                            {selectedGrantee.twitterProposal.text}
+                                            {selectedGrantee.twitterProposal[0].description}
                                         </p>
                                         
                                         <div className="flex justify-between items-center">
                                             <span className="text-sm text-gray-500">
-                                                {selectedGrantee.twitterProposal.date}
+                                                {selectedGrantee.twitterProposal[0].time_created}
                                             </span>
                                             <a 
-                                                href="#" 
+                                                href={selectedGrantee.twitterProposal[0].twitter_url} 
+                                                target='_blank'
                                                 className="text-sm text-blue-500 hover:text-blue-600"
                                             >
                                                 View on Twitter
@@ -271,7 +159,7 @@ const Grantees = () => {
                                                 <span>Amount</span>
                                                 <span>Date</span>
                                             </div>
-                                            {selectedGrantee.paymentTranches?.map((tranche, index) => (
+                                            {selectedGrantee.paymentTranches?.map((tranche: PaymentTranche, index: number) => (
                                                 <div 
                                                     key={index} 
                                                     className="flex justify-between py-2 text-sm border-t first:border-t-0"
