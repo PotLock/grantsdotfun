@@ -7,12 +7,16 @@ import {
   HoverCardTrigger,
 } from "../ui/hover-card";
 import { Agent } from "@/types/agent";
+import { useState } from "react";
+import VotingSetupModal from "./VotingSetupModal";
 
 interface AboutGovernanceProps {
     agent: Agent;
 }
 
 const AboutGovernance: React.FC<AboutGovernanceProps> = ({ agent }) => {
+    const [showVotingModal, setShowVotingModal] = useState(false);
+
     return (
         <Card className="shadow-none bg-[#F8FAFC]">
             <CardContent className="space-y-2 md:space-y-4 p-3 md:p-6">
@@ -82,13 +86,21 @@ const AboutGovernance: React.FC<AboutGovernanceProps> = ({ agent }) => {
                                     Personal settings that determine how your votes are cast. Only visible to you as a token holder. Choose between manual voting, AI-powered voting rules, or delegating your voting power to a trusted community member.
                                 </p>
                             </div>
-                            <Button className="max-w-[150px] bg-blue-500 text-white hover:bg-blue-600">
+                            <Button 
+                                className="max-w-[150px] bg-blue-500 text-white hover:bg-blue-600"
+                                onClick={() => setShowVotingModal(true)}
+                            >
                                 Set Up Voting
                             </Button>
                         </CardContent>
                     </Card>
                 </div>
             </CardContent>
+
+            <VotingSetupModal 
+                open={showVotingModal} 
+                onClose={() => setShowVotingModal(false)}
+            />
         </Card>
     )
 }
