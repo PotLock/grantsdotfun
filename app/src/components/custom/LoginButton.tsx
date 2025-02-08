@@ -60,7 +60,7 @@ const ButtonLogin:React.FC = () => {
 
     if (!accountId) {
         return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center space-x-3">
                 <div className="relative" ref={chainDropdownRef}>
                     <button
                         onClick={() => setIsChainDropdownOpen(!isChainDropdownOpen)}
@@ -116,27 +116,54 @@ const ButtonLogin:React.FC = () => {
     const formatAccountId = (accountId: string) => {
         if (accountId.length === 64) {
             return `${accountId.slice(0, 6)}...${accountId.slice(-4)}`;
-        } else if (accountId.endsWith(import.meta.env.VITE_NETWORK == "testnet" ? ".testnet" : ".near")) {
-            return accountId.replace(import.meta.env.VITE_NETWORK == "testnet" ? ".testnet" : ".near", '');
+        } else if (accountId.endsWith(process.env.NEXT_PUBLIC_NETWORK == "testnet" ? ".testnet" : ".near")) {
+            return accountId.replace(process.env.NEXT_PUBLIC_NETWORK == "testnet" ? ".testnet" : ".near", '');
         }
         return accountId;
     };
 
     return (
-        <div className="flex items-center relative" ref={dropdownRef}>
+    <div className="flex items-center md:space-x-3 space-x-1 relative" ref={dropdownRef}>
+            <div className="relative" ref={chainDropdownRef}>
+                <button
+                    onClick={() => setIsChainDropdownOpen(!isChainDropdownOpen)}
+                    className="bg-white border border-gray-200  shadow-sm hover:bg-gray-50 text-gray-800 font-medium py-2.5 px-4 rounded-lg text-sm cursor-pointer flex items-center"
+                >
+                    <img 
+                        src={`/assets/icons/${selectedChain == "NEAR" ? "near-black" : "eth-black"}.png`}
+                        alt={selectedChain}
+                        className={`w-4 h-4 md:mr-2 ${selectedChain == "NEAR" ? "w-3 h-3" : "w-5 h-5"}`}
+                    />
+                    <span className="hidden md:block">
+                        {selectedChain}
+                    </span>
+                </button>
+                
+                {isChainDropdownOpen && (
+                    <div className="absolute top-12 left-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 w-[120px] z-50">
+                        {['NEAR', 'ETH'].map((chain) => (
+                            <button
+                                key={chain}
+                                onClick={() => handleChainSelect(chain as Chain)}
+                                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center"
+                            >
+                                <img 
+                                    src={`/assets/icons/${chain == "NEAR" ? "near-black" : "eth-black"}.png`}
+                                    alt={chain}
+                                    className={`w-4 h-4 mr-2 ${chain == "NEAR" ? "w-3 h-3" : "w-5 h-5"}`}
+                                />
+                                {chain}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
-                className="bg-blue-500 hover:bg-blue-600 flex items-center space-x-2 px-4 py-2 rounded-xl text-white relative"
+                className="border border-gray-200 space-x-2 shadow-sm hover:bg-gray-50 text-gray-800 font-medium py-1.5 md:py-2 px-2 md:px-4 rounded-lg text-sm cursor-pointer flex items-center"
             >
-                <img 
-                    src="/assets/icons/NEAR.svg" 
-                    alt="NEAR" 
-                    width={20}
-                    height={20}
-                    className="w-5 h-5" 
-                />
-                <span className="font-semibold text-sm">{formatAccountId(accountId)}</span>
                 <AvatarProfile accountId={accountId} size={24} />
+                <span className="font-semibold text-sm md:block hidden">{accountId}</span>
             </button>
             {isOpen && (
                 <div className="absolute top-14 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-3 w-[250px] z-50">
@@ -161,6 +188,9 @@ const ButtonLogin:React.FC = () => {
                     </div>
                 </div>
             )}
+            <button className="bg-white border border-gray-200  shadow-sm hover:bg-gray-50 text-gray-800 p-2.5 rounded-lg text-sm cursor-pointer flex items-center">
+                <Sun className="w-4 h-4" />
+            </button>
         </div>
     );
 };

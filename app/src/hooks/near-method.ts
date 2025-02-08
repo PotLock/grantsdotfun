@@ -1,7 +1,7 @@
 import { JsonRpcProvider } from 'near-api-js/lib/providers';
 
 const getRpcProvider = () => {
-  const networkId = import.meta.env.VITE_NETWORK || "";
+  const networkId = process.env.NEXT_PUBLIC_NETWORK || "";
   const rpcUrl = networkId === "mainnet" 
     ? "https://rpc.mainnet.near.org"
     : "https://rpc.testnet.near.org";

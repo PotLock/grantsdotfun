@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { Agent } from "@/types/agent"
 
 interface FeaturedGrantAgentsProps {
@@ -10,17 +10,20 @@ interface FeaturedGrantAgentsProps {
 }
 
 const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(
-    window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3
-  );
+  const [itemsPerPage, setItemsPerPage] = useState<number>(2);
+  const [imageSize, setImageSize] = useState<number>(80);
   const totalPages = Math.ceil(agents.length / itemsPerPage);
 
   useEffect(() => {
     const handleResize = () => {
       setItemsPerPage(window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3);
+      setImageSize(window.innerWidth < 640 ? 80 : 120);
     };
+
+    // Set initial value
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -69,10 +72,10 @@ const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => 
 
       <div className="grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
         {getCurrentPageItems().map((agent) => (
-          <Card key={agent.id} className="p-4 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => navigate(`/agents/${agent.id}`)}>
+          <Card key={agent.id} className="p-4 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => router.push(`/agents/${agent.id}`)}>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
               <div className="bg-white bg-muted rounded-lg shrink-0 sm:mx-0 flex items-center justify-start md:justify-center">
-                <img src={agent.image} alt={agent.name} width={window.innerWidth < 640 ? 80 : 120} height={window.innerWidth < 640 ? 80 : 120} className="object-contain" />
+                <img src={agent.image} alt={agent.name} width={imageSize} height={imageSize} className="object-contain" />
               </div>
               <div className="sapce-y-2 md:space-y-4">
                 <div className="flex items-start gap-2 justify-between">

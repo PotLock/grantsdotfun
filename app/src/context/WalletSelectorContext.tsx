@@ -1,3 +1,5 @@
+"use client"
+
 import type { AccountState, NetworkId, WalletSelector, WalletModuleFactory } from "@near-wallet-selector/core";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import type { WalletSelectorModal } from "@near-wallet-selector/modal-ui";
@@ -43,7 +45,7 @@ export const WalletSelectorContextProvider:React.FC<{
   const [modal, setModal] = useState<WalletSelectorModal | null>(null);
   const [accounts, setAccounts] = useState<Array<AccountState>>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const network = import.meta.env.VITE_NETWORK as NetworkId;
+  const network = process.env.NEXT_PUBLIC_NETWORK as NetworkId;
   console.log(network)
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
@@ -56,15 +58,15 @@ export const WalletSelectorContextProvider:React.FC<{
         setupMeteorWallet(),
         setupBitteWallet({
           walletUrl: network === "mainnet" 
-            ? import.meta.env.VITE_WALLET_URL as string 
-            : import.meta.env.VITE_WALLET_URL_TESTNET as string,
-          callbackUrl: import.meta.env.VITE_CALLBACK_URL,
+            ? process.env.NEXT_PUBLIC_WALLET_URL as string 
+            : process.env.NEXT_PUBLIC_WALLET_URL_TESTNET as string,
+          callbackUrl: process.env.NEXT_PUBLIC_CALLBACK_URL,
           deprecated: false,
         }),
       ],
     });
     const _modal = setupModal(_selector, {
-      contractId: import.meta.env.VITE_NETWORK as NetworkId == "mainnet" ? import.meta.env.VITE_SMART_CONTRACT as string : import.meta.env.VITE_SMART_CONTRACT_TESTNET as string,
+      contractId: process.env.NEXT_PUBLIC_NETWORK as NetworkId == "mainnet" ? process.env.NEXT_PUBLIC_SMART_CONTRACT as string : process.env.NEXT_PUBLIC_SMART_CONTRACT_TESTNET as string,
     });
     const state = _selector.store.getState();
     setAccounts(state.accounts);

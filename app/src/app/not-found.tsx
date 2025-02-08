@@ -1,7 +1,14 @@
-import { Button } from '../components/ui/button';
+import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import type { NextPage } from 'next'
+import type { Metadata } from 'next'
 
-export default function NotFound() {
+export const metadata: Metadata = {
+  title: '404 Not Found | Grants.fun',
+  description: 'The page you are looking for does not exist',
+}
+
+const NotFound: NextPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <div className="text-center space-y-6">
@@ -20,3 +27,5 @@ export default function NotFound() {
     </div>
   );
 } 
+
+export default NotFound;
