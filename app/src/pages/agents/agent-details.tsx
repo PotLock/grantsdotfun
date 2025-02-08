@@ -1,3 +1,5 @@
+"use client"
+
 import TradingViewChart from "@/components/custom/TradingViewChart"
 import SwapInterface from "@/components/custom/SwapInterface"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -19,13 +21,15 @@ import Overview from "@/components/custom/Overview"
 import Analytics from "@/components/custom/Analytics"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { useParams } from "react-router-dom"
 import { useAgentDetails } from '@/hooks/useAgentDetails'
+import { useSearchParams } from "next/navigation"
 
-const AgentDetails: React.FC = () => {
-  const params = useParams()
-  const agentId = params.agentId
-  const { agent } = useAgentDetails(agentId)
+interface AgentDetailsProps {
+  agentId: string
+}
+
+const AgentDetails: React.FC<AgentDetailsProps> = ({ agentId }) => {
+  const { agent } = useAgentDetails(agentId || "")
   
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false)

@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react'
 import BasicInformation from '@/components/sections/BasicInformation'
 import AgentPreview from '@/components/custom/AgentPriview'
@@ -10,6 +12,7 @@ import toast from 'react-hot-toast'
 import { AgentTypes } from '@/types/agent'
 
 const emojis = ["😀", "😄", "🤪", "❤️", "🐻", "🐉", "🐶", "😋", "🐺", "🏃", "🍷"]
+
 
 const CreateAgent: React.FC = () => {
   const [step, setStep] = useState<number>(1)

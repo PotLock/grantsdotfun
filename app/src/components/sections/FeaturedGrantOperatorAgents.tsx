@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState, useCallback, useEffect } from "react"
 import { Settings2, Twitter, MessageCircle } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { grantOperatorAgents } from "@/data/agents"
 import { GrantOperatorAgent } from "@/types/agent"
 
@@ -39,7 +39,7 @@ const searchData = (data: GrantOperatorAgent[], filters: SearchFilters) => {
 }
 
 const FeaturedGrantOperatorAgents: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [itemsPerPage, setItemsPerPage] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState<string|null>(null)
@@ -168,7 +168,7 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
           <TableBody>
             {currentData.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium cursor-pointer" onClick={() => navigate(`/agents/${item.id}`)}>
+                <TableCell className="font-medium cursor-pointer" onClick={() => router.push(`/agents/${item.id}`)}>
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-lg overflow-hidden">
                       <img src="/assets/images/avatar/avatar-1.png" alt="Avatar" width={32} height={32} className="object-cover" />
