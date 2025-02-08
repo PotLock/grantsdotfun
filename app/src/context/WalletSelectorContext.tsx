@@ -46,7 +46,7 @@ export const WalletSelectorContextProvider:React.FC<{
   const [accounts, setAccounts] = useState<Array<AccountState>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const network = process.env.NEXT_PUBLIC_NETWORK as NetworkId;
-  console.log(network)
+
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
       network: network,

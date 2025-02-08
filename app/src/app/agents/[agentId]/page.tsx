@@ -1,20 +1,23 @@
 import { Metadata } from 'next'
 import AgentDetails from '@/pages/agents/agent-details'
+import { useAgentDetails } from '@/hooks/useAgentDetails'
 
-export const metadata: Metadata = {
-  title: 'Agent Details | Grants.fun',
-  description: 'View and manage your grant agent details',
+type Props = {
+  params: Promise<{ agentId: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
-
-interface Props {
-  params: {
-    agentId: string
+export async function generateMetadata(
+  { params, searchParams }: Props
+): Promise<Metadata> {
+  const agentId = (await params).agentId
+  const { agent } = useAgentDetails(agentId || "")
+  return {
+    title: `${agent?.name} | Grants.fun`,
+    description: 'View and manage your grant agent details',
   }
 }
 
-const AgentDetailsPage = async ({ params }: Props) => {
-  const { agentId } = await params
+export default async function AgentDetailsPage({ params }: Props) {
+  const agentId = (await params).agentId
   return <AgentDetails agentId={agentId} />
 }
-
-export default AgentDetailsPage
