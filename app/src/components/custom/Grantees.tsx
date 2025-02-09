@@ -53,9 +53,9 @@ const Grantees: React.FC<GranteesProps> = ({ grantees }) => {
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
             {/* Stats Section */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <StatsCard title="Total Funded" value={`$${grantees.total_funded}`} />
                 <StatsCard title="Total Grantees" value={grantees.total_grants} />
                 <StatsCard title="Weekly Payouts" value={`$${grantees.weekly_payouts}`} />

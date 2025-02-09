@@ -26,65 +26,63 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
   }
 
   return (
-      <div className="space-y-8">
-          <Card className="rounded-xl border p-6">
-            <div className="flex items-center gap-3">
-              <h2 className="text-xl font-semibold">Basic Information</h2>
-            </div>
+      <div className="space-y-2 md:space-y-8">
+          <Card className="rounded-xl border p-4 md:p-6">
+            <h2 className="text-xl font-semibold">Basic Information</h2>
             
             <div className="mt-4">
-              <div className="flex items-center gap-2 text-sm text-sidebar-foreground">
+              <div className="flex items-center gap-2 text-xs md:text-sm text-sidebar-foreground">
                 <p>Need help developing your own agent? See the <code className="rounded bg-gray-100 text-sidebar-foreground px-1.5 py-0.5 text-xs">agent_config</code> file for another Grant Agent Token (GAT)</p>
               </div>
             </div>
 
             <div className="mt-6 space-y-6">
               <div className="space-y-1.5">
-                <Label htmlFor="name">AI Agent Name</Label>
+                <Label htmlFor="name" className='text-xs md:text-sm'>AI Agent Name</Label>
                 <Input 
                   id="name" 
                   placeholder="Agent name"
                   value={agent.name}
-                  className="placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, name: e.target.value}))}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="ticker">Ticker Name</Label>
+                <Label htmlFor="ticker" className='text-xs md:text-sm'>Ticker Name</Label>
                 <Input 
                   id="ticker" 
                   placeholder="$ Token"
                   value={agent.ticker}
-                  className="placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, ticker: e.target.value}))}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="description">AI Agent Description</Label>
+                <Label htmlFor="description" className='text-xs md:text-sm'>AI Agent Description</Label>
                 <Textarea 
                   id="description" 
                   placeholder="Describe your agent"
                   value={agent.description}
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, description: e.target.value}))}
-                  className="resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="resize-none placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   rows={4}
                 />
               </div>
 
               <div className="space-y-3">
-                <Label>AI Agent Image</Label>
+                <Label className='text-xs md:text-sm'>AI Agent Image</Label>
                 <Tabs defaultValue="emoji" className="w-full">
                   <TabsList className="grid w-[300px] grid-cols-2">
-                    <TabsTrigger value="ai">Generate with AI</TabsTrigger>
-                    <TabsTrigger value="emoji">Use Emoji</TabsTrigger>
+                    <TabsTrigger value="ai" className="text-xs md:text-sm">Generate with AI</TabsTrigger>
+                    <TabsTrigger value="emoji" className="text-xs md:text-sm">Use Emoji</TabsTrigger>
                   </TabsList>
                   <TabsContent value="ai" className="space-y-4">
                     <div className="flex items-center gap-2">
                       <Input 
                         placeholder="Enter a prompt to generate an image..." 
-                        className="w-full placeholder:text-sidebar-foreground text-sidebar-foreground"
+                        className="w-full placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                         value={imagePrompt || ''}
                         onChange={(e) => setImagePrompt(e.target.value)}
                       />
@@ -98,10 +96,12 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                           </div>
                           <div className="flex items-center justify-between w-full">
                             <Button className="bg-stone-100 hover:bg-stone-200 text-black shadow-none" size="sm">
-                              <RefreshCcw className="w-2 h-2" />
-                              <span>Regenerate</span>
+                              <RefreshCcw className="w-3 h-3" />
+                              <span className="text-xs md:text-sm">Regenerate</span>
                             </Button>
-                            <Button className="bg-blue-500 hover:bg-blue-600 text-white shadow-none" size="sm">Use this image</Button>
+                            <Button className="bg-blue-500 hover:bg-blue-600 text-white shadow-none" size="sm">
+                              <span className="text-xs md:text-sm">Use this image</span>
+                            </Button>
                           </div>
                         </div>
                       )
@@ -124,69 +124,73 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="prompt">Agent Prompt (LORE)</Label>
+                <Label htmlFor="prompt" className='text-xs md:text-sm'>Agent Prompt (LORE)</Label>
                 <Textarea 
                   id="prompt"
                   placeholder="Example: As the EcoTech Grant AI, you are passionate about funding innovative green technologies. Your tone is enthusiastic yet professional, always encouraging applicants to think big about environmental solutions. You have a deep understanding of climate science and are excited y projects that combine technology with sustainability"
-                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   rows={4}
                   value={agent.agentPrompt}
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, agentPrompt: e.target.value}))}
                 />
-                <div className="text-sm text-sidebar-foreground">
+                <div className="text-xs md:text-sm text-sidebar-foreground">
                   Enter background story and lore details...
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="personality">Personality</Label>
+                <Label htmlFor="personality" className='text-xs md:text-sm'>Personality</Label>
                 
                 <Textarea 
                   id="personality"
                   placeholder="Example: Friendly, approachable, and knowledgeable. You're enthusiastic about innovative ideas but also analytical and detail-oriented when evaluating proposals. You're patient with applicants and always willing to provide constructive feedback"
-                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   rows={4}
                   value={agent.personality}
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, personality: e.target.value}))}
                 />
-                <div className="text-sm text-sidebar-foreground">
+                <div className="text-xs md:text-sm text-sidebar-foreground">
                   Describe your AI Agent traits, behavior and demeanor.
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="style">Style</Label>
+                <Label htmlFor="style" className='text-xs md:text-sm'>Style</Label>
                 <Textarea 
                   id="style"
                   placeholder="Example: Professional yet approachable, uses technical terms but explain them clearly"
-                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   rows={4}
                   value={agent.style}
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, style: e.target.value}))}
                 />
-                <div className="text-sm text-sidebar-foreground">
+                <div className="text-xs md:text-sm text-sidebar-foreground">
                   Describe your AI Agent response style.
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="knowledge">Knowledge</Label>
+                <Label htmlFor="knowledge" className='text-xs md:text-sm'>Knowledge</Label>
                 <Textarea 
                   id="knowledge"
                   placeholder="Example: Blockchain Technology, DeFi Protocols, Smart Contract development, Tokenomics, Web3 Infrastructure, Cryptography, Sustainable Technology, Renewable Energy"
-                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground"
+                  className="mt-2 resize-none placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
                   rows={4}
                   value={agent.knowledge}
                   onChange={(e) => setAgent((p: AgentTypes) => ({...p, knowledge: e.target.value}))}
                 />
-                <div className="text-sm text-sidebar-foreground">
+                <div className="text-xs md:text-sm text-sidebar-foreground">
                   Give your agent some knowledge, separate by /'s
                 </div>
               </div>
             </div>
-            <div className="flex justify-between mt-10">
-              <Button className="bg-gray-100 hover:bg-gray-200 text-black" >Cancel</Button>
-              <Button onClick={onNext} className="bg-blue-600 hover:bg-blue-700">Next: Token Configuration</Button>
+            <div className="flex justify-between mt-10 flex-col-reverse md:flex-row gap-2">
+              <Button className="bg-gray-100 hover:bg-gray-200 text-black">
+                <span className="text-xs md:text-sm">Cancel</span>
+              </Button>
+              <Button onClick={onNext} className="bg-blue-600 hover:bg-blue-700">
+                <span className="text-xs md:text-sm">Next: Token Configuration</span>
+              </Button>
             </div>
           </Card>          
       </div>   

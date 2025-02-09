@@ -24,7 +24,7 @@ const IconSocial = {
 const LogInteraction = ({ log }: { log: AgentLog }) => {
     return (
         <Card key={log.id} className="shadow-none">
-            <CardContent className="flex items-start gap-4 p-6 border-b last:border-b-0">
+            <CardContent className="flex items-start gap-4 p-4 md:p-6 border-b last:border-b-0">
                 <div className="w-8 h-8 bg-black rounded-lg p-2">
                     {IconSocial[log.platform as keyof typeof IconSocial]}
                 </div>
@@ -32,18 +32,18 @@ const LogInteraction = ({ log }: { log: AgentLog }) => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
                             <img src={log.user?.avatar || ''} alt={log.user?.name || ''} className="w-5 h-5 rounded-full" width={16} height={16} />
-                            <span className="text-sm">{log.user?.name}</span>
+                            <span className="text-xs md:text-sm">{log.user?.name}</span>
                         </div>
                     </div>
-                    <div className="flex flex-row justify-between w-full items-center">
-                        <p className="text-sm mt-1">{log.message}</p>
-                        <span className="text-xs text-muted-foreground">
+                    <div className="flex flex-col md:flex-row justify-between w-full items-start md:items-center space-y-2 md:space-y-0">
+                        <p className="text-xs md:text-sm mt-1">{log.message}</p>
+                        <span className="text-xs md:text-sm text-muted-foreground">
                             {timeAgo(new Date(log.timestamp))}
                         </span>
                         {log.actionLink && (
                             <a 
                                 href="#" 
-                                className="text-sm text-blue-500 hover:text-blue-600 inline-block"
+                                className="text-xs md:text-sm text-blue-500 hover:text-blue-600 inline-block"
                             >
                                 {log.actionLink}
                             </a>
@@ -58,14 +58,14 @@ const LogInteraction = ({ log }: { log: AgentLog }) => {
 const LogDeveloper = ({ log }: { log: AgentLog }) => {
     return (
         <Card key={log.id} className="shadow-none">
-            <CardContent className="flex items-center justify-between p-4">
+            <CardContent className="flex items-start md:items-center justify-between p-4">
                 <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">New Model: Commit:</span>
-                        <span className="text-sm text-muted-foreground">{log.commit}</span>
+                    <div className="flex md:flex-row flex-col items-start md:items-center gap-2">
+                        <span className="text-xs md:text-sm font-medium">New Model: Commit:</span>
+                        <span className="text-xs md:text-sm text-muted-foreground">{log.commit}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm text-muted-foreground">Contributed by</span>
+                    <div className="flex items-start md:items-center gap-2">
+                        <span className="text-xs md:text-sm text-muted-foreground">Contributed by</span>
                         <div className="flex items-center gap-1">
                             <img 
                                 src={log.contributor?.avatar || ''} 
@@ -74,11 +74,11 @@ const LogDeveloper = ({ log }: { log: AgentLog }) => {
                                 height={20} 
                                 className="rounded-full"
                             />
-                            <span className="text-sm text-muted-foreground">@{log.contributor?.name}</span>
+                            <span className="text-xs md:text-sm text-muted-foreground">@{log.contributor?.name}</span>
                         </div>
                     </div>
                 </div>
-                <span className="text-xs text-muted-foreground ml-4">
+                <span className="text-xs md:text-sm text-muted-foreground ml-4">
                     {timeAgo(new Date(log.timestamp))}
                 </span>
             </CardContent>
@@ -93,16 +93,16 @@ const AgentLogs = ({ logs }: { logs: AgentLog[] }) => {
     return (
         <div className="w-full">
             <Tabs defaultValue="all" className="w-full">
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                     <TabsList className="grid grid-cols-3 mb-4 max-w-[500px]">
-                        <TabsTrigger value="all">All Logs</TabsTrigger>
-                        <TabsTrigger value="interaction">Interaction Logs</TabsTrigger>
-                        <TabsTrigger value="developer">Developer Logs</TabsTrigger>
+                        <TabsTrigger value="all" className="text-xs md:text-sm">All Logs</TabsTrigger>
+                        <TabsTrigger value="interaction" className="text-xs md:text-sm">Interaction Logs</TabsTrigger>
+                        <TabsTrigger value="developer" className="text-xs md:text-sm">Developer Logs</TabsTrigger>
                     </TabsList>
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="ml-4">
+                            <Button variant="outline" className="md:ml-4">
                                 All Platforms
                                 <ChevronDown className="ml-2 h-4 w-4" />
                             </Button>

@@ -22,7 +22,7 @@ import Analytics from "@/components/custom/Analytics"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { useAgentDetails } from '@/hooks/useAgentDetails'
-import { useSearchParams } from "next/navigation"
+
 
 interface AgentDetailsProps {
   agentId: string
@@ -31,7 +31,6 @@ interface AgentDetailsProps {
 const AgentDetails: React.FC<AgentDetailsProps> = ({ agentId }) => {
   const { agent } = useAgentDetails(agentId || "")
   
-
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   
   const copyToClipboard = (text: string) => {
@@ -103,37 +102,39 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentId }) => {
                       </div>
                   </div>
               </div>
-              <div className="rounded-lg border">
+              {/* <div className="rounded-lg border">
                 <TradingViewChart />
-              </div>
+              </div> */}
 
               <Tabs defaultValue="overview" className="space-y-4">
-                  <TabsList className="bg-transparent p-1">
-                    <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <Search className="w-4 h-4" />
-                      <span className="hidden md:inline">Overview</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="analytics" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <BarChart2 className="w-4 h-4" />
-                      <span className="hidden md:inline">Analytics</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="governance" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <Vote className="w-4 h-4" />
-                      <span className="hidden md:inline">Governance</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="grantees" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <Users className="w-4 h-4" />
-                      <span className="hidden md:inline">Grantees</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="forum" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <MessageSquare className="w-4 h-4" />
-                      <span className="hidden md:inline">Forum</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="agent-logs" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
-                      <FileText className="w-4 h-4" />
-                      <span className="hidden md:inline">Agent Logs</span>
-                    </TabsTrigger>
-                  </TabsList>
+                  <div className="relative max-w-[360px] overflow-x-auto overflow-y-hidden">
+                    <TabsList className="bg-transparent p-1">
+                      <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <Search className="w-4 h-4" />
+                        <span>Overview</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="analytics" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <BarChart2 className="w-4 h-4" />
+                        <span>Analytics</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="governance" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <Vote className="w-4 h-4" />
+                        <span>Governance</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="grantees" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <Users className="w-4 h-4" />
+                        <span>Grantees</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="forum" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <MessageSquare className="w-4 h-4" />
+                        <span>Forum</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="agent-logs" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
+                        <FileText className="w-4 h-4" />
+                        <span>Agent Logs</span>
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
                   <div className="bg-gray-100 w-full h-[2px]"/>
 
                   <TabsContent value="overview" className="space-y-6">
