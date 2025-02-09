@@ -74,15 +74,26 @@ const ProposalGovernance: React.FC<ProposalGovernanceProps> = ({ proposals }) =>
     }
 
     return (
-        <div className="space-y-6">
-            <Tabs defaultValue="all" className="py-4">
+        <div className="space-y-4 md:space-y-6">
+            <Tabs defaultValue="all" className="md:py-4">
                 <TabsList className="py-5 px-1">
-                    <TabsTrigger value="all" className="p-2 px-4">All</TabsTrigger>
-                    <TabsTrigger value="active" className="p-2 px-4">Active Proposals</TabsTrigger>
-                    <TabsTrigger value="passed" className="p-2 px-4">Passed Proposals</TabsTrigger>
-                    <TabsTrigger value="my" className="p-2 px-4">My Proposals</TabsTrigger>
+                    <TabsTrigger value="all" className="p-2 px-4">
+                        <span className="text-xs md:text-sm">All</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="active" className="p-2 px-4">
+                        <span className="text-xs md:text-sm">Active </span>
+                        <span className="hidden md:block">Proposals</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="passed" className="p-2 px-4">
+                        <span className="text-xs md:text-sm">Passed </span>
+                        <span className="hidden md:block">Proposals</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="my" className="p-2 px-4">
+                        <span className="text-xs md:text-sm">My Proposals</span>
+                    </TabsTrigger>
                 </TabsList>
             </Tabs>
+            
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                 <Input
                     type="text"
@@ -143,21 +154,21 @@ const ProposalGovernance: React.FC<ProposalGovernanceProps> = ({ proposals }) =>
                                     <h4 className="font-medium text-base">{proposal.title}</h4>
                                     <span className="text-xs bg-orange-100 text-orange-600 px-2.5 py-1 rounded-sm border border-orange-400">{ProposalStatus[proposal.status as keyof typeof ProposalStatus]}</span>
                                 </div>
-                                <p className="text-sm text-muted-foreground mt-2">
+                                <p className="text-xs md:text-sm text-muted-foreground mt-2">
                                     {proposal.description}
                                 </p>
-                                <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                                <div className="flex items-center md:gap-2 mt-2 text-xs text-muted-foreground">
                                     <div className="flex items-center gap-4">
                                         <div className="flex items-center gap-1">
-                                            <Calendar className="h-3.5 w-3.5 text-blue-500" />
-                                            <span>{proposal.time_started} - {proposal.time_ended}</span>
+                                            <Calendar className="md:h-3.5 md:w-3.5 w-3 h-3 text-blue-500" />
+                                            <span className="text-[9px] md:text-sm">{proposal.time_started} - {proposal.time_ended}</span>
                                         </div>
                                         <span>•</span>
                                         <div className="flex items-center gap-1">
-                                            <User className="h-3.5 w-3.5 text-blue-500" />
-                                            <span>Published by</span>
+                                            <User className="md:h-3.5 md:w-3.5 w-3 h-3 text-blue-500" />
+                                            <span className="text-[9px] md:text-sm">Published by</span>
                                             <img src="/assets/images/avatar/avatar.png" alt="avatar" width={16} height={16} className="rounded-full" />
-                                            <span className="text-blue-500">{proposal.publisher}</span>
+                                            <span className="text-blue-500 text-[9px] md:text-sm">{proposal.publisher}</span>
                                         </div>
                                     </div>
                                 </div>

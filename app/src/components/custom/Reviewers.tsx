@@ -15,8 +15,8 @@ const Reviewers = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {reviewers.map((reviewer, i) => (
             <div key={i} className="flex items-center gap-2 rounded-lg border p-2">
-              <div className="h-10 w-10 rounded-full bg-muted relative">
-                <img src={reviewer.image} alt={reviewer.name} className="w-full h-full object-cover rounded-full" />
+              <div className="h-10 w-10 rounded-full bg-muted relative flex-shrink-0">
+                <img src={reviewer.image} alt={reviewer.name} className="w-full h-full object-cover rounded-full aspect-square" />
                 <div className="absolute -bottom-2 -right-1">
                   <div className="w-5 h-5 rounded-full bg-white p-1 flex items-center justify-center border border-gray-200">
                     <img src="/assets/icons/prime-twitter.svg" alt="Twitter" className="w-3 h-3" />
@@ -24,8 +24,8 @@ const Reviewers = () => {
                 </div>
               </div>
               <div>
-                <div className="font-medium text-sidebar-foreground">{reviewer.name}</div>
-                <div className="text-sm text-sidebar-foreground">{reviewer.handle}</div>
+                <div className="font-medium text-sm md:text-base text-sidebar-foreground">{reviewer.name}</div>
+                <div className="text-xs md:text-sm text-sidebar-foreground">{reviewer.handle}</div>
               </div>
             </div>
           ))}

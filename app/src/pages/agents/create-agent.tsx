@@ -72,7 +72,7 @@ const CreateAgent: React.FC = () => {
 
         <ProgressSteps currentStep={step} />
 
-        <div className='container mx-auto grid gap-8 lg:grid-cols-[1fr,400px] pb-10'>
+        <div className='container mx-auto grid gap-8 lg:grid-cols-[1fr,400px] md:pb-10 md:px-0 px-5 pb-20'>
             {step === 1 && <BasicInformation agent={agent} setAgent={setAgent} emojis={emojis} onNext={() => setStep(2)} />}
             {step === 2 && <TokenConfiguration agent={agent} setAgent={setAgent} onBack={() => setStep(1)} onNext={() => setStep(3)} />}
             {step === 3 && <PlatformIntegration agent={agent} setAgent={setAgent} onBack={() => setStep(2)} onNext={() => setStep(4)} />}

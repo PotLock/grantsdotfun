@@ -50,117 +50,114 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
   }
     
   return (
-      <div className="space-y-8">
-      <Card className="rounded-xl border p-6">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-semibold">Grant Canvas</h2>
-            <Info className="h-4 w-4 text-gray-400" />
-          </div>
-        </div>
-        
-        <div className="mt-4 text-sm text-sidebar-foreground">
-          Define your grant program's objectives and evaluation criteria
-        </div>
-
-        <div className="mt-6 space-y-6">
-          <div className="space-y-1.5">
-            <Label htmlFor="ecosystem-goals">Ecosystem Goals</Label>
-            <Textarea 
-              id="ecosystem-goals" 
-              placeholder="E.g Increase treasury etc"
-              className="min-h-[100px]"
-              value={agent.ecosystemGoals || ''}
-              onChange={(e) => setAgent({...agent, ecosystemGoals: e.target.value})}
-            />
+      <div className="space-y-4 md:space-y-8">
+        <Card className="rounded-xl border p-4 md:p-6">
+          <h2 className="text-xl font-semibold">Grant Canvas</h2>
+          
+          <div className="mt-2 md:mt-4 text-xs md:text-sm text-sidebar-foreground">
+            Define your grant program's objectives and evaluation criteria
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="evaluation-criteria">Evaluation Criteria</Label>
-            <Textarea 
-              id="evaluation-criteria"
-              placeholder="Describe how projects will be evaluated (e.g Social Impact, Technical Complexity)"
-              className="min-h-[100px]"
-              value={agent.evaluationCriteria || ''}
-              onChange={(e) => setAgent({...agent, evaluationCriteria: e.target.value})}
-            />
-          </div>
+          <div className="mt-4 md:mt-6 space-y-4 md:space-y-6">
+            <div className="space-y-1.5">
+              <Label htmlFor="ecosystem-goals" className="text-xs md:text-sm">Ecosystem Goals</Label>
+              <Textarea 
+                id="ecosystem-goals" 
+                placeholder="E.g Increase treasury etc"
+                className="min-h-[100px] text-xs md:text-sm"
+                value={agent.ecosystemGoals || ''}
+                onChange={(e) => setAgent({...agent, ecosystemGoals: e.target.value})}
+              />
+            </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="reward-criteria">Reward Criteria</Label>
-            <Textarea 
-              id="reward-criteria"
-              placeholder="Describe the criteria for rewarding projects"
-              className="min-h-[100px]"
-              value={agent.rewardCriteria || ''}
-              onChange={(e) => setAgent({...agent, rewardCriteria: e.target.value})}
-            />
-          </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="evaluation-criteria" className="text-xs md:text-sm">Evaluation Criteria</Label>
+              <Textarea 
+                id="evaluation-criteria"
+                placeholder="Describe how projects will be evaluated (e.g Social Impact, Technical Complexity)"
+                className="min-h-[100px] text-xs md:text-sm"
+                value={agent.evaluationCriteria || ''}
+                onChange={(e) => setAgent({...agent, evaluationCriteria: e.target.value})}
+              />
+            </div>
 
-          <div className="space-y-1.5">
-            <Label>Project Type</Label>
-            <Select 
-              defaultValue="mvp"
-              onValueChange={(value) => setAgent({...agent, projectType: value})}
-              value={agent.projectType || 'mvp'}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select project type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="mvp">MVP</SelectItem>
-                <SelectItem value="prototype">Prototype</SelectItem>
-                <SelectItem value="production">Production</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="reward-criteria" className="text-xs md:text-sm">Reward Criteria</Label>
+              <Textarea 
+                id="reward-criteria"
+                placeholder="Describe the criteria for rewarding projects"
+                className="min-h-[100px] text-xs md:text-sm"
+                value={agent.rewardCriteria || ''}
+                onChange={(e) => setAgent({...agent, rewardCriteria: e.target.value})}
+              />
+            </div>
 
-          <div className="space-y-3">
-            <Label>Metrics Optimizing For</Label>
-            <div className="flex flex-wrap gap-2">
-              {metricsOptions.map((metric) => (
-                <button
-                  key={metric.id}
-                  onClick={() => toggleMetric(metric.id)}
-                  className={`rounded-full px-3 py-1 text-sm transition-colors ${
-                    selectedMetrics.includes(metric.id)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {metric.label}
-                </button>
-              ))}
+            <div className="space-y-1.5">
+              <Label className="text-xs md:text-sm">Project Type</Label>
+              <Select 
+                defaultValue="mvp"
+                onValueChange={(value) => setAgent({...agent, projectType: value})}
+                value={agent.projectType || 'mvp'}
+              >
+                <SelectTrigger className="text-xs md:text-sm">
+                  <SelectValue placeholder="Select project type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="mvp" className="text-xs md:text-sm">MVP</SelectItem>
+                  <SelectItem value="prototype" className="text-xs md:text-sm">Prototype</SelectItem>
+                  <SelectItem value="production" className="text-xs md:text-sm">Production</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-3">
+              <Label className="text-xs md:text-sm">Metrics Optimizing For</Label>
+              <div className="flex flex-wrap gap-2">
+                {metricsOptions.map((metric) => (
+                  <button
+                    key={metric.id}
+                    onClick={() => toggleMetric(metric.id)}
+                    className={`rounded-full px-3 py-1 text-xs md:text-sm transition-colors ${
+                      selectedMetrics.includes(metric.id)
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {metric.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label className="text-xs md:text-sm" >Disqualification Criteria</Label>
+              <div className="flex flex-wrap gap-2">
+                {criteriaOptions.map((criteria) => (
+                  <button
+                    key={criteria.id}
+                    onClick={() => toggleCriteria(criteria.id)}
+                    className={`rounded-full px-3 py-1 text-xs md:text-sm transition-colors ${
+                      selectedCriteria.includes(criteria.id)
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {criteria.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="space-y-3">
-            <Label>Disqualification Criteria</Label>
-            <div className="flex flex-wrap gap-2">
-              {criteriaOptions.map((criteria) => (
-                <button
-                  key={criteria.id}
-                  onClick={() => toggleCriteria(criteria.id)}
-                  className={`rounded-full px-3 py-1 text-sm transition-colors ${
-                    selectedCriteria.includes(criteria.id)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {criteria.label}
-                </button>
-              ))}
-            </div>
+          <div className="flex justify-between flex-col-reverse md:flex-row gap-2 pt-4 md:pt-10">
+            <Button variant="outline" onClick={onBack}>
+              <span className="text-xs md:text-sm">Back: Platform Integration</span>
+            </Button>
+            <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
+              <span className="text-xs md:text-sm">Next: Wallet Configuration</span>
+            </Button>
           </div>
-        </div>
-
-        <div className="flex justify-between pt-10">
-          <Button variant="outline" onClick={onBack}>Back: Platform Integration</Button>
-          <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
-            Next: Wallet Configuration
-          </Button>
-        </div>
-      </Card>
+        </Card>
     </div>
   )
 }

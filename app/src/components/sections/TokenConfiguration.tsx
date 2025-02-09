@@ -19,13 +19,9 @@ interface TokenConfigurationProps {
 export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: TokenConfigurationProps) {
   const [launchOption, setLaunchOption] = useState<string>('existing')
   return (
-    <div className="space-y-8">
-        <Card className="rounded-xl border p-6">
-            <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                    <h2 className="text-xl font-semibold">Token Configuration</h2>
-                </div>
-            </div>
+    <div className="space-y-4 md:space-y-8">
+        <Card className="rounded-xl border p-4 md:p-6">
+            <h2 className="text-xl font-semibold">Token Configuration</h2>
             
             <div className="mt-4 text-sm text-sidebar-foreground">
                 Configure the token settings for your grant agent
@@ -33,7 +29,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
 
             <div className="mt-6 space-y-6">
             <div className="space-y-4">
-                <Label>LAUNCH OPTIONS</Label>
+                <Label className='text-xs md:text-sm'>LAUNCH OPTIONS</Label>
                 <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                         <Checkbox 
@@ -42,8 +38,8 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                             onCheckedChange={() => setLaunchOption('normal')}
                         />
                         <Label htmlFor="normal" className="font-normal">
-                            <div>Normal Launch</div>
-                            <div className="text-sm text-sidebar-foreground">Launch a new token for your agent</div>
+                            <div className='text-xs md:text-sm'>Normal Launch</div>
+                            <div className="text-xs text-sidebar-foreground">Launch a new token for your agent</div>
                         </Label>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -53,8 +49,8 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                             onCheckedChange={() => setLaunchOption('existing')}
                         />
                         <Label htmlFor="existing" className="font-normal">
-                            <div>Use Existing Token</div>
-                            <div className="text-sm text-sidebar-foreground">Must use deployed wallet. Try pasting contract several times if there's an error.</div>
+                            <div className='text-xs md:text-sm'>Use Existing Token</div>
+                            <div className="text-xs text-sidebar-foreground">Must use deployed wallet. Try pasting contract several times if there's an error.</div>
                         </Label>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -64,15 +60,15 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                             onCheckedChange={() => setLaunchOption('none')}
                         />
                         <Label htmlFor="none" className="font-normal">
-                            <div>No Token</div>
-                            <div className="text-sm text-sidebar-foreground">Launch without token</div>
+                            <div className='text-xs md:text-sm'>No Token</div>
+                            <div className="text-xs text-sidebar-foreground">Launch without token</div>
                         </Label>
                     </div>
                 </div>
             </div>
 
             <div className="space-y-1.5">
-                <Label htmlFor="token-address font-semibold">Token Address</Label>
+                <Label htmlFor="token-address" className='text-xs md:text-sm font-semibold'>Token Address</Label>
                 <Input 
                     id="token-address" 
                     placeholder="Enter token address"
@@ -88,7 +84,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
             <div className="rounded-lg bg-blue-50 p-4 space-y-3">
                 <div className="flex items-center gap-2 font-semibold">
                     <AlertTriangle className="h-5 w-5 text-black" />
-                    <span>Token Whitelist Management</span>
+                    <span className='text-xs md:text-sm'>Token Whitelist Management</span>
                 </div>
                 <div className="text-sm text-black ml-10">
                     <span>To Get a token off the payment whitelist, projects can:</span>
@@ -107,7 +103,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
 
             <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                    <Label htmlFor="min-grant">Governance Type</Label>
+                    <Label htmlFor="min-grant" className='text-xs md:text-sm'>Governance Type</Label>
                     <div className="cursor-help group relative">
                         <Info className="h-3 w-3" />
                         <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[230px] h-[35px]">
@@ -132,7 +128,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <Label htmlFor="min-grant">Max Deploy Percentage</Label>
+                        <Label htmlFor="min-grant" className='text-xs md:text-sm'>Max Deploy Percentage</Label>
                         <div className="cursor-help group relative">
                             <Info className="h-3 w-3" />
                             <div className="hidden group-hover:block absolute top-4 z-10 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[65px]">
@@ -160,7 +156,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
             </div>
 
             <div className="space-y-1.5">
-                <Label>Funding Frequency</Label>
+                <Label className='text-xs md:text-sm'>Funding Frequency</Label>
                 <Select 
                     defaultValue="weekly"
                     onValueChange={(value) => setAgent((prev: AgentTypes) => ({...prev, fundingFrequency: value}))}
@@ -180,7 +176,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
-                        <Label htmlFor="min-grant">Minimum Grant Size</Label>
+                        <Label htmlFor="min-grant" className='text-xs md:text-sm'>Minimum Grant Size</Label>
                         <div className="cursor-help group relative">
                             <Info className="h-3 w-3" />
                             <div className="hidden group-hover:block absolute top-4 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[90px]">
@@ -201,7 +197,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 </div>
                 <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
-                        <Label htmlFor="max-grant">Maximum Grant Size</Label>
+                        <Label htmlFor="max-grant" className='text-xs md:text-sm'>Maximum Grant Size</Label>
                         <div className="cursor-help group relative">
                             <Info className="h-3 w-3" />
                             <div className="hidden group-hover:block absolute top-4 left-0 bg-white border border-gray-200 p-2 rounded-lg shadow-md w-[270px] h-[90px]">
@@ -222,10 +218,12 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 </div>
             </div>
             </div>
-            <div className="flex justify-between mt-10">
-                <Button variant="outline" onClick={onBack}>Back: Basic Information</Button>
+            <div className="flex justify-between mt-10 flex-col-reverse md:flex-row gap-2">
+                <Button variant="outline" onClick={onBack}>
+                    <span className="text-xs md:text-sm">Back: Basic Information</span>
+                </Button>
                 <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
-                Next: Platform Integration
+                    <span className="text-xs md:text-sm">Next: Platform Integration</span>
                 </Button>
             </div>
         </Card>
