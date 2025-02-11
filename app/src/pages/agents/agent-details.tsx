@@ -102,12 +102,12 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentId }) => {
                       </div>
                   </div>
               </div>
-              {/* <div className="rounded-lg border">
+              <div className="rounded-lg border">
                 <TradingViewChart />
-              </div> */}
+              </div>
 
               <Tabs defaultValue="overview" className="space-y-4">
-                  <div className="relative max-w-[360px] overflow-x-auto overflow-y-hidden">
+                  <div className="relative max-w-[360px] md:max-w-full overflow-x-auto overflow-y-hidden">
                     <TabsList className="bg-transparent p-1">
                       <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-blue-50 p-3">
                         <Search className="w-4 h-4" />
