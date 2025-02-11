@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { useWalletSelector } from "@/context/WalletSelectorContext"
+import { useWalletSelector } from "@near-wallet-selector/react-hook";
 import AvatarProfile from './AvatarProfile';
 import toast from 'react-hot-toast';
-import { Wallet,Sun } from "lucide-react";
-
+import { Wallet, Sun } from "lucide-react";
 
 type Chain = 'NEAR' | 'ETH';
 
 const ButtonLogin:React.FC = () => {
-    const { modal, accountId, selector } = useWalletSelector();
+    const { signedAccountId, signIn, signOut } = useWalletSelector();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedChain, setSelectedChain] = useState<Chain>('NEAR');
@@ -32,22 +31,18 @@ const ButtonLogin:React.FC = () => {
         };
     }, []);
 
-    const handleSignOut = async () => {
-        const wallet = await selector.wallet();
-        wallet.signOut();
+    const handleSignOut = () => {
+        signOut();
         window.location.reload();
     };
 
     const handleConnect = async () => {
         try {
             setIsLoading(true);
-            if (!modal) {
-                toast.loading("Please wait...", { duration: 3000 });
-                throw new Error("Wallet selector initialization is still in progress. Please try again in a moment.");
-            }
-            modal.show();
+            signIn();
         } catch (err) {
-            console.error("Failed to connect wallet. Please try again.");
+            console.error("Failed to connect wallet:", err);
+            toast.error("Failed to connect wallet. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -58,7 +53,7 @@ const ButtonLogin:React.FC = () => {
         setIsChainDropdownOpen(false);
     };
 
-    if (!accountId) {
+    if (!signedAccountId) {
         return (
             <div className="flex items-center space-x-3">
                 <div className="relative" ref={chainDropdownRef}>
@@ -162,18 +157,18 @@ const ButtonLogin:React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)} 
                 className="border border-gray-200 space-x-2 shadow-sm hover:bg-gray-50 text-gray-800 font-medium py-1.5 md:py-2 px-2 md:px-4 rounded-lg text-sm cursor-pointer flex items-center"
             >
-                <AvatarProfile accountId={accountId} size={24} />
-                <span className="font-semibold text-sm md:block hidden">{accountId}</span>
+                <AvatarProfile accountId={signedAccountId} size={24} />
+                <span className="font-semibold text-sm md:block hidden">{signedAccountId}</span>
             </button>
             {isOpen && (
                 <div className="absolute top-14 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-3 w-[250px] z-50">
                     <div className="px-4">
                         <div className="flex items-center space-x-3 pb-3 border-b border-gray-100 text-sm">
-                            <AvatarProfile accountId={accountId} size={32} />
-                            <span className="font-semibold text-gray-900">{formatAccountId(accountId)}</span>
+                            <AvatarProfile accountId={signedAccountId} size={32} />
+                            <span className="font-semibold text-gray-900">{formatAccountId(signedAccountId)}</span>
                         </div>
                         <a 
-                            href={`https://testnet.nearblocks.io/vi/address/${accountId}`}
+                            href={`https://testnet.nearblocks.io/vi/address/${signedAccountId}`}
                             target="_blank"
                             className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 py-2 mt-2 hover:bg-gray-50 px-2 rounded-lg transition-colors"
                         >
