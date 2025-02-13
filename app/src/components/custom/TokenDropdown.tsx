@@ -40,7 +40,7 @@ export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onS
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="shrink-0 rounded-full bg-stone-200 hover:bg-stone-300">
+        <Button variant="secondary" className="shrink-0 rounded-full bg-stone-200 dark:bg-stone-600 hover:bg-stone-300 dark:hover:bg-stone-600">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 relative flex items-center justify-center rounded-full bg-white/10">
                 <img

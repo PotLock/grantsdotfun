@@ -21,13 +21,14 @@ const Overview: React.FC<OverviewProps> = ({ agent }) => {
         { label: "Current Treasury", value: agent.currentTreasury },
         { label: "Total Grants", value: agent.totalGrants },
     ];
+
     return (
         <div className="space-y-4 sm:space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
                     <div 
                         key={index} 
-                        className="rounded-lg border p-2 sm:px-4 h-[60px] sm:h-[70px] flex flex-col justify-center bg-primary-foreground"
+                        className="rounded-lg border p-2 sm:px-4 h-[60px] sm:h-[70px] flex flex-col justify-center bg-primary-foreground dark:bg-muted"
                     >
                         <div className="text-xs sm:text-sm font-medium text-sidebar-foreground">{stat.label}</div>
                         <div className="mt-0.5 sm:mt-1 text-sm font-bold text-sidebar-foreground">{stat.value}</div>
@@ -59,8 +60,8 @@ const Overview: React.FC<OverviewProps> = ({ agent }) => {
                 </p>
             </div>
 
-            <Reviewers />
-            <SocialIntegrations />
+            <Reviewers reviewers={agent.reviewers} />
+            <SocialIntegrations socialIntegrations={agent.agent_intents} />
         </div>
     )
 }

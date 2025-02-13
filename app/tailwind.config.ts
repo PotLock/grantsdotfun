@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 import type { PluginAPI } from 'tailwindcss/types/config'
 
-export default {
-    darkMode: ["class"],
+//#334155
+const config: Config = {
+    darkMode: 'class',
     content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,7 +15,7 @@ export default {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			sidebar: {
-  				foreground: '#334155'
+  				foreground: 'hsl(var(--sidebar-foreground))'
   			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -76,4 +77,6 @@ export default {
       })
     }
   ],
-} satisfies Config;
+}
+
+export default config;

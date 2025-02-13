@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from "@vercel/analytics/react"
 import { NearWalletProvider } from "@/components/providers/NearWalletProvider";
+import { ThemeProvider } from '@/context/ThemeContext'
 
 import "@near-wallet-selector/modal-ui/styles.css"
 import "./globals.css";
@@ -61,12 +62,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.className} antialiased`}
       >
-        <NearWalletProvider>
-          <Toaster position="top-center" />
-          <LayoutCustom> 
-            {children} 
-          </LayoutCustom>
-        </NearWalletProvider>
+        <ThemeProvider>
+          <NearWalletProvider>
+            <Toaster position="top-center" />
+            <LayoutCustom> 
+              {children} 
+            </LayoutCustom>
+          </NearWalletProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

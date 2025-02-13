@@ -1,4 +1,4 @@
-import { Agent } from "@/types/agent";
+import { Agent, GrantOperatorAgent } from "@/types/agent";
 
 const agents: Agent[] = [
     {
@@ -22,19 +22,19 @@ const agents: Agent[] = [
       evaluation_criteria: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Purus elementum erat quae nec aliquat sed feugiat dolor donec. Mi non maecenas non adipiscing. Fam enim et risus nulla amet mus in aliquam porta.",
       reviewers:[
         {
-          image: "/assets/images/image-example.png",
+          image: "/assets/images/avatar/avatar-example.png",
           name: "John Doe",
           username: "@john_doe",
           platform: "Twitter",
         },
         {
-          image: "/assets/images/image-example.png",
+          image: "/assets/images/avatar/avatar-example.png",
           name: "John Doe",
           username: "@john_doe",
           platform: "Twitter",
         },
         {
-          image: "/assets/images/image-example.png",
+          image: "/assets/images/avatar/avatar-example.png",
           name: "John Doe",
           username: "@john_doe",
           platform: "Twitter",
@@ -149,7 +149,7 @@ const agents: Agent[] = [
                 name: "Potlock",
                 username: "Potlock_",
                 content: "Building decentralized funding infrastructure for public goods on NEAR Protocol.",
-                timeAgo: "2 Mins Ago",
+                time_created: "2025-02-10",
                 hasThread: true,
                 twitterProposal: [
                     {
@@ -183,8 +183,8 @@ const agents: Agent[] = [
                 name: "NearWeek",
                 username: "NearWeek_",
                 content: "Your trusted source for NEAR Protocol ecosystem news and updates.",
-                timeAgo: "5 Mins Ago",
-                hasThread: true
+                hasThread: true,
+                time_created: "2024-03-15"
             },
             {
                 id: 3,
@@ -192,8 +192,8 @@ const agents: Agent[] = [
                 name: "Ref Finance",
                 username: "Ref_Finance",
                 content: "Leading AMM protocol on NEAR, providing seamless DeFi experiences.",
-                timeAgo: "10 Mins Ago",
-                hasThread: false
+                hasThread: false,
+                time_created: "2024-03-14"
             },
             {
                 id: 4,
@@ -201,8 +201,8 @@ const agents: Agent[] = [
                 name: "Paras",
                 username: "Paras_NFT",
                 content: "Digital art cards marketplace on NEAR Protocol.",
-                timeAgo: "15 Mins Ago",
-                hasThread: true
+                hasThread: true,
+                time_created: "2024-03-13"
             },
             {
                 id: 5,
@@ -210,8 +210,8 @@ const agents: Agent[] = [
                 name: "Aurora",
                 username: "AuroraNetwork",
                 content: "EVM compatibility layer built on NEAR Protocol.",
-                timeAgo: "20 Mins Ago",
-                hasThread: true
+                hasThread: true,
+                time_created: "2024-03-12"
             },
             {
                 id: 6,
@@ -219,8 +219,8 @@ const agents: Agent[] = [
                 name: "Octopus Network",
                 username: "Octopus_Network",
                 content: "Multichain interoperable crypto-network for launching Web3 appchains.",
-                timeAgo: "25 Mins Ago",
-                hasThread: false
+                hasThread: false,
+                time_created: "2024-03-11"
             },
             {
                 id: 7,
@@ -228,8 +228,8 @@ const agents: Agent[] = [
                 name: "Mintbase",
                 username: "Mintbase_",
                 content: "NFT infrastructure provider on NEAR Protocol.",
-                timeAgo: "30 Mins Ago",
-                hasThread: true
+                hasThread: true,
+                time_created: "2024-03-10"
             },
             {
                 id: 8,
@@ -237,8 +237,8 @@ const agents: Agent[] = [
                 name: "Human Guild",
                 username: "HumanGuild_",
                 content: "Supporting game developers building on NEAR Protocol.",
-                timeAgo: "35 Mins Ago",
-                hasThread: true
+                hasThread: true,
+                time_created: "2024-03-09"
             }
         ]
       },
@@ -406,8 +406,8 @@ const agents: Agent[] = [
             name: "DeFi Protocol",
             username: "DeFi_Protocol",
             content: "Building innovative DeFi solutions on Web3",
-            timeAgo: "5 Mins Ago",
-            hasThread: true
+            hasThread: true,
+            time_created: "2024-03-15"
           }
         ]
       }
@@ -528,8 +528,8 @@ const agents: Agent[] = [
             name: "Green Energy Project",
             username: "GreenEnergy",
             content: "Developing blockchain solutions for renewable energy tracking",
-            timeAgo: "10 Mins Ago",
-            hasThread: true
+            hasThread: true,
+            time_created: "2024-03-14"
           }
         ]
       }
@@ -643,29 +643,256 @@ const agents: Agent[] = [
             name: "DeFi Security",
             username: "DeFiSec",
             content: "Enhancing security measures for DeFi protocols",
-            timeAgo: "15 Mins Ago",
-            hasThread: true
+            hasThread: true,
+            time_created: "2024-03-15"
           }
         ]
       }
     }
 ];
 
-const grantOperatorAgents = Array(100).fill(0).map((_, index) => ({
-  id: index + 1,
-  name: index === 0 ? "AI Research DAO" : index === 1 ? "Black Dragon" : `AI Research DAO ${index + 1}`,
-  ticker: index === 0 ? "AI" : index === 1 ? "BD" : `AI${index + 1}`,
-  creator: index === 0 ? "Amichael_design" : index === 1 ? "BAjwaze" : `Creator${index + 1}`,
-  marketcap: "$2,567,001.00",
-  price: "$12.45",
-  change24h: "+0.91",
-  capitalDeployed: "$250,000.00",
-  weeklyPool: "$250.00",
-  hasTwitter: index % 2 === 0,
-  hasTelegram: index % 2 === 1,
-  twitterLink: "https://twitter.com/ai_research_dao",
-  telegramLink: "https://t.me/ai_research_dao",
-}))
+const grantOperatorAgents: GrantOperatorAgent[] = [
+  {
+    id: 1,
+    name: "AI Research DAO",
+    ticker: "AIRD",
+    creator: "ResearchDAO Labs",
+    marketcap: "$25,670,450.00",
+    price: "$156.78",
+    change24h: "+5.91",
+    capitalDeployed: "$1,250,000.00",
+    weeklyPool: "$25,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/ai_research_dao",
+    telegramLink: "https://t.me/ai_research_dao"
+  },
+  {
+    id: 2,
+    name: "Web3 Grants Collective",
+    ticker: "WGC",
+    creator: "Web3 Foundation",
+    marketcap: "$15,890,230.00",
+    price: "$89.45",
+    change24h: "-2.34",
+    capitalDeployed: "$890,000.00",
+    weeklyPool: "$15,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/web3_grants",
+    telegramLink: "https://t.me/web3_grants"
+  },
+  {
+    id: 3,
+    name: "DeFi Builders Fund",
+    ticker: "DBF",
+    creator: "DeFi Alliance",
+    marketcap: "$45,230,780.00",
+    price: "$234.56",
+    change24h: "+8.67",
+    capitalDeployed: "$2,100,000.00",
+    weeklyPool: "$35,000.00",
+    hasTwitter: true,
+    hasTelegram: false,
+    twitterLink: "https://twitter.com/defi_builders",
+    telegramLink: ""
+  },
+  {
+    id: 4,
+    name: "GameFi Accelerator",
+    ticker: "GFAC",
+    creator: "GameFi Ventures",
+    marketcap: "$12,450,890.00",
+    price: "$67.89",
+    change24h: "+1.23",
+    capitalDeployed: "$750,000.00",
+    weeklyPool: "$20,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/gamefi_acc",
+    telegramLink: "https://t.me/gamefi_acc"
+  },
+  {
+    id: 5,
+    name: "NFT Creator Fund",
+    ticker: "NCF",
+    creator: "NFT Labs",
+    marketcap: "$8,920,340.00",
+    price: "$45.67",
+    change24h: "-1.45",
+    capitalDeployed: "$450,000.00",
+    weeklyPool: "$12,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/nft_creator_fund",
+    telegramLink: "https://t.me/nft_creator_fund"
+  },
+  {
+    id: 6,
+    name: "Privacy Tech DAO",
+    ticker: "PTD",
+    creator: "Privacy Alliance",
+    marketcap: "$18,670,230.00",
+    price: "$123.45",
+    change24h: "+3.78",
+    capitalDeployed: "$980,000.00",
+    weeklyPool: "$18,000.00",
+    hasTwitter: true,
+    hasTelegram: false,
+    twitterLink: "https://twitter.com/privacy_tech_dao",
+    telegramLink: ""
+  },
+  {
+    id: 7,
+    name: "Layer2 Innovation Fund",
+    ticker: "L2IF",
+    creator: "L2 Labs",
+    marketcap: "$32,450,670.00",
+    price: "$178.90",
+    change24h: "+6.54",
+    capitalDeployed: "$1,560,000.00",
+    weeklyPool: "$28,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/l2_innovation",
+    telegramLink: "https://t.me/l2_innovation"
+  },
+  {
+    id: 8,
+    name: "ZK Research Grants",
+    ticker: "ZKR",
+    creator: "ZK Foundation",
+    marketcap: "$21,340,560.00",
+    price: "$145.67",
+    change24h: "-0.89",
+    capitalDeployed: "$1,100,000.00",
+    weeklyPool: "$22,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/zk_research",
+    telegramLink: "https://t.me/zk_research"
+  },
+  {
+    id: 9,
+    name: "Metaverse Builders Fund",
+    ticker: "MVB",
+    creator: "Meta Alliance",
+    marketcap: "$67,890,450.00",
+    price: "$312.45",
+    change24h: "+12.34",
+    capitalDeployed: "$3,450,000.00",
+    weeklyPool: "$45,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/metaverse_builders",
+    telegramLink: "https://t.me/metaverse_builders"
+  },
+  {
+    id: 10,
+    name: "DAO Infrastructure Grants",
+    ticker: "DIG",
+    creator: "DAO Labs",
+    marketcap: "$28,450,670.00",
+    price: "$167.89",
+    change24h: "-3.45",
+    capitalDeployed: "$1,780,000.00",
+    weeklyPool: "$30,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/dao_infra",
+    telegramLink: "https://t.me/dao_infra"
+  },
+  {
+    id: 11,
+    name: "Social Protocol Fund",
+    ticker: "SPF",
+    creator: "Social Web3",
+    marketcap: "$52,340,890.00",
+    price: "$245.67",
+    change24h: "+7.82",
+    capitalDeployed: "$2,890,000.00",
+    weeklyPool: "$40,000.00",
+    hasTwitter: true,
+    hasTelegram: false,
+    twitterLink: "https://twitter.com/social_protocol",
+    telegramLink: ""
+  },
+  {
+    id: 12,
+    name: "ReFi Grants DAO",
+    ticker: "RGD",
+    creator: "ReFi Alliance",
+    marketcap: "$19,780,230.00",
+    price: "$98.45",
+    change24h: "+4.56",
+    capitalDeployed: "$980,000.00",
+    weeklyPool: "$25,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/refi_grants",
+    telegramLink: "https://t.me/refi_grants"
+  },
+  {
+    id: 13,
+    name: "Identity Protocol Fund",
+    ticker: "IPF",
+    creator: "Identity Labs",
+    marketcap: "$15,670,890.00",
+    price: "$78.34",
+    change24h: "-2.67",
+    capitalDeployed: "$780,000.00",
+    weeklyPool: "$15,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/identity_fund",
+    telegramLink: "https://t.me/identity_fund"
+  },
+  {
+    id: 14,
+    name: "Cross-Chain Innovation",
+    ticker: "CCI",
+    creator: "Bridge Alliance",
+    marketcap: "$89,450,230.00",
+    price: "$445.67",
+    change24h: "+15.78",
+    capitalDeployed: "$4,500,000.00",
+    weeklyPool: "$60,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/crosschain_inn",
+    telegramLink: "https://t.me/crosschain_inn"
+  },
+  {
+    id: 15,
+    name: "Data Protocol Grants",
+    ticker: "DPG",
+    creator: "Data DAO",
+    marketcap: "$34,560,780.00",
+    price: "$178.90",
+    change24h: "-1.23",
+    capitalDeployed: "$1,890,000.00",
+    weeklyPool: "$32,000.00",
+    hasTwitter: true,
+    hasTelegram: false,
+    twitterLink: "https://twitter.com/data_protocol",
+    telegramLink: ""
+  },
+  {
+    id: 16,
+    name: "MEV Research Fund",
+    ticker: "MRF",
+    creator: "MEV Labs",
+    marketcap: "$42,890,340.00",
+    price: "$234.56",
+    change24h: "+9.45",
+    capitalDeployed: "$2,340,000.00",
+    weeklyPool: "$38,000.00",
+    hasTwitter: true,
+    hasTelegram: true,
+    twitterLink: "https://twitter.com/mev_research",
+    telegramLink: "https://t.me/mev_research"
+  }
+];
 
 export { 
   agents, 

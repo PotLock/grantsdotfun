@@ -18,7 +18,7 @@ const AboutGovernance: React.FC<AboutGovernanceProps> = ({ agent }) => {
     const [showVotingModal, setShowVotingModal] = useState(false);
 
     return (
-        <Card className="shadow-none bg-[#F8FAFC]">
+        <Card className="shadow-none bg-[#F8FAFC] dark:bg-muted">
             <CardContent className="space-y-2 md:space-y-4 p-3 md:p-6">
                 <div>
                     <CardHeader className="p-0">
@@ -61,7 +61,7 @@ const AboutGovernance: React.FC<AboutGovernanceProps> = ({ agent }) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                    <Card className="bg-[#EFF6FF] border-blue-200 shadow-none">
+                    <Card className="bg-[#EFF6FF] dark:bg-transparent border-blue-200 shadow-none">
                         <CardContent className="space-y-3 p-4">
                             <div className="flex items-center gap-2">
                                 <InfoIcon className="w-5 h-5 text-blue-500" />

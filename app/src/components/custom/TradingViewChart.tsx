@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import { useTheme } from "@/context/ThemeContext"
 
 declare global {
   interface Window {
@@ -10,6 +11,7 @@ const TradingViewChart: React.FC<{
   symbol?: string
 }> = ({ symbol }) => {
   const container = useRef<HTMLDivElement>(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const script = document.createElement("script")
@@ -24,10 +26,10 @@ const TradingViewChart: React.FC<{
           symbol: "NEARUSDT",
           interval: "D",
           timezone: "Etc/UTC",
-          theme: "light",
+          theme: theme,
           style: "1",
           locale: "en",
-          toolbar_bg: "#FFFFFF",
+          toolbar_bg: "transparent",
           enable_publishing: false,
           allow_symbol_change: true,
           container_id: container.current.id,
@@ -61,7 +63,7 @@ const TradingViewChart: React.FC<{
     return () => {
       document.head.removeChild(script)
     }
-  }, [])
+  }, [theme])
 
   return (
     <div 

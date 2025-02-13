@@ -13,6 +13,16 @@ interface SearchFilters {
   sortDirection?: 'asc' | 'desc';
 }
 
+const parseNumericValue = (value: string): number => {
+  // Remove currency symbols and commas, then convert to number
+  return parseFloat(value.replace(/[$,]/g, ''));
+}
+
+const parsePercentage = (value: string): number => {
+  // Remove % symbol and convert to number
+  return parseFloat(value.replace('%', ''));
+}
+
 const searchData = (data: GrantOperatorAgent[], filters: SearchFilters) => {
   let filteredData = [...data]
 
@@ -20,18 +30,32 @@ const searchData = (data: GrantOperatorAgent[], filters: SearchFilters) => {
     const searchLower = filters.searchTerm.toLowerCase()
     filteredData = filteredData.filter(item => 
       item.name.toLowerCase().includes(searchLower) ||
-      item.creator.toLowerCase().includes(searchLower)
+      item.creator.toLowerCase().includes(searchLower) ||
+      item.ticker.toLowerCase().includes(searchLower)
     )
   }
 
   if (filters.sortBy) {
     filteredData.sort((a, b) => {
-      const aValue = parseFloat(a[filters.sortBy!].replace(/[^0-9.-]+/g, ''))
-      const bValue = parseFloat(b[filters.sortBy!].replace(/[^0-9.-]+/g, ''))
+      let aValue: number, bValue: number;
+
+      switch (filters.sortBy) {
+        case 'marketcap':
+        case 'price':
+        case 'capitalDeployed':
+        case 'weeklyPool':
+          aValue = parseNumericValue(a[filters.sortBy]);
+          bValue = parseNumericValue(b[filters.sortBy]);
+          break;
+        case 'change24h':
+          aValue = parsePercentage(a.change24h);
+          bValue = parsePercentage(b.change24h);
+          break;
+        default:
+          return 0;
+      }
       
-      if (isNaN(aValue) || isNaN(bValue)) return 0
-      
-      return filters.sortDirection === 'desc' ? bValue - aValue : aValue - bValue
+      return filters.sortDirection === 'desc' ? bValue - aValue : aValue - bValue;
     })
   }
 
@@ -42,7 +66,7 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
   const router = useRouter();
   const [itemsPerPage, setItemsPerPage] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState<string|null>(null)
+  const [searchTerm, setSearchTerm] = useState<string>("")
   const [sortConfig, setSortConfig] = useState<{
     sortBy?: SearchFilters['sortBy'];
     sortDirection?: SearchFilters['sortDirection'];
@@ -61,10 +85,11 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
           ? 'desc' 
           : 'asc'
     }))
+    setCurrentPage(1)
   }, [])
 
   const filteredData = searchData(grantOperatorAgents, {
-    searchTerm: searchTerm || "",
+    searchTerm,
     ...sortConfig
   })
 
@@ -98,20 +123,25 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
     }
   }
 
+  const getSortIndicator = (column: SearchFilters['sortBy']) => {
+    if (sortConfig.sortBy !== column) return '↕';
+    return sortConfig.sortDirection === 'asc' ? '↑' : '↓';
+  }
+
   return (
     <section className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-col gap-4 w-full">
             <div>
                 <h2 className="text-lg md:text-xl font-bold text-sidebar-foreground">Featured Grant Operator Agents</h2>
-                <p className="text-sm text-sidebar-foreground">Top ai agent token with AI grant operator agents.</p>
+                <p className="text-sm text-sidebar-foreground">Top AI agent tokens with grant operator capabilities.</p>
             </div>
             <div className="flex justify-between flex-row w-full items-center gap-4">
                 <Input 
                     type="search" 
-                    placeholder="Search Agents" 
+                    placeholder="Search by name, ticker, or creator" 
                     className="w-full sm:max-w-xs"
-                    value={searchTerm || ""}
+                    value={searchTerm}
                     onChange={(e) => handleSearch(e.target.value)}
                 />
                 <Button 
@@ -136,31 +166,31 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
                 className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('marketcap')}
               >
-                Marketcap {sortConfig.sortBy === 'marketcap' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                Marketcap {getSortIndicator('marketcap')}
               </TableHead>
               <TableHead 
                 className="text-center cursor-pointer hover:bg-gray-50"
                 onClick={() => handleSort('price')}
               >
-                Price {sortConfig.sortBy === 'price' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                Price {getSortIndicator('price')}
               </TableHead>
               <TableHead 
                 className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('change24h')}
               >
-                24h (%) {sortConfig.sortBy === 'change24h' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                24h (%) {getSortIndicator('change24h')}
               </TableHead>
               <TableHead 
                 className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('capitalDeployed')}
               >
-                Capital Deployed {sortConfig.sortBy === 'capitalDeployed' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                Capital Deployed {getSortIndicator('capitalDeployed')}
               </TableHead>
               <TableHead 
                 className="text-center cursor-pointer hover:bg-gray-50 hidden sm:table-cell"
                 onClick={() => handleSort('weeklyPool')}
               >
-                Weekly Pool {sortConfig.sortBy === 'weeklyPool' ? (sortConfig.sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                Weekly Pool {getSortIndicator('weeklyPool')}
               </TableHead>
               <TableHead className="text-center">Integrations</TableHead>
             </TableRow>
@@ -189,7 +219,7 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
                 </TableCell>
                 <TableCell className="text-center text-muted-foreground hidden sm:table-cell">{item.marketcap}</TableCell>
                 <TableCell className="text-center text-muted-foreground">{item.price}</TableCell>
-                <TableCell className="text-center text-green-500 hidden sm:table-cell">
+                <TableCell className={`text-center hidden sm:table-cell ${parseFloat(item.change24h) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                   {item.change24h}%
                 </TableCell>
                 <TableCell className="text-center text-muted-foreground hidden sm:table-cell">{item.capitalDeployed}</TableCell>
@@ -197,12 +227,12 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
                 <TableCell className="text-center">
                   <div className="flex justify-center gap-2">
                     {item.hasTwitter && (
-                      <a href={item.twitterLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                      <a href={item.twitterLink} target="_blank" rel="noopener noreferrer" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                         <Twitter className="h-4 w-4 text-gray-600" />
                       </a>
                     )}
                     {item.hasTelegram && (
-                      <a href={item.telegramLink} target="_blank" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
+                      <a href={item.telegramLink} target="_blank" rel="noopener noreferrer" className="p-1.5 border rounded-md hover:bg-gray-50 transition-colors cursor-pointer">
                         <MessageCircle className="h-4 w-4 text-gray-600" />
                       </a>
                     )}
@@ -216,7 +246,7 @@ const FeaturedGrantOperatorAgents: React.FC = () => {
 
       <div className="flex justify-between items-center py-2">
         <span className="text-sm text-muted-foreground">
-          {startIndex + 1} of {filteredData.length} Agents.
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredData.length)} of {filteredData.length} Agents
         </span>
         <div className="flex gap-2">
           <Button 

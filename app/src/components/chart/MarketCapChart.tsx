@@ -78,7 +78,7 @@ const MarketCapChart: React.FC<MarketCapChartProps> = ({
     };
 
     return (
-        <Card className="bg-white rounded-lg shadow-none">
+        <Card className="bg-white dark:bg-muted rounded-lg shadow-none">
             <CardContent className="p-4">
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col">

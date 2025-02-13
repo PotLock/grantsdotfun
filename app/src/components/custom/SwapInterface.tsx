@@ -34,7 +34,7 @@ const SwapInterface: React.FC = () => {
 
       <div className="space-y-4">
         <div className="relative space-y-2">
-          <div className="rounded-lg bg-stone-50 p-4 space-y-2">
+          <div className="rounded-lg bg-stone-50 dark:bg-muted p-4 space-y-2">
             <label className="text-sm text-sidebar-foreground">From</label>
             <div className="flex items-center gap-2 justify-between">
               <input value={fromAmount || ""} placeholder="0" onChange={(e) => setFromAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full md:w-[120px] 2xl:w-[200px]" />
@@ -50,7 +50,7 @@ const SwapInterface: React.FC = () => {
               <ArrowDown className="w-5 h-5" />
             </div>
           </div>
-          <div className="rounded-lg bg-stone-50 p-4 space-y-2">
+          <div className="rounded-lg bg-stone-50 dark:bg-muted p-4 space-y-2">
             <label className="text-sm text-sidebar-foreground">To</label>
             <div className="flex items-center justify-between gap-2">
               <input value={toAmount || ""} placeholder="0" onChange={(e) => setToAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full xl:w-[120px] 2xl:w-[200px]" />

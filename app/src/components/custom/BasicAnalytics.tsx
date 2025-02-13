@@ -11,7 +11,7 @@ const AnalyticCard = ({ title, value, change, timeframe = "This Month" }: Analyt
   const isPositive = change >= 0;
   
   return (
-    <Card className="bg-[#F8FAFC] shadow-none">
+    <Card className="bg-[#F8FAFC] dark:bg-muted shadow-none">
       <CardContent className="p-4">
         <div className="space-y-3">
             <p className="text-xs md:text-sm text-sidebar-foreground">{title}</p>

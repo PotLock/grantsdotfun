@@ -2,13 +2,14 @@ import { Avatar } from "@/components/ui/avatar"
 import { Card, CardContent } from "../ui/card"
 import { MessageCircle } from "lucide-react"
 import { GranteePostType } from "@/types/agent"
+import { timeAgo } from "@/utils/time"
 
 const GranteePost = ({ 
     avatar, 
     name, 
     username, 
     content, 
-    timeAgo, 
+    time_created, 
     hasThread,
     twitterProposal
 }: GranteePostType) => {
@@ -25,7 +26,7 @@ const GranteePost = ({
                             <span className="font-semibold text-xs md:text-sm">{name}</span>
                             <span className="text-muted-foreground text-xs md:text-sm"> @{username}</span>
                         </div>
-                        <span className="text-muted-foreground text-xs md:text-sm">{timeAgo}</span>
+                        <span className="text-muted-foreground text-xs md:text-sm">{timeAgo(time_created)}</span>
                     </div>
                     <p className="mt-2 text-xs md:text-sm">{content}</p>
                     {hasThread && (

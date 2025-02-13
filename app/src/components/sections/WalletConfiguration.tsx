@@ -100,12 +100,12 @@ const WalletConfiguration: React.FC<WalletConfigurationProps> = ({ onBack, onDep
               </p>
             </div>
 
-            <div className="rounded-lg bg-blue-50 p-4">
+            <div className="rounded-lg bg-blue-50 dark:bg-muted p-4">
               <div className="flex items-center gap-2">
                 <Info className="h-5 w-5 text-blue-600" />
                 <div className="font-medium text-xs md:text-sm">Deployment Cost</div>
               </div>
-              <div className="mt-1 text-xs md:text-sm text-gray-600 flex items-center gap-1">
+              <div className="mt-1 text-xs md:text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
                 <span>This covers infrastructure and initial setup costs 100</span> 
                 <img src="/assets/icons/money.svg" alt="GRANTS" width={16} height={16} />
                 <span>$GRANTS</span>

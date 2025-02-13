@@ -81,12 +81,12 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 </div>
             </div>
 
-            <div className="rounded-lg bg-blue-50 p-4 space-y-3">
+            <div className="rounded-lg bg-blue-50 dark:bg-muted p-4 space-y-3">
                 <div className="flex items-center gap-2 font-semibold">
-                    <AlertTriangle className="h-5 w-5 text-black" />
+                    <AlertTriangle className="h-5 w-5 text-black dark:text-white" />
                     <span className='text-xs md:text-sm'>Token Whitelist Management</span>
                 </div>
-                <div className="text-sm text-black ml-10">
+                <div className="text-sm text-black dark:text-white ml-10">
                     <span>To Get a token off the payment whitelist, projects can:</span>
                     <ol className="list-decimal ml-5 mt-2 space-y-1">
                         <li>Submit a new proposal in the governance for token removal</li>
@@ -94,7 +94,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         <li>Show evidence of token misuse or manipulation</li>
                     </ol>
                 </div>
-                <div className="text-sm text-black ml-10">
+                <div className="text-sm text-black dark:text-white ml-10">
                     The Final decision to remove a token whitelist is typically made through a community vote or by the grant program administrators
                 </div>
             </div>
