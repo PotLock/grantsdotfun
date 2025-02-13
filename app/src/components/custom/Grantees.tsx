@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/dialog"
 import { Twitter } from 'lucide-react'
 import { GranteesType, PaymentTranche, GranteePostType } from '@/types/agent'
+import { filterGranteesByTime } from '@/utils/time'
+
 interface StatsCardProps {
     title: string
     value: string | number
@@ -29,7 +31,7 @@ interface GranteesProps {
 
 const StatsCard = ({ title, value }: StatsCardProps) => {
     return (
-        <Card className="p-4 shadow-none bg-primary-foreground">
+        <Card className="p-4 shadow-none bg-primary-foreground dark:bg-muted">
             <p className="text-sm text-sidebar-foreground">{title}</p>
             <p className="text-xl font-semibold text-sidebar-foreground">{value}</p>
         </Card>
@@ -41,12 +43,15 @@ const ITEMS_PER_PAGE = 8
 
 const Grantees: React.FC<GranteesProps> = ({ grantees }) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const totalPages = Math.ceil(grantees.grantees_posts.length / ITEMS_PER_PAGE)
+    const [timeFilter, setTimeFilter] = useState<'latest' | 'this-week' | 'this-month' | 'all-time'>('all-time')
     const [selectedGrantee, setSelectedGrantee] = useState<GranteePostType | null>(null)
+
+    const filteredGrantees = filterGranteesByTime(grantees.grantees_posts, timeFilter)
+    const totalPages = Math.ceil(filteredGrantees.length / ITEMS_PER_PAGE)
 
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
     const endIndex = startIndex + ITEMS_PER_PAGE
-    const currentGrantees = grantees.grantees_posts.slice(startIndex, endIndex)
+    const currentGrantees = filteredGrantees.slice(startIndex, endIndex)
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page)
@@ -62,7 +67,10 @@ const Grantees: React.FC<GranteesProps> = ({ grantees }) => {
                 <StatsCard title="Completed Grants" value={grantees.completed_grants} />
             </div>
 
-            <Tabs defaultValue="latest" className="w-full">
+            <Tabs defaultValue="all-time" className="w-full" onValueChange={(value) => {
+                setTimeFilter(value as 'latest' | 'this-week' | 'this-month' | 'all-time')
+                setCurrentPage(1)
+            }}>
                 <TabsList className="py-5 px-1">
                     <TabsTrigger value="latest" className="p-2 px-3">Latest</TabsTrigger>
                     <TabsTrigger value="this-week" className="p-2 px-3">This Week</TabsTrigger>
@@ -80,7 +88,7 @@ const Grantees: React.FC<GranteesProps> = ({ grantees }) => {
                                 name={grantee.name}
                                 username={grantee.username}
                                 content={grantee.content}
-                                timeAgo={grantee.timeAgo}
+                                time_created={grantee.time_created}
                                 hasThread={grantee.hasThread}
                                 twitterProposal={grantee.twitterProposal}
                             />

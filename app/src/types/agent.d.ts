@@ -106,7 +106,7 @@ export interface GranteePostType {
   name: string
   username: string
   content: string
-  timeAgo: string
+  time_created: string
   hasThread: boolean
   proposal?: string
   paymentTranches?: PaymentTranche[]

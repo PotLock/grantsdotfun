@@ -32,7 +32,7 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
             
             <div className="mt-4">
               <div className="flex items-center gap-2 text-xs md:text-sm text-sidebar-foreground">
-                <p>Need help developing your own agent? See the <code className="rounded bg-gray-100 text-sidebar-foreground px-1.5 py-0.5 text-xs">agent_config</code> file for another Grant Agent Token (GAT)</p>
+                <p>Need help developing your own agent? See the <code className="rounded bg-gray-100 dark:bg-muted text-sidebar-foreground px-1.5 py-0.5 text-xs">agent_config</code> file for another Grant Agent Token (GAT)</p>
               </div>
             </div>
 
@@ -54,8 +54,12 @@ const BasicInformation: React.FC<BasicInformationProps> = ({ agent, setAgent, em
                   id="ticker" 
                   placeholder="$ Token"
                   value={agent.ticker}
-                  className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
-                  onChange={(e) => setAgent((p: AgentTypes) => ({...p, ticker: e.target.value}))}
+                  maxLength={5}
+                  className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm uppercase"
+                  onChange={(e) => {
+                    const value = e.target.value.slice(0, 5).toUpperCase();
+                    setAgent((p: AgentTypes) => ({...p, ticker: value}));
+                  }}
                 />
               </div>
 

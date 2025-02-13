@@ -61,9 +61,9 @@ const CreateAgent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-transparent">
       <main>
-        <div className="mb-12 text-center bg-blue-50 py-8 md:py-16 px-4 md:px-32">
+        <div className="mb-12 text-center bg-blue-50 dark:bg-muted py-8 md:py-16 px-4 md:px-32">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-sidebar-foreground">Create AI Agent</h1>
           <p className="mt-2 text-lg md:text-xl text-sidebar-foreground">
             Launch your own grant program on social with an agent governed by token holders

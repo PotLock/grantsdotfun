@@ -49,7 +49,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
             <div className="mt-6 space-y-4 md:space-y-8">
               {/* Telegram Section */}
               <div className="space-y-2 md:space-y-4">
-                <h3 className="text-xs md:text-sm font-medium text-gray-700 uppercase">Telegram Interactions</h3>
+                <h3 className="text-xs md:text-sm font-medium text-sidebar-foreground uppercase">Telegram Interactions</h3>
                 <p className="text-xs md:text-sm text-sidebar-foreground">Configure how your agent interacts on Telegram</p>
                 
                 <div className="flex items-center justify-between rounded-lg border p-2 md:p-4">
@@ -70,7 +70,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
 
               {/* Twitter Section */}
               <div className="space-y-2 md:space-y-4">
-                <h3 className="text-xs md:text-sm font-medium text-gray-700 uppercase">Twitter Interactions</h3>
+                <h3 className="text-xs md:text-sm font-medium text-sidebar-foreground uppercase">Twitter Interactions</h3>
                 <p className="text-xs md:text-sm text-sidebar-foreground">Configure how your agent interacts on Twitter</p>
                 
                 <Card className="shadow-none">
@@ -174,13 +174,13 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                       />
                     </div>
                     
-                    <div className="text-xs md:text-sm text-gray-600">
+                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
                       Projects that do not meet all requirements will be automatically rejected. Qualified projects will be added to the grantee whitelist, but may still require approval based on the configuration below.
                     </div>
                   </div>
 
                   <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
-                    <Label className="text-xs md:text-sm text-gray-500">Auto Approve Threshold</Label>
+                    <Label className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Auto Approve Threshold</Label>
                     <Input 
                       type="number"
                       className="max-w-[100px] text-xs md:text-sm"
@@ -191,7 +191,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
 
                   <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                          <Label className="text-xs md:text-sm text-gray-500">Require Admin Approval</Label>
+                          <Label className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Require Admin Approval</Label>
                           <div className="cursor-help group relative">
                               <Info className="h-3 w-3 text-gray-500" />
                               <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[350px] h-[60px]">
@@ -215,7 +215,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
 
                 <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
                   <div className="flex items-center gap-2">
-                      <Label className="text-xs md:text-sm text-gray-500">Minimum Followings</Label>
+                      <Label className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Minimum Followings</Label>
                       <div className="cursor-help group relative">
                           <Info className="h-3 w-3 text-gray-500" />
                           <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[340px] h-[35px]">
@@ -235,7 +235,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
 
                 <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
                   <div className="flex items-center gap-2">
-                      <Label className="text-xs md:text-sm text-gray-500">Minimum Account Age</Label>
+                      <Label className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Minimum Account Age</Label>
                       <div className="cursor-help group relative">
                           <Info className="h-3 w-3 text-gray-500" />
                           <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[360px] h-[35px]">
@@ -256,7 +256,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                 <div className="space-y-6 pt-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <Label className="text-xs md:text-sm text-gray-500">Blue Tick (Verified Account)</Label>
+                        <Label className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Blue Tick (Verified Account)</Label>
                         <div className="cursor-help group relative">
                             <Info className="h-3 w-3 text-gray-500" />
                             <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[460px] h-[35px]">
@@ -274,7 +274,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs md:text-sm text-gray-500">Crypto Settings Enabled</span>
+                      <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Crypto Settings Enabled</span>
                       <Info className="h-4 w-4 text-gray-400" />
                     </div>
                     <Switch 

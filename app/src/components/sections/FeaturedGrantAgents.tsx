@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Agent } from "@/types/agent"
+import Image from "next/image"
 
 interface FeaturedGrantAgentsProps {
   agents: Agent[]
@@ -48,7 +49,7 @@ const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => 
       <div className="flex flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-lg sm:text-2xl font-bold text-sidebar-foreground">Featured Grant Agents</h2>
-          <p className="text-muted-foreground text-sm text-sidebar-foreground">Top ai agent token with AI grant operator agents.</p>
+          <p className="text-sm text-sidebar-foreground">Top ai agent token with AI grant operator agents.</p>
         </div>
         <div className="flex gap-2 self-auto">
           <Button 
@@ -74,8 +75,8 @@ const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => 
         {getCurrentPageItems().map((agent) => (
           <Card key={agent.id} className="p-4 cursor-pointer hover:border-blue-500 shadow-none" onClick={() => router.push(`/agents/${agent.id}`)}>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
-              <div className="bg-white bg-muted rounded-lg shrink-0 sm:mx-0 flex items-center justify-start md:justify-center">
-                <img src={agent.image} alt={agent.name} width={imageSize} height={imageSize} className="object-contain" />
+              <div className="bg-white dark:bg-transparent rounded-lg shrink-0 sm:mx-0 flex items-center justify-start md:justify-center">
+                <Image src={agent.image} alt={agent.name} width={imageSize} height={imageSize} className="object-contain" />
               </div>
               <div className="sapce-y-2 md:space-y-4">
                 <div className="flex items-start gap-2 justify-between">

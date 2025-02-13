@@ -12,11 +12,10 @@ const MindShareChart: React.FC = () => {
       const mindshareData = [];
       const categories = [];
       
-
       const startDate = new Date('2024-01-16');
       
-      let price = 0.72;
-      let mindshare = 8.0;
+      let price = 217.2;
+      let mindshare = 32.6;
       
       for (let i = 0; i < 200; i++) {
         // Generate date
@@ -28,17 +27,17 @@ const MindShareChart: React.FC = () => {
           hour: '2-digit'
         }));
 
-        const priceChange = (Math.random() - 0.5) * 0.02;
-        price = Math.max(0.48, Math.min(0.96, price + priceChange));
+        const priceChange = (Math.random() - 0.5) * 5;
+        price = Math.max(180, Math.min(250, price + priceChange));
         priceData.push(Number(price.toFixed(2)));
 
-        const mindshareChange = (Math.random() - 0.48) * 0.15;
-        mindshare = Math.max(7.5, Math.min(9.8, mindshare + mindshareChange));
+        const mindshareChange = (Math.random() - 0.48) * 0.5;
+        mindshare = Math.max(25, Math.min(40, mindshare + mindshareChange));
         mindshareData.push(Number(mindshare.toFixed(2)));
       }
 
-      priceData[priceData.length - 1] = 0.86;
-      mindshareData[mindshareData.length - 1] = 9.57;
+      priceData[priceData.length - 1] = 217.2;
+      mindshareData[mindshareData.length - 1] = 32.6;
 
       return { categories, priceData, mindshareData };
     };
@@ -47,7 +46,7 @@ const MindShareChart: React.FC = () => {
 
     const options = {
       chart: {
-        backgroundColor: '#ffffff',
+        backgroundColor: 'transparent',
         height: 400,
         style: {
           fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
@@ -86,8 +85,8 @@ const MindShareChart: React.FC = () => {
           }
         },
         gridLineColor: '#e6e6e6',
-        min: 0.48,
-        max: 0.96,
+        min: 180,
+        max: 250,
         tickAmount: 5
       }, {
         title: {
@@ -102,8 +101,8 @@ const MindShareChart: React.FC = () => {
           }
         },
         opposite: true,
-        min: 7.5,
-        max: 9.8,
+        min: 25,
+        max: 40,
         tickAmount: 5
       }],
       legend: {
@@ -184,22 +183,22 @@ const MindShareChart: React.FC = () => {
   }
 
   return (
-    <Card key="analytics-chart" className="bg-white rounded-lg">
-      <CardHeader className='p-2 px-4 border-b border-gray-200'>
+    <Card key="analytics-chart" className="bg-white dark:bg-muted rounded-lg">
+      <CardHeader className='p-2 px-4 border-b border-gray-200 dark:border-gray-700'>
         <div className="space-y-2">
           <div className="flex items-center gap-10">
             <div>
-              <div className="text-sm text-sidebar-foreground">Mindshare</div>
+              <div className="text-sm text-sidebar-foreground dark:text-gray-300">Mindshare</div>
               <div className="flex items-center gap-2">
-                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground">9.57%</span>
-                <span className="text-xs md:text-sm text-red-500">-1.76 7D</span>
+                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground dark:text-white">32.6%</span>
+                <span className="text-xs md:text-sm text-green-500">+17.5% 7D</span>
               </div>
             </div>
             <div>
-              <div className="text-sm text-sidebar-foreground">Price</div>
+              <div className="text-sm text-sidebar-foreground dark:text-gray-300">Price</div>
               <div className="flex items-center gap-2">
-                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground">$0.86</span>
-                <span className="text-xs md:text-sm text-green-500">+28.44% 7D</span>
+                <span className="text-lg md:text-xl font-semibold text-sidebar-foreground dark:text-white">$217.2</span>
+                <span className="text-xs md:text-sm text-green-500">+17.5% 7D</span>
               </div>
             </div>
           </div>

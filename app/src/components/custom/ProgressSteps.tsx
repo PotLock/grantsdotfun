@@ -25,13 +25,13 @@ const ProgressSteps: React.FC<ProgressStepsProps> = ({ currentStep }) => {
               <div
                 className={`flex h-6 w-6 items-center justify-center rounded-full text-sm
                   ${currentStep >= step.id 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-[#334155bd] text-white'}`}
+                    ? 'bg-blue-600 text-white dark:bg-blue-600' 
+                    : 'bg-[#334155bd] text-white dark:bg-[#334155bd]'}`}
               >
                 {step.id}
               </div>
               <span className={`text-sm hidden md:block ${
-                currentStep >= step.id ? 'text-gray-900' : 'text-sidebar-foreground'
+                currentStep >= step.id ? 'text-gray-900 dark:text-white' : 'text-sidebar-foreground dark:text-white'
               }`}>
                 {step.title}
               </span>
@@ -40,7 +40,7 @@ const ProgressSteps: React.FC<ProgressStepsProps> = ({ currentStep }) => {
             {index < steps.length - 1 && (
               <div className="flex-1 flex items-center md:mx-4 ml-4 md:ml-10">
                 <div className={`h-[2px] w-[30px] md:w-[100px] rounded-full ${
-                  currentStep > step.id ? 'bg-blue-600' : 'bg-gray-400'
+                  currentStep > step.id ? 'bg-blue-600 dark:bg-blue-600' : 'bg-gray-400 dark:bg-gray-400'
                 }`} />
               </div>
             )}

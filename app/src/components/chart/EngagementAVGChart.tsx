@@ -61,7 +61,7 @@ const EngagementChart: React.FC<EngagementChartProps> = ({
     };
 
     return (
-        <Card className="bg-white rounded-lg shadow-none">
+        <Card className="bg-white dark:bg-muted rounded-lg shadow-none">
             <CardContent className="p-4">
                 <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
