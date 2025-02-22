@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         hostname: 'unavatar.io',
       },
     ],
-  },
+  }
 };
 
 export default nextConfig;

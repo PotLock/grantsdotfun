@@ -19,8 +19,8 @@ const FeaturedGrantAgents: React.FC<FeaturedGrantAgentsProps> = ({ agents }) => 
 
   useEffect(() => {
     const handleResize = () => {
-      setItemsPerPage(window.innerWidth < 640 ? 1 : window.innerWidth < 1440 ? 2 : 3);
-      setImageSize(window.innerWidth < 640 ? 80 : 120);
+      setItemsPerPage(window.innerWidth > 1440 ? 3 : window.innerWidth < 640 ? 1 : 2);
+      setImageSize(window.innerWidth > 1440 ? 120 : window.innerWidth < 640 ? 80 : 120);
     };
 
     // Set initial value
