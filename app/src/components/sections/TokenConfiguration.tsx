@@ -18,6 +18,65 @@ interface TokenConfigurationProps {
 
 export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: TokenConfigurationProps) {
   const [launchOption, setLaunchOption] = useState<string>('existing')
+  const [errors, setErrors] = useState({
+    tokenAddress: '',
+    minGrant: '',
+    maxGrant: '',
+    governanceType: '',
+    fundingFrequency: ''
+  })
+
+  const validateField = (name: string, value: string) => {
+    switch(name) {
+      case 'tokenAddress':
+        if (!value && launchOption === 'existing') return 'Token address is required'
+        if (value && !value.includes('.near')) return 'Invalid NEAR address format'
+        return ''
+      case 'minGrant':
+        if (!value) return 'Minimum grant size is required'
+        if (isNaN(Number(value)) || Number(value) <= 0) return 'Must be a positive number'
+        return ''
+      case 'maxGrant':
+        if (!value) return 'Maximum grant size is required'
+        if (isNaN(Number(value)) || Number(value) <= 0) return 'Must be a positive number'
+        if (Number(value) <= Number(agent.minGrant)) return 'Must be greater than minimum grant'
+        return ''
+      case 'governanceType':
+        if (!value) return 'Governance type is required'
+        return ''
+      case 'fundingFrequency':
+        if (!value) return 'Funding frequency is required'
+        return ''
+      default:
+        return ''
+    }
+  }
+
+  const handleInputChange = (name: string, value: string) => {
+    setErrors(prev => ({...prev, [name]: validateField(name, value)}))
+    setAgent((p: AgentTypes) => ({...p, [name]: value}))
+  }
+
+  const handleNext = () => {
+    // Validate all fields
+    const newErrors = {
+      tokenAddress: validateField('tokenAddress', agent.tokenAddress),
+      minGrant: validateField('minGrant', agent.minGrant),
+      maxGrant: validateField('maxGrant', agent.maxGrant),
+      governanceType: validateField('governanceType', agent.governanceType),
+      fundingFrequency: validateField('fundingFrequency', agent.fundingFrequency)
+    }
+    
+    setErrors(newErrors)
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error !== '')) {
+      return
+    }
+
+    onNext()
+  }
+
   return (
     <div className="space-y-4 md:space-y-8">
         <Card className="rounded-xl border p-4 md:p-6">
@@ -73,9 +132,11 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                     id="token-address" 
                     placeholder="Enter token address"
                     value={agent.tokenAddress || ''}
-                    onChange={(e) => setAgent((p: AgentTypes) => ({...p, tokenAddress: e.target.value}))}
-                    className="placeholder:text-sidebar-foreground text-sidebar-foreground"
+                    onChange={(e) => handleInputChange('tokenAddress', e.target.value)}
+                    className={`placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground ${errors.tokenAddress ? 'border-red-500' : ''}`}
+                    disabled={launchOption !== 'existing'}
                 />
+                {errors.tokenAddress && <p className="text-red-500 text-xs mt-1">{errors.tokenAddress}</p>}
                 <div className="text-sm text-sidebar-foreground">
                     E.g amichael.near
                 </div>
@@ -103,7 +164,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
 
             <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                    <Label htmlFor="min-grant" className='text-xs md:text-sm'>Governance Type</Label>
+                    <Label htmlFor="min-grant" className='text-xs md:text-sm font-semibold'>Governance Type</Label>
                     <div className="cursor-help group relative">
                         <Info className="h-3 w-3" />
                         <div className="hidden group-hover:block absolute top-4 z-10 left-0 px-2 bg-white border border-gray-200 p-1 rounded-lg shadow-md w-[230px] h-[35px]">
@@ -113,8 +174,12 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         </div>
                     </div>
                 </div>
-                <Select defaultValue="admin">
-                    <SelectTrigger>
+                <Select 
+                    defaultValue="admin"
+                    onValueChange={(value) => handleInputChange('governanceType', value)}
+                    value={agent.governanceType}
+                >
+                    <SelectTrigger className={`text-xs md:text-sm ${errors.governanceType ? 'border-red-500' : ''}`}>
                         <SelectValue placeholder="Select governance type" />
                     </SelectTrigger>
                     <SelectContent className='text-sidebar-foreground'>
@@ -123,6 +188,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         <SelectItem value="multisig">Multi-signature</SelectItem>
                     </SelectContent>
                 </Select>
+                {errors.governanceType && <p className="text-red-500 text-xs mt-1">{errors.governanceType}</p>}
             </div>
 
             <div className="space-y-4">
@@ -159,10 +225,10 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 <Label className='text-xs md:text-sm'>Funding Frequency</Label>
                 <Select 
                     defaultValue="weekly"
-                    onValueChange={(value) => setAgent((prev: AgentTypes) => ({...prev, fundingFrequency: value}))}
+                    onValueChange={(value) => handleInputChange('fundingFrequency', value)}
                     value={agent.fundingFrequency || 'weekly'}
                 >
-                    <SelectTrigger>
+                    <SelectTrigger className={`text-xs md:text-sm ${errors.fundingFrequency ? 'border-red-500' : ''}`}>
                         <SelectValue placeholder="Select funding frequency" />
                     </SelectTrigger>
                     <SelectContent className='text-sidebar-foreground'>
@@ -171,6 +237,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         <SelectItem value="quarterly">Quarterly</SelectItem>
                     </SelectContent>
                 </Select>
+                {errors.fundingFrequency && <p className="text-red-500 text-xs mt-1">{errors.fundingFrequency}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -191,9 +258,10 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         type="number"
                         placeholder="10,000"
                         value={agent.minGrant || ''}
-                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, minGrant: e.target.value}))}
-                        className="placeholder:text-sidebar-foreground text-sidebar-foreground"
+                        onChange={(e) => handleInputChange('minGrant', e.target.value)}
+                        className={`placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground ${errors.minGrant ? 'border-red-500' : ''}`}
                     />
+                    {errors.minGrant && <p className="text-red-500 text-xs mt-1">{errors.minGrant}</p>}
                 </div>
                 <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
@@ -212,9 +280,10 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                         type="number"
                         placeholder="30,000"
                         value={agent.maxGrant || ''}
-                        onChange={(e) => setAgent((p: AgentTypes) => ({...p, maxGrant: e.target.value}))}
-                        className="placeholder:text-sidebar-foreground text-sidebar-foreground"
+                        onChange={(e) => handleInputChange('maxGrant', e.target.value)}
+                        className={`placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground ${errors.maxGrant ? 'border-red-500' : ''}`}
                     />
+                    {errors.maxGrant && <p className="text-red-500 text-xs mt-1">{errors.maxGrant}</p>}
                 </div>
             </div>
             </div>
@@ -222,7 +291,7 @@ export default function TokenConfiguration({ agent, setAgent, onBack, onNext }: 
                 <Button variant="outline" onClick={onBack}>
                     <span className="text-xs md:text-sm">Back: Basic Information</span>
                 </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
+                <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleNext}>
                     <span className="text-xs md:text-sm">Next: Platform Integration</span>
                 </Button>
             </div>

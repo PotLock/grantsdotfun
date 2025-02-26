@@ -22,6 +22,14 @@ interface Tag {
 const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNext }) => {
   const [selectedMetrics, setSelectedMetrics] = useState<string[]>([])
   const [selectedCriteria, setSelectedCriteria] = useState<string[]>([])
+  const [errors, setErrors] = useState({
+    ecosystemGoals: '',
+    evaluationCriteria: '',
+    rewardCriteria: '',
+    projectType: '',
+    metricsOptimizingFor: '',
+    disqualificationCriteria: ''
+  })
 
   const metricsOptions: Tag[] = [
     { id: 'community-impact', label: 'Community Impact' },
@@ -35,18 +43,78 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
     { id: 'audience-consensus', label: 'Audience Consensus' },
   ]
 
+  const validateField = (name: string, value: string | string[]) => {
+    switch(name) {
+      case 'ecosystemGoals':
+        if (!value) return 'Ecosystem goals are required'
+        if (typeof value === 'string' && value.length < 20) return 'Must be at least 20 characters'
+        return ''
+      case 'evaluationCriteria':
+        if (!value) return 'Evaluation criteria is required'
+        if (typeof value === 'string' && value.length < 20) return 'Must be at least 20 characters'
+        return ''
+      case 'rewardCriteria':
+        if (!value) return 'Reward criteria is required'
+        if (typeof value === 'string' && value.length < 20) return 'Must be at least 20 characters'
+        return ''
+      case 'projectType':
+        if (!value) return 'Project type is required'
+        return ''
+      case 'metricsOptimizingFor':
+        if (Array.isArray(value) && value.length === 0) return 'Select at least one metric'
+        return ''
+      case 'disqualificationCriteria':
+        if (Array.isArray(value) && value.length === 0) return 'Select at least one criteria'
+        return ''
+      default:
+        return ''
+    }
+  }
+
+  const handleInputChange = (name: string, value: string) => {
+    setErrors(prev => ({...prev, [name]: validateField(name, value)}))
+    setAgent((p: AgentTypes) => ({...p, [name]: value}))
+  }
+
+  const handleNext = () => {
+    // Validate all fields
+    const newErrors = {
+      ecosystemGoals: validateField('ecosystemGoals', agent.ecosystemGoals),
+      evaluationCriteria: validateField('evaluationCriteria', agent.evaluationCriteria),
+      rewardCriteria: validateField('rewardCriteria', agent.rewardCriteria),
+      projectType: validateField('projectType', agent.projectType),
+      metricsOptimizingFor: validateField('metricsOptimizingFor', agent.metricsOptimizingFor),
+      disqualificationCriteria: validateField('disqualificationCriteria', agent.disqualificationCriteria)
+    }
+    
+    setErrors(newErrors)
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error !== '')) {
+      return
+    }
+
+    onNext()
+  }
+
   const toggleMetric = (id: string) => {
-    setSelectedMetrics(prev => 
-      prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]
-    )
-    setAgent({...agent, metricsOptimizingFor: selectedMetrics})
+    const newMetrics = selectedMetrics.includes(id) 
+      ? selectedMetrics.filter(m => m !== id) 
+      : [...selectedMetrics, id]
+    
+    setSelectedMetrics(newMetrics)
+    setAgent({...agent, metricsOptimizingFor: newMetrics})
+    setErrors(prev => ({...prev, metricsOptimizingFor: validateField('metricsOptimizingFor', newMetrics)}))
   }
 
   const toggleCriteria = (id: string) => {
-    setSelectedCriteria(prev => 
-      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
-    )
-    setAgent({...agent, disqualificationCriteria: selectedCriteria})
+    const newCriteria = selectedCriteria.includes(id)
+      ? selectedCriteria.filter(c => c !== id)
+      : [...selectedCriteria, id]
+    
+    setSelectedCriteria(newCriteria)
+    setAgent({...agent, disqualificationCriteria: newCriteria})
+    setErrors(prev => ({...prev, disqualificationCriteria: validateField('disqualificationCriteria', newCriteria)}))
   }
     
   return (
@@ -64,10 +132,11 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
               <Textarea 
                 id="ecosystem-goals" 
                 placeholder="E.g Increase treasury etc"
-                className="min-h-[100px] text-xs md:text-sm"
+                className={`min-h-[100px] text-xs md:text-sm placeholder:text-gray-400 ${errors.ecosystemGoals ? 'border-red-500' : ''}`}
                 value={agent.ecosystemGoals || ''}
-                onChange={(e) => setAgent({...agent, ecosystemGoals: e.target.value})}
+                onChange={(e) => handleInputChange('ecosystemGoals', e.target.value)}
               />
+              {errors.ecosystemGoals && <p className="text-red-500 text-xs mt-1">{errors.ecosystemGoals}</p>}
             </div>
 
             <div className="space-y-1.5">
@@ -75,10 +144,11 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
               <Textarea 
                 id="evaluation-criteria"
                 placeholder="Describe how projects will be evaluated (e.g Social Impact, Technical Complexity)"
-                className="min-h-[100px] text-xs md:text-sm"
+                className={`min-h-[100px] text-xs md:text-sm placeholder:text-gray-400 ${errors.evaluationCriteria ? 'border-red-500' : ''}`}
                 value={agent.evaluationCriteria || ''}
-                onChange={(e) => setAgent({...agent, evaluationCriteria: e.target.value})}
+                onChange={(e) => handleInputChange('evaluationCriteria', e.target.value)}
               />
+              {errors.evaluationCriteria && <p className="text-red-500 text-xs mt-1">{errors.evaluationCriteria}</p>}
             </div>
 
             <div className="space-y-1.5">
@@ -86,20 +156,21 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
               <Textarea 
                 id="reward-criteria"
                 placeholder="Describe the criteria for rewarding projects"
-                className="min-h-[100px] text-xs md:text-sm"
+                className={`min-h-[100px] text-xs md:text-sm placeholder:text-gray-400 ${errors.rewardCriteria ? 'border-red-500' : ''}`}
                 value={agent.rewardCriteria || ''}
-                onChange={(e) => setAgent({...agent, rewardCriteria: e.target.value})}
+                onChange={(e) => handleInputChange('rewardCriteria', e.target.value)}
               />
+              {errors.rewardCriteria && <p className="text-red-500 text-xs mt-1">{errors.rewardCriteria}</p>}
             </div>
 
             <div className="space-y-1.5">
               <Label className="text-xs md:text-sm">Project Type</Label>
               <Select 
                 defaultValue="mvp"
-                onValueChange={(value) => setAgent({...agent, projectType: value})}
+                onValueChange={(value) => handleInputChange('projectType', value)}
                 value={agent.projectType || 'mvp'}
               >
-                <SelectTrigger className="text-xs md:text-sm">
+                <SelectTrigger className={`text-xs md:text-sm ${errors.projectType ? 'border-red-500' : ''}`}>
                   <SelectValue placeholder="Select project type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -108,6 +179,7 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
                   <SelectItem value="production" className="text-xs md:text-sm">Production</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.projectType && <p className="text-red-500 text-xs mt-1">{errors.projectType}</p>}
             </div>
 
             <div className="space-y-3">
@@ -127,6 +199,7 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
                   </button>
                 ))}
               </div>
+              {errors.metricsOptimizingFor && <p className="text-red-500 text-xs mt-1">{errors.metricsOptimizingFor}</p>}
             </div>
 
             <div className="space-y-3">
@@ -146,6 +219,7 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
                   </button>
                 ))}
               </div>
+              {errors.disqualificationCriteria && <p className="text-red-500 text-xs mt-1">{errors.disqualificationCriteria}</p>}
             </div>
           </div>
 
@@ -153,7 +227,7 @@ const GrantCanvas: React.FC<GrantCanvasProps> = ({ agent, setAgent, onBack, onNe
             <Button variant="outline" onClick={onBack}>
               <span className="text-xs md:text-sm">Back: Platform Integration</span>
             </Button>
-            <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
+            <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleNext}>
               <span className="text-xs md:text-sm">Next: Wallet Configuration</span>
             </Button>
           </div>

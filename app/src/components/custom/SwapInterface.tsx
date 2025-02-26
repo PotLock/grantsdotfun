@@ -2,23 +2,68 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, ChevronRight } from "lucide-react"
-import { TokenDropdown, Token } from "./TokenDropdown"
+import { TokenDropdown } from "./TokenDropdown"
+import { ftGetTokenMetadata,init_env,WalletSelectorTransactions,getPoolByIds, estimateSwap, EstimateSwapView, instantSwap, Transaction } from "@ref-finance/ref-sdk";
+import { useEffect } from "react";
+import { TokenMetadata,Pool } from "@ref-finance/ref-sdk";
+import { useWalletSelector } from "@near-wallet-selector/react-hook"
+import { toast } from "react-hot-toast";
+
+init_env(process.env.NEXT_PUBLIC_NETWORK || "mainnet");
+
 
 const SwapInterface: React.FC = () => {
-
+  const { signedAccountId, signIn, signOut,wallet } = useWalletSelector();
   const [fromAmount, setFromAmount] = useState<string|null>(null)
   const [toAmount, setToAmount] = useState<string|null>(null)
+  const [pools, setPools] = useState<Pool[]>()
+  const [tokenIn, setTokenIn] = useState<TokenMetadata>()
+  const [tokenOut, setTokenOut] = useState<TokenMetadata>()
+  
+  const fetchTokenMetadata = async () => {
+    const tokenIn = await ftGetTokenMetadata("wrap.testnet");
+    const tokenOut = await ftGetTokenMetadata("coin.school.asac.aslabs.testnet");
+    setTokenIn(tokenIn)
+    setTokenOut(tokenOut)
+    // console.log(tokenIn, tokenOut);
+  };
 
-  const [fromToken, setFromToken] = useState<Token>({
-    symbol: "$BLACKDRAGON",
-    name: "Black Dragon",
-    image: "/assets/tokens/black-dragon.png",
-  })
-  const [toToken, setToToken] = useState<Token>({
-    symbol: "$GRANTS",
-    name: "Grants Token",
-    image: "/assets/icons/money.svg",
-  })
+  const fetchAllPoolTokens = async () => {
+    const pools = await getPoolByIds([0]);
+    // console.log(pools)
+    setPools(pools)
+  };
+
+  useEffect(() => {
+    fetchTokenMetadata();
+    fetchAllPoolTokens();
+  }, []);
+
+  if (!tokenIn || !tokenOut || !pools) return null;
+
+  //rft.tokenfactory.testnet
+  const handleSwap = async () => {
+    const swapTodos: EstimateSwapView[] = await estimateSwap({
+      tokenIn,
+      tokenOut,
+      amountIn: '1',
+      simplePools: pools,
+    });
+    console.log(swapTodos)
+    const transactionsRef: Transaction[] = await instantSwap({
+      tokenIn,
+      tokenOut,
+      amountIn: '1',
+      swapTodos,
+      slippageTolerance: 0.01,
+      AccountId: signedAccountId || ''
+    });
+    console.log(transactionsRef)
+    if (!signedAccountId) toast.error("Please login to swap");
+    wallet?.signAndSendTransactions(
+      WalletSelectorTransactions(transactionsRef, signedAccountId || '')
+    );
+  }
 
   return (
     <Card className="p-4 shadow-none">
@@ -38,7 +83,7 @@ const SwapInterface: React.FC = () => {
             <label className="text-sm text-sidebar-foreground">From</label>
             <div className="flex items-center gap-2 justify-between">
               <input value={fromAmount || ""} placeholder="0" onChange={(e) => setFromAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full md:w-[120px] 2xl:w-[200px]" />
-              <TokenDropdown selectedToken={fromToken} onSelect={setFromToken} />
+              <TokenDropdown selectedToken={tokenIn || {}} onSelect={setTokenIn} />
             </div>
             <div className="flex items-center justify-between">
               <div className="mt-1 text-sm text-sidebar-foreground">$0.00</div>
@@ -54,7 +99,7 @@ const SwapInterface: React.FC = () => {
             <label className="text-sm text-sidebar-foreground">To</label>
             <div className="flex items-center justify-between gap-2">
               <input value={toAmount || ""} placeholder="0" onChange={(e) => setToAmount(e.target.value)} className="border-0 bg-transparent shadow-none focus:border-0 focus:outline-none focus:ring-0 font-semibold text-base xl:text-2xl w-full xl:w-[120px] 2xl:w-[200px]" />
-              <TokenDropdown selectedToken={toToken} onSelect={setToToken} />
+              <TokenDropdown selectedToken={tokenOut || {}} onSelect={setTokenOut} />
             </div>
             <div className="flex items-center justify-between">
               <div className="mt-1 text-sm text-sidebar-foreground">$0.00</div>
@@ -62,11 +107,11 @@ const SwapInterface: React.FC = () => {
             </div>
           </div>
         </div>
-        <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">Swap</Button>
+        <Button onClick={handleSwap} className="w-full bg-blue-500 text-white hover:bg-blue-600">Swap</Button>
         <div className="space-y-6 rounded-lg border border-stone-200 p-3 text-sidebar-foreground">
           <div className="flex justify-between text-sm">
             <span className="text-sidebar-foreground">Rate</span>
-            <span className="text-sidebar-foreground">1 {toToken.symbol}=0.1001234 NEAR</span>
+            <span className="text-sidebar-foreground">1 {tokenOut.symbol}=0.1001234 NEAR</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-sidebar-foreground">Est network fee</span>
@@ -84,7 +129,7 @@ const SwapInterface: React.FC = () => {
           </div>
 
           <div className="text-sm text-orange-500">
-            {toToken.symbol}'s burning mechanism will affect the token's price. 
+            {tokenOut.symbol}'s burning mechanism will affect the token's price. 
             We've set a 5% slippage to increase of a successful transaction. 
             If the transaction encounters issues, Consider increasing the slippage
           </div>

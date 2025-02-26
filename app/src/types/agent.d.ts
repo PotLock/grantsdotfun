@@ -170,7 +170,32 @@ export interface Agent {
   totalGrants: string
   governance: Governance
   grantees: GranteesType
-  logs?: AgentLog[]
+  logs?: AgentLog[],
+  transactions?: Transaction[],
+  priceHistory?: PriceData[]
+}
+
+export interface Transaction {
+  id: string
+  type: string
+  price: string
+  amount: string
+  token: {
+    symbol: string
+    address: string
+    decimals: number
+  }
+  tradingInfo: {
+    high24h: string
+    low24h: string
+    volume24h: string
+    priceChange24h: string
+    priceChangePercentage24h: string
+  }
+  timestamp: string
+  hash: string
+  from: string
+  to: string
 }
 
 export interface GrantOperatorAgent {
