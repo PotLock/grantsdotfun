@@ -6,29 +6,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react"
+import { TokenMetadata } from "@ref-finance/ref-sdk"
 
-const tokens: Token[] = [
+interface TokenDropdownProps {
+  selectedToken: TokenMetadata
+  onSelect: (token: TokenMetadata) => void
+}
+
+const tokens: TokenMetadata[] = [
   {
     symbol: "$BLACKDRAGON",
     name: "Black Dragon",
     icon: "/assets/tokens/black-dragon.png",
+    id: "black-dragon",
+    decimals: 18,
   },
   {
     symbol: "$GRANTS",
     name: "Grants Token",
     icon: "/assets/icons/money.svg",
+    id: "grants",
+    decimals: 18,
   },
   {
     symbol: "$NEAR",
     name: "NEAR Protocol",
     icon: "/assets/tokens/near.png",
+    id: "near",
+    decimals: 18,
   },
 ]
-
-interface TokenDropdownProps {
-  selectedToken: Token
-  onSelect: (token: Token) => void
-}
 
 export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onSelect }) => {
   return (
