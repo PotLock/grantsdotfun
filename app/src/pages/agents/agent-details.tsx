@@ -103,7 +103,10 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentId }) => {
                   </div>
               </div>
               <div className="rounded-lg border">
-                <TradingViewChart />
+                <TradingViewChart 
+                  symbol={agent.ticker} 
+                  priceHistory={agent.priceHistory} 
+                />
               </div>
 
               <Tabs defaultValue="overview" className="space-y-4">

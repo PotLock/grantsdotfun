@@ -7,27 +7,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react"
 
-export interface Token {
-  symbol: string
-  name: string
-  image: string
-}
-
 const tokens: Token[] = [
   {
     symbol: "$BLACKDRAGON",
     name: "Black Dragon",
-    image: "/assets/tokens/black-dragon.png",
+    icon: "/assets/tokens/black-dragon.png",
   },
   {
     symbol: "$GRANTS",
     name: "Grants Token",
-    image: "/assets/icons/money.svg",
+    icon: "/assets/icons/money.svg",
   },
   {
     symbol: "$NEAR",
     name: "NEAR Protocol",
-    image: "/assets/tokens/near.png",
+    icon: "/assets/tokens/near.png",
   },
 ]
 
@@ -44,8 +38,8 @@ export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onS
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 relative flex items-center justify-center rounded-full bg-white/10">
                 <img
-                src={selectedToken.image}
-                alt={selectedToken.name}
+                src={selectedToken.icon || ""}
+                alt={selectedToken.name || ""}
                 width={16}
                 height={16}
                 className="object-contain max-w-[16px] max-h-[16px]"
@@ -65,8 +59,8 @@ export const TokenDropdown: React.FC<TokenDropdownProps> = ({ selectedToken, onS
           >
             <div className="w-5 h-5 relative flex items-center justify-center rounded-full bg-white/10">
                 <img
-                src={token.image}
-                alt={token.name}
+                src={token.icon || ""}
+                alt={token.name || ""}
                 width={16}
                 height={16}
                 className="object-contain max-w-[16px] max-h-[16px]"

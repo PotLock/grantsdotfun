@@ -1,4 +1,5 @@
 import { Agent, GrantOperatorAgent } from "@/types/agent";
+import { priceHistoryData } from "./priceHistory";
 
 const agents: Agent[] = [
     {
@@ -10,7 +11,7 @@ const agents: Agent[] = [
       currentTreasury: "$8,600,213.00",
       weeklyGrantPool: "$8,600,213.00",
       image: "/assets/images/image-example.png",
-      ticker: "AI",
+      ticker: "AIRD",
       creator: "Amichael_design",
       marketcap: "$2,567,001.00",
       change24h: "+0.91",
@@ -286,8 +287,121 @@ const agents: Agent[] = [
                 name: "PlugnLinear",
                 avatar: "/assets/images/avatar/avatar-1.png"
             }
+        }
+      ],
+      transactions: [
+        {
+          id: "tx1",
+          type: "buy",
+          price: "102.45",
+          amount: "1500",
+          token: {
+            symbol: "AIRD",
+            address: "0x1234567890abcdef1234567890abcdef12345678",
+            decimals: 18
+          },
+          tradingInfo: {
+            high24h: "105.20",
+            low24h: "98.75",
+            volume24h: "2500000",
+            priceChange24h: "+2.45",
+            priceChangePercentage24h: "+2.45"
+          },
+          timestamp: "2024-03-20T09:30:00Z",
+          hash: "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+          from: "0x9876543210fedcba9876543210fedcba98765432",
+          to: "0x1234567890abcdef1234567890abcdef12345678"
         },
-    ]
+        {
+          id: "tx2",
+          type: "sell",
+          price: "101.80",
+          amount: "2000",
+          token: {
+            symbol: "AIRD",
+            address: "0x1234567890abcdef1234567890abcdef12345678",
+            decimals: 18
+          },
+          tradingInfo: {
+            high24h: "105.20",
+            low24h: "98.75",
+            volume24h: "2500000",
+            priceChange24h: "-0.65",
+            priceChangePercentage24h: "-0.63"
+          },
+          timestamp: "2024-03-20T09:45:00Z",
+          hash: "0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321",
+          from: "0x5432109876fedcba5432109876fedcba54321098",
+          to: "0x1234567890abcdef1234567890abcdef12345678"
+        },
+        {
+          id: "tx3",
+          type: "buy",
+          price: "103.25",
+          amount: "3500",
+          token: {
+            symbol: "AIRD",
+            address: "0x1234567890abcdef1234567890abcdef12345678",
+            decimals: 18
+          },
+          tradingInfo: {
+            high24h: "105.20",
+            low24h: "98.75",
+            volume24h: "2500000",
+            priceChange24h: "+1.45",
+            priceChangePercentage24h: "+1.42"
+          },
+          timestamp: "2024-03-20T10:00:00Z",
+          hash: "0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0",
+          from: "0x3456789012defabc3456789012defabc34567890",
+          to: "0x1234567890abcdef1234567890abcdef12345678"
+        },
+        {
+          id: "tx4",
+          type: "buy",
+          price: "104.10",
+          amount: "1800",
+          token: {
+            symbol: "AIRD",
+            address: "0x1234567890abcdef1234567890abcdef12345678",
+            decimals: 18
+          },
+          tradingInfo: {
+            high24h: "105.20",
+            low24h: "98.75",
+            volume24h: "2500000",
+            priceChange24h: "+0.85",
+            priceChangePercentage24h: "+0.82"
+          },
+          timestamp: "2024-03-20T10:15:00Z",
+          hash: "0x89abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234567",
+          from: "0x7890123456defabc7890123456defabc78901234",
+          to: "0x1234567890abcdef1234567890abcdef12345678"
+        },
+        {
+          id: "tx5",
+          type: "sell",
+          price: "103.90",
+          amount: "2200",
+          token: {
+            symbol: "AIRD",
+            address: "0x1234567890abcdef1234567890abcdef12345678",
+            decimals: 18
+          },
+          tradingInfo: {
+            high24h: "105.20",
+            low24h: "98.75",
+            volume24h: "2500000",
+            priceChange24h: "-0.20",
+            priceChangePercentage24h: "-0.19"
+          },
+          timestamp: "2024-03-20T10:30:00Z",
+          hash: "0xcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab",
+          from: "0xbcdef01234567890bcdef01234567890bcdef012",
+          to: "0x1234567890abcdef1234567890abcdef12345678"
+        }
+      ],
+      priceHistory: priceHistoryData.AIRD
     },
     {
       id: 2,
@@ -410,7 +524,8 @@ const agents: Agent[] = [
             time_created: "2024-03-15"
           }
         ]
-      }
+      },
+      priceHistory: priceHistoryData.WIF
     },
     {
       id: 3,
@@ -532,7 +647,8 @@ const agents: Agent[] = [
             time_created: "2024-03-14"
           }
         ]
-      }
+      },
+      priceHistory: priceHistoryData.CTD
     },
     {
       id: 4,
@@ -647,7 +763,8 @@ const agents: Agent[] = [
             time_created: "2024-03-15"
           }
         ]
-      }
+      },
+      priceHistory: priceHistoryData.DGI
     }
 ];
 

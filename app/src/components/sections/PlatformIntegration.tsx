@@ -10,7 +10,7 @@ import { AgentTypes } from "@/types/agent"
 
 interface PlatformIntegrationProps {
   agent: AgentTypes
-  setAgent: (agent: AgentTypes) => void
+  setAgent: React.Dispatch<React.SetStateAction<AgentTypes>>
   onBack: () => void;
   onNext: () => void;
 }
@@ -18,12 +18,82 @@ interface PlatformIntegrationProps {
 const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAgent, onBack, onNext }) => {
   const [apiKey, setApiKey] = useState<string|null>(null);
   const [reviewer, setReviewer] = useState<string>('');
+  const [errors, setErrors] = useState({
+    apiKey: '',
+    exampleTweets: '',
+    reviewer: '',
+    minimumFollowing: '',
+    minimumAccountAge: ''
+  })
+
+  const validateField = (name: string, value: string) => {
+    switch(name) {
+      case 'apiKey':
+        if (!value) return 'API key is required'
+        if (!/^[A-Za-z0-9-]+$/.test(value)) return 'Invalid API key format'
+        return ''
+      case 'exampleTweets':
+        if (!value) return 'Example tweets are required'
+        return ''
+      case 'reviewer':
+        if (!value) return 'Reviewer username is required'
+        if (!value.startsWith('@')) return 'Username must start with @'
+        return ''
+      case 'minimumFollowing':
+        if (!value) return 'Minimum following is required'
+        if (isNaN(Number(value)) || Number(value) < 0) return 'Must be a positive number'
+        return ''
+      case 'minimumAccountAge':
+        if (!value) return 'Minimum account age is required'
+        if (isNaN(Number(value)) || Number(value) < 0) return 'Must be a positive number'
+        return ''
+      default:
+        return ''
+    }
+  }
+
+  const handleInputChange = (name: string, value: string) => {
+    setErrors(prev => ({...prev, [name]: validateField(name, value)}))
+    if (name === 'apiKey') {
+      setApiKey(value)
+    } else if (name === 'reviewer') {
+      setReviewer(value)
+    } else {
+      setAgent((p: AgentTypes) => ({...p, [name]: value}))
+    }
+  }
+
+  const handleNext = () => {
+    // Validate all fields
+    const newErrors = {
+      apiKey: validateField('apiKey', apiKey || ''),
+      exampleTweets: validateField('exampleTweets', agent.exampleTwitter),
+      reviewer: validateField('reviewer', reviewer),
+      minimumFollowing: validateField('minimumFollowing', String(agent.minimumFollowing)),
+      minimumAccountAge: validateField('minimumAccountAge', String(agent.miniumAccountAge))
+    }
+    
+    setErrors(newErrors)
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error !== '')) {
+      return
+    }
+
+    onNext()
+  }
 
   const handleAddReviewer = () => {
-      if (reviewer.trim()) {
-        setAgent({...agent, reviewers: [...agent.reviewers, reviewer.trim()]});
-        setReviewer('');
-      }
+    const error = validateField('reviewer', reviewer)
+    if (error) {
+      setErrors(prev => ({...prev, reviewer: error}))
+      return
+    }
+    if (reviewer.trim()) {
+      setAgent({...agent, reviewers: [...agent.reviewers, reviewer.trim()]});
+      setReviewer('');
+      setErrors(prev => ({...prev, reviewer: ''}))
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -99,10 +169,10 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                           id="api-key" 
                           placeholder="XXXX-XXXX-XXXX-XXXX"
                           value={apiKey || ''}
-                          onChange={(e) => setApiKey(e.target.value)}
-                          className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
+                          onChange={(e) => handleInputChange('apiKey', e.target.value)}
+                          className={`placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground text-xs md:text-sm ${errors.apiKey ? 'border-red-500' : ''}`}
                         />
-                        <p className="text-xs md:text-sm text-red-500">Warning: You will not be able to view this API key again after saving.</p>
+                        {errors.apiKey && <p className="text-red-500 text-xs mt-1">{errors.apiKey}</p>}
                       </div>
 
                       <div className="space-y-1.5">
@@ -110,8 +180,11 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                         <Textarea 
                           id="example-tweets"
                           placeholder="Add example tweets to guide your AI's posting style..."
-                          className="min-h-[100px] placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
+                          className={`min-h-[100px] placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground text-xs md:text-sm ${errors.exampleTweets ? 'border-red-500' : ''}`}
+                          value={agent.exampleTwitter}
+                          onChange={(e) => handleInputChange('exampleTweets', e.target.value)}
                         />
+                        {errors.exampleTweets && <p className="text-red-500 text-xs mt-1">{errors.exampleTweets}</p>}
                       </div>
                       {apiKey && (
                         <div className="space-y-2 mt-2 md:mt-4">
@@ -120,10 +193,11 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                               <Input 
                                 placeholder="@username" 
                                 value={reviewer} 
-                                onChange={(e) => setReviewer(e.target.value)}
+                                onChange={(e) => handleInputChange('reviewer', e.target.value)}
                                 onKeyDown={handleKeyPress}
-                                className="placeholder:text-sidebar-foreground text-sidebar-foreground text-xs md:text-sm"
+                                className={`placeholder:text-sidebar-foreground placeholder:text-gray-400 text-sidebar-foreground text-xs md:text-sm ${errors.reviewer ? 'border-red-500' : ''}`}
                               />
+                              {errors.reviewer && <p className="text-red-500 text-xs mt-1">{errors.reviewer}</p>}
                               <Button onClick={handleAddReviewer}><Plus className="h-4 w-4" /></Button>
                           </div>
                         </div>
@@ -150,7 +224,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                         <Button className="bg-[#F1F5F9] hover:bg-gray-300 text-black shadow-none">
                           <span className="text-xs md:text-sm">Cancel</span>
                         </Button>
-                        <Button className="bg-blue-600 hover:bg-blue-700">
+                        <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleNext}>
                           <span className="text-xs md:text-sm">Save Configuration</span>
                         </Button>
                       </div>
@@ -227,10 +301,11 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                   </div>
                   <Input 
                     type="number"
-                    className="max-w-[100px] text-xs md:text-sm"
+                    className={`max-w-[100px] text-xs md:text-sm ${errors.minimumFollowing ? 'border-red-500' : ''}`}
                     value={agent.minimumFollowing}
-                    onChange={(e) => setAgent({...agent, minimumFollowing: Number(e.target.value)})}
+                    onChange={(e) => handleInputChange('minimumFollowing', e.target.value)}
                   />
+                  {errors.minimumFollowing && <p className="text-red-500 text-xs mt-1">{errors.minimumFollowing}</p>}
                 </div>
 
                 <div className="space-y-1.5 flex flex-row justify-between items-center w-full">
@@ -247,10 +322,11 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
                   </div>
                   <Input 
                     type="number"
-                    className="max-w-[100px] text-xs md:text-sm"
+                    className={`max-w-[100px] text-xs md:text-sm ${errors.minimumAccountAge ? 'border-red-500' : ''}`}
                     value={agent.miniumAccountAge}
-                    onChange={(e) => setAgent({...agent, miniumAccountAge: Number(e.target.value)})}
+                    onChange={(e) => handleInputChange('minimumAccountAge', e.target.value)}
                   />
+                  {errors.minimumAccountAge && <p className="text-red-500 text-xs mt-1">{errors.minimumAccountAge}</p>}
                 </div>
 
                 <div className="space-y-6 pt-2">
@@ -289,7 +365,7 @@ const PlatformIntegration: React.FC<PlatformIntegrationProps> = ({ agent, setAge
               <Button variant="outline" onClick={onBack}>
                 <span className="text-xs md:text-sm">Back: Token Configuration</span>
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700" onClick={onNext}>
+              <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleNext}>
                 <span className="text-xs md:text-sm">Next: Grant Canvas</span>
               </Button>
             </div>
