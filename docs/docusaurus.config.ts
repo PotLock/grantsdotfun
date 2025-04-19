@@ -84,7 +84,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://x.com/grantsdotfun',
+          href: 'https://x.com/potlock_',
           label: 'X',
           position: 'right',
         },
