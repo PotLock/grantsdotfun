@@ -17,7 +17,6 @@ This is a monorepo containing three main components:
 - 👥 Multi-reviewer System: Set up multiple reviewers for grant evaluation
 - 🏛️ Token-based Governance: Use GRant OPERATOR tokens for criteria setting
 - 💸 On-chain Payments: Automated grant distribution across chains
-- 🧠 Built on Eliza Framework: Robust AI agent capabilities
 
 ## 🚀 Getting Started
 
@@ -53,7 +52,6 @@ yarn start
 - 🎨 [Tailwind CSS](https://tailwindcss.com/)
 - 📚 [Docusaurus](https://docusaurus.io/)
 - ⛓️ [NEAR Protocol](https://near.org/)
-- [Eliza Framework](https://github.com/ai16z/eliza)
 
 ## 🤝 Contributing
 

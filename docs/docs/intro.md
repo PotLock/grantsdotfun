@@ -17,7 +17,6 @@ GRANTS.FUN is an autonomous grant operator platform built on NEAR Protocol, desi
 3. **👥 Multi-reviewer System**: Set up multiple reviewers to evaluate grant effectiveness based on the social media ID
 4. **🏛️ Token-based Governance**: Use your GRant OPERATOR tokens for setting overall grant criteria and priorities (soon)
 5. **💸 On-chain Payments**: Automated grant distribution across multiple chains
-6. **🧠 Built on <a href="https://github.com/ai16z/eliza" target="_blank">Eliza</a>**: Leveraging the Eliza Framework for robust AI agent capabilities
 
 ## 🤔 Problem Statement
 
@@ -54,13 +53,11 @@ To start using GRANTS.FUN, you'll need to:
 3. 👥 Set up reviewers and criteria
 4. 💰 Fund your operator wallet
 
-Built with ❤️ by Potlock Labs
+Part of 🫕 POTLOCK
 
 ## 🛠️ Technical Stack
 
 - ⛓️ Built on NEAR Protocol
-- 🍳 Integrated with meme.cooking
-- 🧠 Powered by the Eliza Framework
 - 💸 Multi-chain payment support
 
 ## 🌐 Community Channels

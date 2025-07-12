@@ -77,7 +77,7 @@ const FeatureList: FeatureItem[] = [
     emoji: '📖',
     description: (
       <>
-        Built on the Eliza framework, we believe in open source and have completely open soruced our front ends.
+        We believe in open source and have completely open soruced our front ends.
       </>
     ),
   },
