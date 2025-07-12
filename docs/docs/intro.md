@@ -66,5 +66,5 @@ Built with ❤️ by Potlock Labs
 ## 🌐 Community Channels
 
 - 💬 [Telegram](https://t.me/grantsdotfun)
-- 🐦 [Twitter/X](https://twitter.com/grantsdotfun)
+- 🐦 [Twitter/X](https://twitter.com/potlock_)
 - 📚 [GitHub](https://github.com/potlock/grantsdotfun)

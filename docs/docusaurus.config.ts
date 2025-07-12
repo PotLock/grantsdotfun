@@ -116,7 +116,7 @@ const config: Config = {
             },
             {
               label: '🐦 Twitter',
-              href: 'https://twitter.com/grantsdotfun',
+              href: 'https://twitter.com/potlock_',
             },
           ],
         },

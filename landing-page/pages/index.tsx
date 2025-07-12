@@ -128,7 +128,7 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
             <Link 
-              href="https://twitter.com/grantsdotfun" 
+              href="https://twitter.com/potlock_" 
               className="btn text-sm sm:text-base w-[calc(50%-0.5rem)] sm:w-auto"
               target="_blank" 
               rel="noopener noreferrer"

@@ -41,7 +41,7 @@ yarn start
 
 - 🌐 [Website](https://grants.fun)
 - 📚 [Documentation](https://docs.grants.fun)
-- 🐦 [Twitter](https://twitter.com/grantsdotfun)
+- 🐦 [Twitter](https://twitter.com/potlock_)
 - 💬 [Telegram](https://t.me/grantsdotfun)
 - 📝 [GitHub](https://github.com/potlock/grantsdotfun)
 
