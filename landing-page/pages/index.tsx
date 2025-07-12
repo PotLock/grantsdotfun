@@ -116,8 +116,6 @@ export default function Home() {
                 1000,
                 '[soon] autonomous grant operators',
                 1000,
-                '[soon] $GRANTS',
-                1000,
               ]}
               wrapper="div"
               cursor={true}
